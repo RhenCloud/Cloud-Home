@@ -1,0 +1,144 @@
+interface SiteConfig {
+    profile: {
+        name: string;
+        title: string;
+        avatar: string;
+        bio: string;
+    };
+    socialLinks: Array<{
+        name: string;
+        url: string;
+    }>;
+    github: {
+        username: string;
+    };
+    about: Array<{
+        title: string;
+        desc: string;
+        icon: string;
+    }>;
+    siteMeta: {
+        title: string;
+        icon: string;
+    };
+    skills: Array<{
+        title: string;
+        items: string[];
+    }>;
+    sites: Array<{
+        name: string;
+        desc: string;
+        url: string;
+    }>;
+    projects: Array<{
+        name: string;
+        url: string;
+        desc: string;
+    }>;
+    friends: Array<{
+        name: string;
+        desc: string;
+        url: string;
+        avatar: string;
+    }>;
+    footer: {
+        beian: string;
+        beianLink: string;
+        showHitokoto: boolean;
+        hitokotoType: string;
+        customHtml: string;
+    };
+}
+
+const siteConfig: SiteConfig = {
+    profile: {
+        name: "RhenCloud",
+        title: "I'm RhenCloud.",
+        avatar: "avatar.webp", // public/avatar.webp
+        bio: "趁世界还未重启之前 约一次爱恋",
+    },
+
+    socialLinks: [
+        { name: "GitHub", url: "https://github.com/RhenCloud" },
+        { name: "Email", url: "mailto:i@rhen.cloud" },
+        { name: "Telegram", url: "https://t.me/RhenCloud" },
+        { name: "Bilibili", url: "https://space.bilibili.com/1502883335" },
+        { name: "Blog", url: "https://blog.rhen.cloud" },
+    ],
+
+    github: {
+        username: "RhenCloud",
+    },
+
+    about: [
+        { title: "Pro-LGBT", desc: "我相信性别多样性是人们应有的自由和权利。", icon: "🧠" },
+        { title: "Developer", desc: "专注后端 / 云原生，热爱自动化与高可用。", icon: "🛠️" },
+        { title: "Anime Fan", desc: "二次元爱好者，享受故事与想象力。", icon: "🎬" },
+        { title: "Just For Fun", desc: "我喜欢尝试新鲜事物，折腾小众技术", icon: "🎮" },
+    ],
+
+    siteMeta: {
+        title: "RhenCloud",
+        icon: "favicon.ico", // public/favicon.ico
+    },
+
+    skills: [
+        { title: "前端", items: ["css", "html", "javascript", "typescript", "vue"] },
+        { title: "后端 / 云", items: ["cpp", "cloudflare", "docker", "java", "mysql", "nodejs", "python", "vercel"] },
+        { title: "工具", items: ["ae", "au", "git", "github", "md", "ps", "pr", "vscode"] },
+        { title: "操作系统", items: ["arch", "linux", "windows"] },
+    ],
+
+    sites: [
+        {
+            name: "个人主页",
+            desc: "个人主页",
+            url: "https://rhen.cloud",
+        },
+        {
+            name: "我的博客",
+            desc: "分享与记录",
+            url: "https://blog.rhen.cloud",
+        },
+        {
+            name: "来视奸我",
+            desc: "使用Sleepy项目搭建的视奸网站",
+            url: "https://sleepy.rhen.cloud",
+        },
+        {
+            name: "网站监控",
+            desc: "网站运行状态监控",
+            url: "https://status.rhen.cloud",
+        },
+    ],
+
+    projects: [
+        { name: "Cloud Home", url: "https://github.com/RhenCloud/cloud-home", desc: "个人主页模板" },
+        { name: "ILP", url: "https://github.com/RhenCloud/ILP", desc: "跨平台、多网站、模块化的小说下载器" },
+        { name: "ILP-C++", url: "https://github.com/RhenCloud/ILP-Cpp", desc: "跨平台、多网站、模块化的小说下载器" },
+    ],
+    friends: [
+        {
+            name: "wuxian",
+            desc: "wuxian's web",
+            url: "https://www.alxian.cn",
+            avatar: "https://www.alxian.cn/_next/image?url=%2Fimages%2Favatar.jpg&w=256&q=75",
+        },
+        {
+            name: "鈴奈咲桜のBlog",
+            desc: "一个普普通通的Blog",
+            url: "https://blog.sakura.ink",
+            avatar: "https://q2.qlogo.cn/headimg_dl?dst_uin=2731443459&spec=5",
+        },
+    ],
+
+    footer: {
+        beian: "津ICP备2025039003号-1",
+        beianLink: "https://beian.miit.gov.cn/",
+        showHitokoto: true,
+        hitokotoType: "a&b&c&d&j",
+        customHtml: '<span style="opacity:.8">© 2025 <a href="https://rhen.cloud">RhenCloud</a></span>',
+    },
+};
+
+export default siteConfig;

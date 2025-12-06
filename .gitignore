@@ -1,0 +1,36 @@
+# dependencies
+node_modules/
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# builds
+dist/
+build/
+.out/
+.next/
+.vercel/
+.vite/
+
+# env & secrets
+.env
+.env.*
+!.env.example
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs/
+*.log
+
+# editors & system
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# tests
+tests/
+test*
