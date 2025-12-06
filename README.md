@@ -1,6 +1,6 @@
 # Cloud Home
 
-一个基于 Vue 的个人主页模板，内置友链申请、项目展示、友链随机展示、自定义配置，支持 Vercel 部署与邮件通知。
+一个基于 Vue 的个人主页模板，内置友链申请、网站展示、项目展示、友链随机展示、自定义配置，支持 Vercel 部署与邮件通知。
 
 ## 特性
 
@@ -145,9 +145,7 @@ pnpm build
 ## 部署到 Vercel
 
 1. 导入仓库到 Vercel。
-2. 设置上文的 SMTP 环境变量。
-3. 保持 `vercel.json` 中 `distDir: "dist"`。
-4. 部署后，静态文件从 `dist/` 提供，API 走 `/api/send-mail`。
+2. 设置上文的环境变量。
 
 ## API
 

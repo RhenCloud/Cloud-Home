@@ -4,6 +4,10 @@ interface SiteConfig {
         title: string;
         avatar: string;
         bio: string;
+        birthday?: string;
+        gender?: string;
+        pronouns?: string;
+        location?: string;
     };
     socialLinks: Array<{
         name: string;
@@ -56,6 +60,10 @@ const siteConfig: SiteConfig = {
         title: "I'm RhenCloud.",
         avatar: "avatar.webp", // public/avatar.webp
         bio: "趁世界还未重启之前 约一次爱恋",
+        birthday: "2010-03-28",
+        // gender: "女",
+        pronouns: "她",
+        location: "中国 · 天津",
     },
 
     socialLinks: [

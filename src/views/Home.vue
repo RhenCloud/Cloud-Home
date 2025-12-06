@@ -2,7 +2,7 @@
     <main class="page">
         <HeroSection :profile="profile" />
         <SocialLinks :links="socialLinks" />
-        <AboutSection :items="about" />
+        <AboutSection :items="about" :profile="profile" />
     </main>
 </template>
 
