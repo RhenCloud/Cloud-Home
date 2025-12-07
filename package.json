@@ -8,6 +8,7 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "@jaseeey/vue-umami-plugin": "^1.4.0",
         "@vercel/node": "^5.5.15",
         "express": "^5.2.1",
         "he": "^1.2.0",

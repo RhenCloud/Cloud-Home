@@ -9,6 +9,7 @@
 </template>
 
 <script setup>
+import { onMounted } from "vue";
 import PageSwitcher from "./components/PageSwitcher.vue";
 import FooterSection from "./components/FooterSection.vue";
 import siteConfig from "./config/siteConfig";

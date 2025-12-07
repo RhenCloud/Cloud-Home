@@ -28,6 +28,10 @@ const siteConfig: SiteConfig = {
         title: "I'm a software developer.", // 你的简介，可为空
         avatar: "avatar.webp", // 你的头像，可为public目录下的文件或外部链接
         bio: "Hello World", // 你的喜欢的一句话，可为空
+        birthday: "xxxx-xx-xx", // 你的生日，可为空
+        gender: "", // 你的性别，可为空
+        pronouns: "", // 你希望别人如何称呼你，可为空
+        location: "", // 你的居住地，可为空
     },
 
     // 社交链接，预定义的社交链接可在 `src/components/SocialLink.vue` 中查阅
@@ -52,8 +56,16 @@ const siteConfig: SiteConfig = {
     ],
 
     siteMeta: {
-        title: "RhenCloud", // 网站标题
+        title: "Example Title", // 网站标题
         icon: "favicon.ico", // 网站图标，可为public目录下的文件或外部链接
+        startDate:"xxxx-xx-xx", // 网站创建日期
+    },
+
+    umami: {
+        enable: true, // 是否启用 Umami 分析
+        url: "https://cloud.umami.is/script.js", // Umami 分析脚本 URL，一般无需修改
+        websiteId: "YOUR_WEBSITE_ID", // Umami 网站 ID
+        apiBase: "https://api.umami.is", // Umami API 地址，一般无需修改
     },
 
     // 技能图标展示，详见https://github.com/tandpfun/skill-icons#icons-list
@@ -100,9 +112,11 @@ const siteConfig: SiteConfig = {
     footer: {
         beian: "备案号", // 备案号，留空则不显示
         beianLink: "https://beian.miit.gov.cn/", // 备案号链接，一般无需修改
-        showHitokoto: true, // 是否显示一言
-        hitokotoType: "a&b&c&d&j", // 一言类型，详见 https://developer.hitokoto.cn/sentence/#%E5%8F%A5%E5%AD%90%E7%B1%BB%E5%9E%8B-%E5%8F%82%E6%95%B0
         customHtml: '', // 自定义 HTML 代码，如统计代码等
+        hitokoto: {
+            enable: true, // 是否启用一言
+            type: "a&b&c&d&j", // 一言类型，详见 https://developer.hitokoto.cn/sentence/#%E5%8F%A5%E5%AD%90%E7%B1%BB%E5%9E%8B-%E5%8F%82%E6%95%B0
+        },
     },
 };
 ```
@@ -112,11 +126,12 @@ const siteConfig: SiteConfig = {
 - **404 页面**：修改 `public/404.html` 来自定义 404 错误页面的样式与内容。
 - **友链展示逻辑**：`FriendsSection.vue` 默认使用随机顺序渲染 `siteConfig.friends`，如需固定顺序请修改该组件。
 
-## 环境变量（邮件发送）
+## 环境变量
 
 在 Vercel 控制台或本地 `.env` 配置：
 
-- `VITE_GITHUB_TOKEN`: 具有仓库读取权限的 GitHub Token，用于绕过 GitHub API 速率限制。
+- `VITE_GITHUB_TOKEN`: 具有仓库读取权限的 GitHub Token，用于绕过 GitHub API 速率限制。（可选）
+- `UMAMI_API_KEY`: Umami 分析的 API Key。
 - `SMTP_HOST`: 邮件服务器主机名
 - `SMTP_PORT`: 端口（如 465 或 587）
 - `SMTP_USER`: 发件人邮箱账号
@@ -140,7 +155,7 @@ pnpm dev
 pnpm build
 ```
 
-产物输出到 `dist/`。
+产物输出到
 
 ## 部署到 Vercel
 

@@ -25,8 +25,6 @@ const github = reactive({
 // 修改此处：使用 VITE_ 前缀
 const githubToken = import.meta.env.VITE_GITHUB_TOKEN ?? "";
 
-console.log(githubToken);
-
 onMounted(() => {
     document.title = siteMeta.title;
     const link = document.querySelector("link[rel~='icon']") || document.createElement("link");

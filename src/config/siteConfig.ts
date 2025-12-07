@@ -1,60 +1,4 @@
-interface SiteConfig {
-    profile: {
-        name: string;
-        title: string;
-        avatar: string;
-        bio: string;
-        birthday?: string;
-        gender?: string;
-        pronouns?: string;
-        location?: string;
-    };
-    socialLinks: Array<{
-        name: string;
-        url: string;
-    }>;
-    github: {
-        username: string;
-    };
-    about: Array<{
-        title: string;
-        desc: string;
-        icon: string;
-    }>;
-    siteMeta: {
-        title: string;
-        icon: string;
-    };
-    skills: Array<{
-        title: string;
-        items: string[];
-    }>;
-    sites: Array<{
-        name: string;
-        desc: string;
-        url: string;
-    }>;
-    projects: Array<{
-        name: string;
-        url: string;
-        desc: string;
-    }>;
-    friends: Array<{
-        name: string;
-        desc: string;
-        url: string;
-        avatar: string;
-    }>;
-    footer: {
-        beian: string;
-        beianLink: string;
-        showHitokoto: boolean;
-        hitokotoType: string;
-        customHtml: string;
-    };
-}
-
-const siteConfig: SiteConfig = {
+const siteConfig = {
     profile: {
         name: "RhenCloud",
         title: "I'm RhenCloud.",
@@ -88,6 +32,14 @@ const siteConfig: SiteConfig = {
     siteMeta: {
         title: "RhenCloud",
         icon: "favicon.ico", // public/favicon.ico
+        startDate: "2025-12-06",
+    },
+
+    umami: {
+        enable: true,
+        url: "https://cloud.umami.is/script.js",
+        websiteId: "ddcd51c3-ccc7-45e4-81e6-11567027f69b",
+        apiBase: "https://api.umami.is",
     },
 
     skills: [
@@ -143,9 +95,11 @@ const siteConfig: SiteConfig = {
     footer: {
         beian: "津ICP备2025039003号-1",
         beianLink: "https://beian.miit.gov.cn/",
-        showHitokoto: true,
-        hitokotoType: "a&b&c&d&j",
         customHtml: '<span style="opacity:.8">© 2025 <a href="https://rhen.cloud">RhenCloud</a></span>',
+        hitokoto: {
+            enable: true,
+            type: "a&b&c&d&j",
+        },
     },
 };
 
