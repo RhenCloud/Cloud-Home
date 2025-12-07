@@ -82,7 +82,7 @@ button:disabled {
         grid-template-columns: 1fr;
     }
     .dots {
-        justify-content: flex-start;
+        justify-content: center;
     }
 }
 </style>

@@ -148,6 +148,7 @@ h2 {
 }
 .actions {
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: 10px;
     margin-bottom: 10px;
@@ -205,7 +206,7 @@ h2 {
     display: flex;
     align-items: center;
     gap: 10px;
-    justify-content: flex-end;
+    justify-content: center;
 }
 .form-actions .primary {
     min-width: 120px;
