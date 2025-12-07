@@ -35,6 +35,18 @@ const siteConfig = {
         startDate: "2025-12-06",
     },
 
+    appearance: {
+        background: {
+            enable: true,
+            // URL 支持：可使用外部 URL 或本地路径
+            // 例如: "https://example.com/bg.jpg" 或 "background.webp"
+            image: "background.png", // 背景图片 URL 或本地路径（桌面端）
+            mobileImage: "https://www.loliapi.com/acg/pe/", // 移动端背景图片（可选，不设置则使用 image）
+            blur: 0, // 背景模糊程度 (0-100)
+            overlay: "rgba(70, 59, 82, 0.4)", // 背景遮罩颜色与透明度
+        },
+    },
+
     umami: {
         enable: true,
         url: "https://cloud.umami.is/script.js",
