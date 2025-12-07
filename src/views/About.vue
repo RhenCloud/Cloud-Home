@@ -2,7 +2,7 @@
     <main class="page">
         <HeroSection :profile="profile" />
         <SkillsSection :skills="skills" />
-        <GithubSection :github="github" />
+        <StatsSection :github="github" :wakatime="wakatime" />
     </main>
 </template>
 
@@ -10,12 +10,13 @@
 import { onMounted, reactive } from "vue";
 import HeroSection from "../components/HeroSection.vue";
 import SkillsSection from "../components/SkillsSection.vue";
-import GithubSection from "../components/GithubSection.vue";
+import StatsSection from "../components/StatsSection.vue";
 import siteConfig from "../config/siteConfig";
 
 const profile = siteConfig.profile;
 const siteMeta = siteConfig.siteMeta;
 const skills = siteConfig.skills;
+const wakatime = siteConfig.wakatime;
 
 const github = reactive({
     ...siteConfig.github,
@@ -51,7 +52,7 @@ async function fetchGithubMeta() {
         const parsed = Object.entries(counts)
             .map(([name, count]) => ({ name, count }))
             .sort((a, b) => b.count - a.count)
-            .slice(0, 4);
+            .slice(0, 5);
         github.languages = parsed.map((item) => ({
             name: item.name,
             percent: Math.round((item.count / total) * 100),

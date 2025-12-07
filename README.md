@@ -99,6 +99,11 @@ const siteConfig: SiteConfig = {
         apiBase: "https://api.umami.is", // Umami API 地址，一般无需修改
     },
 
+    wakatime: {
+        enable: true, // 是否启用 Wakatime 统计
+        apiUrl: "https://wakatime.com/api/v1", // Wakatime API 地址，默认官方地址
+    },
+
     // 技能图标展示，详见https://github.com/tandpfun/skill-icons#icons-list
     skills: [
         { title: "前端", items: ["css", "html", "javascript", "typescript", "vue"] },
@@ -163,6 +168,7 @@ const siteConfig: SiteConfig = {
 
 - `VITE_GITHUB_TOKEN`: 具有仓库读取权限的 GitHub Token，用于绕过 GitHub API 速率限制。（可选）
 - `UMAMI_API_KEY`: Umami 分析的 API Key。
+- `WAKATIME_API_KEY`: Wakatime API Key，用于获取编码统计数据。
 - `SMTP_HOST`: 邮件服务器主机名
 - `SMTP_PORT`: 端口（如 465 或 587）
 - `SMTP_USER`: 发件人邮箱账号

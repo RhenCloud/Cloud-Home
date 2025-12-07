@@ -74,6 +74,11 @@ const siteConfig = {
         apiBase: "https://api.umami.is",
     },
 
+    wakatime: {
+        enable: true,
+        apiUrl: "https://wakapi.rhen.cloud/api/v1",
+    },
+
     skills: [
         { title: "前端", items: ["css", "html", "javascript", "typescript", "vue"] },
         { title: "后端 / 云", items: ["cpp", "cloudflare", "docker", "java", "mysql", "nodejs", "python", "vercel"] },

@@ -1,6 +1,11 @@
 <template>
     <section class="card">
         <h2>GitHub</h2>
+        <div class="heatmap">
+            <h3>提交热力图</h3>
+            <p class="muted">我的提交热力图 · Acitivity Heatmap</p>
+            <img :src="github.heatmapUrl" alt="GitHub Heatmap" loading="lazy" />
+        </div>
         <div class="lang-wrap">
             <h3>常用语言</h3>
             <p class="muted">我常用的语言 · Languages</p>
@@ -18,11 +23,6 @@
                     </li>
                 </ul>
             </div>
-        </div>
-        <div class="heatmap">
-            <h3>提交热力图</h3>
-            <p class="muted">我的提交热力图 · Acitivity Heatmap</p>
-            <img :src="github.heatmapUrl" alt="GitHub Heatmap" loading="lazy" />
         </div>
     </section>
 </template>
