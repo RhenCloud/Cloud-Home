@@ -19,7 +19,7 @@
 
 排名不分先后
 
-- [`Netease Mini Player`](https://github.com/numakkiyu/NeteaseMiniPlayer): 迷你网易云播放器组件，为本项目的音乐播放功能提供支持。
+- [Netease Mini Player](https://github.com/numakkiyu/NeteaseMiniPlayer)：迷你网易云播放器组件，为本项目的音乐播放功能提供支持。
 
 感谢以上开源项目原作者与维护者的贡献。
 
