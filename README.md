@@ -15,6 +15,14 @@
 - 构建：Vite
 - 部署：Vercel（静态构建 + Serverless Functions）
 
+## 致谢
+
+排名不分先后
+
+- [`Netease Mini Player`](https://github.com/numakkiyu/NeteaseMiniPlayer): 迷你网易云播放器组件，为本项目的音乐播放功能提供支持。
+
+感谢以上开源项目原作者与维护者的贡献。
+
 ## 配置指南
 
 ### 站点配置文件 (`src/config/siteConfig.ts`)
@@ -59,6 +67,28 @@ const siteConfig: SiteConfig = {
         title: "Example Title", // 网站标题
         icon: "favicon.ico", // 网站图标，可为public目录下的文件或外部链接
         startDate:"xxxx-xx-xx", // 网站创建日期
+    },
+
+    music: {
+        // 是否启用音乐播放器
+        enable: true,
+        // floating - 浮动模式播放器（推荐）- 用于播放网易云歌单
+        // embed - 嵌入模式播放器 - 用于播放网易云单曲
+        mode: "floating", // "floating" 或 "embed"
+        // 歌单ID：从网易云音乐链接获取，如 https://music.163.com/#/playlist?id=14273792576
+        playlistId: undefined, // 例如: "14273792576"
+        // 歌曲ID：仅在嵌入模式下使用
+        songId: undefined, // 例如: "554242291"
+        // 播放器位置（浮动模式）: "bottom-left" | "bottom-right" | "top-left" | "top-right"
+        position: "bottom-left",
+        // 是否显示歌词
+        lyric: true,
+        // 主题: "light" | "dark" | "auto"
+        theme: "dark",
+        // 是否自动播放
+        autoplay: false,
+        // 是否默认以黑胶唱片状态启动（仅浮动模式）
+        defaultMinimized: true,
     },
 
     umami: {

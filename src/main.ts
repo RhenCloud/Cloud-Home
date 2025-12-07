@@ -12,4 +12,5 @@ if (process.env.NODE_ENV !== "development") {
         app.use(VueUmamiPlugin({ websiteID: siteConfig.umami.websiteId, scriptSrc: siteConfig.umami.url, router }));
     }
 }
+
 app.use(router).mount("#app");

@@ -47,6 +47,26 @@ const siteConfig = {
         },
     },
 
+    music: {
+        enable: true,
+        // 浮动模式播放器（推荐）- 用于播放网易云歌单
+        mode: "floating", // "floating" 或 "embed"
+        // 歌单ID：从网易云音乐链接获取，如 https://music.163.com/#/playlist?id=14273792576
+        playlistId: "14366453940", // 例如: "14273792576"
+        // 歌曲ID：仅在嵌入模式下使用
+        songId: undefined, // 例如: "554242291"
+        // 播放器位置（浮动模式）: "bottom-left" | "bottom-right" | "top-left" | "top-right"
+        position: "bottom-left",
+        // 是否显示歌词
+        lyric: true,
+        // 主题: "light" | "dark" | "auto"
+        theme: "dark",
+        // 是否自动播放
+        autoplay: false,
+        // 是否默认以黑胶唱片状态启动（仅浮动模式）
+        defaultMinimized: true,
+    },
+
     umami: {
         enable: true,
         url: "https://cloud.umami.is/script.js",

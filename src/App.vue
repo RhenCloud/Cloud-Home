@@ -21,6 +21,8 @@
         <Transition name="fade-down">
             <FooterSection v-if="!hideComponents" :contact="contact" key="footer" />
         </Transition>
+        <!-- 音乐播放器 -->
+        <MusicPlayer />
     </div>
 </template>
 
@@ -28,6 +30,7 @@
 import { onMounted, computed, ref } from "vue";
 import PageSwitcher from "./components/PageSwitcher.vue";
 import FooterSection from "./components/FooterSection.vue";
+import MusicPlayer from "./components/MusicPlayer.vue";
 import siteConfig from "./config/siteConfig";
 
 const contact = siteConfig.footer;
@@ -53,7 +56,7 @@ const getBackgroundImage = () => {
 
     if (!image) return undefined;
 
-    return image.startsWith("http") ? image : `/public/${image}`;
+    return image.startsWith("http") ? image : `/${image}`;
 };
 
 const backgroundStyle = computed(() => {

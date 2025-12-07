@@ -1,3 +1,7 @@
+html {
+    height: 100%;
+}
+
 :root {
     color-scheme: light dark;
     font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -7,7 +11,7 @@
 
 body {
     margin: 0;
-    min-height: 100vh;
+    min-height: 100%;
     background: radial-gradient(circle at 20% 20%, #1b2b4b, #0f1629);
 }
 
@@ -89,4 +93,99 @@ p {
 .footer {
     text-align: center;
     margin-top: 8px;
+}
+
+/* Ensure the Netease mini player doesn't occupy page layout space
+   and stays fixed above content. Use !important to override
+   styles injected by third-party scripts. */
+.netease-mini-player {
+    position: fixed !important;
+    bottom: 20px !important;
+    left: 20px !important;
+    right: auto !important;
+    /* do not force width here — let the player's own minimized/expanded
+       styles control sizing. Only constrain max width as a safety net. */
+    max-width: calc(100% - 40px) !important;
+    z-index: 9999 !important;
+    margin: 0 !important;
+    transform: none !important;
+}
+
+/* If the player injects a full-width bar, make sure it won't
+   push page content by forcing it out of the normal flow. */
+.netease-mini-player > * {
+    box-sizing: border-box;
+}
+
+/* Defensive: hide any accidental full-width injected container from the player
+   that might occupy vertical space. This targets common helper classes used
+   by the player script. */
+.netease-mini-player-embed,
+.nmpv2-player,
+.nmpv2-root {
+    position: fixed !important;
+    bottom: 20px !important;
+    left: 20px !important;
+    right: auto !important;
+    z-index: 9999 !important;
+}
+
+/* Fix: prevent playlist dropdown from increasing document height
+   by forcing the playlist container to be fixed and clipped to viewport. */
+.netease-mini-player[data-position="bottom-left"] .playlist-container,
+.netease-mini-player[data-position="bottom-right"] .playlist-container {
+    position: fixed !important;
+    bottom: calc(20px + 80px) !important;
+    left: 20px !important;
+    right: auto !important;
+    width: 290px !important;
+    max-height: 50vh !important;
+    overflow: auto !important;
+    z-index: 10001 !important;
+}
+
+.netease-mini-player[data-position="top-left"] .playlist-container,
+.netease-mini-player[data-position="top-right"] .playlist-container {
+    position: fixed !important;
+    top: calc(20px + 80px) !important;
+    left: 20px !important;
+    right: auto !important;
+    width: 290px !important;
+    max-height: 50vh !important;
+    overflow: auto !important;
+    z-index: 10001 !important;
+}
+
+/* If player is docked to the right, align playlist to right edge */
+.netease-mini-player[data-position="bottom-right"] .playlist-container,
+.netease-mini-player[data-position="top-right"] .playlist-container {
+    left: auto !important;
+    right: 20px !important;
+}
+
+/* Ensure minimized player displays as a circle and its album cover fits */
+.netease-mini-player.minimized {
+    width: 80px !important;
+    height: 80px !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    box-shadow: none !important;
+}
+
+.netease-mini-player.minimized .album-cover-container {
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+}
+
+.netease-mini-player.minimized .album-cover {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
 }
