@@ -31,7 +31,7 @@ const siteConfig = {
 
     siteMeta: {
         title: "RhenCloud",
-        icon: "favicon.ico", // public/favicon.ico
+        icon: "favicon.svg", // public/favicon.svg
         startDate: "2025-12-06",
     },
 
