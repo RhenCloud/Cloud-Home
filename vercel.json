@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "framework": "vite",
+    "buildCommand": "nuxt generate",
     "routes": [
         {
             "src": "/api/(.*)",

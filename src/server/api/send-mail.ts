@@ -19,6 +19,7 @@ type SendMailPayload = {
     desc?: string;
     email?: string;
     avatar?: string;
+    message?: string;
 };
 
 const ensureValue = (value?: string, fallback = "未填写") => (value?.trim() ? value.trim() : fallback);
@@ -35,7 +36,7 @@ export default defineEventHandler(async (event) => {
     }
 
     const payload = (await readBody<SendMailPayload>(event)) || {};
-    const { name, url, desc, email, avatar } = payload;
+    const { name, url, desc, email, avatar, message } = payload;
 
     if (!name?.trim() || !url?.trim() || !email?.trim()) {
         throw createError({
@@ -45,15 +46,7 @@ export default defineEventHandler(async (event) => {
     }
 
     const config = useRuntimeConfig() as MailConfig;
-    const {
-        smtpHost,
-        smtpPort: configSmtpPort,
-        smtpUser,
-        smtpPass,
-        senderEmail,
-        adminEmail,
-        smtpSecure,
-    } = config;
+    const { smtpHost, smtpPort: configSmtpPort, smtpUser, smtpPass, senderEmail, adminEmail, smtpSecure } = config;
 
     const smtpPort = Number(configSmtpPort ?? 465);
     if (!smtpHost || !smtpUser || !smtpPass || !senderEmail || !adminEmail) {
@@ -72,12 +65,26 @@ export default defineEventHandler(async (event) => {
     };
 
     const transporter = nodemailer.createTransport(smtpOptions);
+    const friendEntry = `{
+    name: "${ensureValue(name).replace(/"/g, '\\"')}",
+    url: "${ensureValue(url).replace(/"/g, '\\"')}",
+    desc: "${ensureValue(desc).replace(/"/g, '\\"')}",
+    avatar: "${ensureValue(avatar).replace(/"/g, '\\"')}",
+},`;
+
     const htmlMessage = `
+        <p>一个新的友链申请已提交，以下是可直接复制到项目中的配置：</p>
+        <pre style="background: #f5f5f5; padding: 12px; border-radius: 4px; overflow: auto;">
+<code>${friendEntry}</code>
+        </pre>
+        <hr style="margin: 20px 0;" />
+        <p><strong>申请者信息：</strong></p>
         <p><strong>名称：</strong>${ensureValue(name)}</p>
         <p><strong>邮箱：</strong>${ensureValue(email)}</p>
         <p><strong>站点：</strong><a href="${ensureValue(url)}">${ensureValue(url)}</a></p>
         <p><strong>描述：</strong>${ensureValue(desc)}</p>
         <p><strong>头像：</strong>${ensureValue(avatar)}</p>
+        <p><strong>想说的话：</strong>${ensureValue(message)}</p>
         <p><strong>时间：</strong>${new Date().toISOString()}</p>
     `;
 

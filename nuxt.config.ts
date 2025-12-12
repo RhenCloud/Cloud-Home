@@ -11,12 +11,12 @@ export default defineNuxtConfig({
             link: [{ rel: "icon", href: siteConfig.siteMeta.icon }],
         },
     },
-    nitro: {
-        prerender: {
-            crawlLinks: true,
-            routes: ["/sitemap.xml", "/rss.xml"],
-        },
-    },
+    // nitro: {
+    //     prerender: {
+    //         crawlLinks: true,
+    //         routes: ["/sitemap.xml", "/rss.xml"],
+    //     },
+    // },
     runtimeConfig: {
         smtpHost: process.env.SMTP_HOST ?? "",
         smtpPort: Number(process.env.SMTP_PORT ?? 465),

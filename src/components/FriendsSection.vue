@@ -26,6 +26,13 @@
                 头像链接
                 <input v-model="form.avatar" type="url" placeholder="可选，展示头像" />
             </label>
+            <label>
+                想说的话
+                <div class="textarea-wrapper">
+                    <textarea v-model="form.message" placeholder="可选，最多50字" maxlength="50"></textarea>
+                    <span class="char-count">{{ form.message?.length || 0 }}/50</span>
+                </div>
+            </label>
             <div class="form-actions">
                 <button type="submit" class="primary" :disabled="loading">
                     {{ loading ? "提交中..." : "提交申请" }}
@@ -75,6 +82,7 @@ const form = reactive({
     desc: "",
     email: "",
     avatar: "",
+    message: "",
 });
 const displayedFriends = ref([]);
 
@@ -108,6 +116,7 @@ const submitForm = async () => {
                 desc: form.desc,
                 email: form.email,
                 avatar: form.avatar,
+                message: form.message,
             }),
         });
         if (!resp.ok) throw new Error("send failed");
@@ -192,14 +201,40 @@ h2 {
     color: inherit;
     transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
-.friend-form input::placeholder {
+.textarea-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.friend-form textarea {
+    flex: 1;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.06);
+    color: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    font-family: inherit;
+    height: 36px;
+    resize: none;
+    overflow: auto;
+}
+.friend-form input::placeholder,
+.friend-form textarea::placeholder {
     color: rgba(232, 238, 252, 0.7);
 }
-.friend-form input:focus {
+.friend-form input:focus,
+.friend-form textarea:focus {
     outline: none;
     border-color: rgba(124, 193, 255, 0.8);
     background: rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 0 2px rgba(124, 193, 255, 0.25);
+}
+.char-count {
+    font-size: 12px;
+    color: rgba(232, 238, 252, 0.6);
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 .form-actions {
     grid-column: 1 / -1;
