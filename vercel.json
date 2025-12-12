@@ -1,10 +1,4 @@
 {
     "version": 2,
-    "buildCommand": "nuxt generate",
-    "routes": [
-        {
-            "src": "/api/(.*)",
-            "dest": "/api/$1"
-        }
-    ]
+    "framework": "nuxt"
 }
