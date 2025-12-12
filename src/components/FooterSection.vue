@@ -18,8 +18,10 @@
 
 <script setup>
 import { onMounted, ref } from "vue";
-import siteConfig from "../config/siteConfig";
+import { useRuntimeConfig } from "#imports";
+import siteConfig from "~/config/siteConfig";
 const props = defineProps({ contact: Object });
+const config = useRuntimeConfig();
 const quote = ref("");
 const from = ref("");
 const pageviews = ref(0);
@@ -60,7 +62,7 @@ const fetchStats = async () => {
         }
         const apiBase = siteConfig.umami.apiBase;
         const websiteId = siteConfig.umami.websiteId;
-        const apiKey = import.meta.env.VITE_UMAMI_API_KEY;
+        const apiKey = config.public.umamiApiKey;
 
         if (!apiKey) return;
 
@@ -105,7 +107,8 @@ onMounted(() => {
 <style scoped>
 .footer {
     text-align: center;
-    margin-top: 8px;
+    margin-top: auto;
+    width: 100%;
 }
 
 .from {

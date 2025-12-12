@@ -11,6 +11,9 @@ build/
 .next/
 .vercel/
 .vite/
+.nuxt/
+.output/
+.edgeone
 
 # env & secrets
 .env

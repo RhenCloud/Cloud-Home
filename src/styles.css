@@ -15,6 +15,42 @@ body {
     background: radial-gradient(circle at 20% 20%, #1b2b4b, #0f1629);
 }
 
+/* Layout shell keeps background and toggle visible even when content is hidden */
+
+.app-shell {
+    position: relative;
+    min-height: 100vh;
+    color: #e8eefc;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    isolation: isolate;
+}
+
+.background-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background-repeat: no-repeat;
+}
+
+.content-stack {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.app-body {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
 a {
     color: #7cc1ff;
     text-decoration: none;
@@ -106,7 +142,7 @@ p {
     /* do not force width here — let the player's own minimized/expanded
        styles control sizing. Only constrain max width as a safety net. */
     max-width: calc(100% - 40px) !important;
-    z-index: 9999 !important;
+    z-index: 10001 !important;
     margin: 0 !important;
     transform: none !important;
 }
@@ -127,7 +163,7 @@ p {
     bottom: 20px !important;
     left: 20px !important;
     right: auto !important;
-    z-index: 9999 !important;
+    z-index: 10001 !important;
 }
 
 /* Fix: prevent playlist dropdown from increasing document height
@@ -141,7 +177,7 @@ p {
     width: 290px !important;
     max-height: 50vh !important;
     overflow: auto !important;
-    z-index: 10001 !important;
+    z-index: 10002 !important;
 }
 
 .netease-mini-player[data-position="top-left"] .playlist-container,
@@ -153,7 +189,7 @@ p {
     width: 290px !important;
     max-height: 50vh !important;
     overflow: auto !important;
-    z-index: 10001 !important;
+    z-index: 10002 !important;
 }
 
 /* If player is docked to the right, align playlist to right edge */
@@ -188,4 +224,66 @@ p {
     height: 100% !important;
     object-fit: cover !important;
     border-radius: 50% !important;
+}
+
+/* Floating background show/hide toggle (bottom-right) */
+.background-toggle {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 10000;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(10px);
+    color: #f7fbff;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+
+.background-toggle:hover,
+.background-toggle:focus-visible {
+    background: rgba(124, 193, 255, 0.25);
+    border-color: rgba(124, 193, 255, 0.65);
+    box-shadow: 0 14px 36px rgba(124, 193, 255, 0.28);
+    outline: none;
+}
+
+.background-toggle:active {
+    transform: translateY(1px) scale(0.99);
+}
+
+.background-toggle .toggle-icon {
+    font-size: 18px;
+    line-height: 1;
+}
+
+.background-toggle .toggle-label {
+    font-size: 14px;
+    letter-spacing: 0.2px;
+}
+
+.background-toggle.active {
+    background: linear-gradient(135deg, rgba(124, 193, 255, 0.4), rgba(255, 255, 255, 0.2));
+    border-color: rgba(124, 193, 255, 0.8);
+    color: #0f1629;
+    box-shadow: 0 16px 42px rgba(124, 193, 255, 0.32);
+}
+
+@media (max-width: 640px) {
+    .background-toggle {
+        right: 12px;
+        bottom: 12px;
+        padding: 9px 12px;
+        gap: 5px;
+    }
+    .background-toggle .toggle-label {
+        font-size: 13px;
+    }
 }

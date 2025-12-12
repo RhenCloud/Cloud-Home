@@ -1,6 +1,6 @@
 # Cloud Home
 
-一个基于 Vue 的个人主页模板，内置友链申请、网站展示、项目展示、友链随机展示、自定义配置，支持 Vercel 部署与邮件通知。
+一个基于 Nuxt 3 (Vue 3) 的个人主页模板，内置友链申请、网站展示、项目展示、友链随机展示、自定义配置，支持 Vercel 部署与邮件通知。
 
 ## 特性
 
@@ -11,16 +11,16 @@
 
 ## 技术栈
 
-- 前端：Vue 3 + HTML + CSS
-- 构建：Vite
-- 部署：Vercel（静态构建 + Serverless Functions）
+- 前端：Nuxt 3（Vue 3）+ HTML + CSS
+- 构建 / 运行：Nuxt 3 + Nitro
+- 部署：Vercel（Nuxt 构建 + Nitro 函数）
 
 ## 致谢
 
 排名不分先后
 
 - [Skill Icons](https://github.com/tandpfun/skill-icons)：技能图标库，本项目的技能图标来源。
-- [Netease Mini Player](https://github.com/numakkiyu/NeteaseMiniPlayer)：迷你网易云播放器组件，为本项目的音乐播放功能提供支持。
+- [Netease Mini Player](https://github.com/numakkiyu/NeteaseMiniPlayer)：迷你网易云播放器组件，为本项目的音乐播放功能提供支持。（本项目使用[本人fork的版本](https://github.com/RhenCloud/NeteaseMiniPlayer)）
 
 感谢以上开源项目原作者与维护者的贡献。
 
@@ -35,7 +35,7 @@ const siteConfig: SiteConfig = {
     profile: {
         name: "Example User", // 你的名字
         title: "I'm a software developer.", // 你的简介，可为空
-        avatar: "avatar.webp", // 你的头像，可为public目录下的文件或外部链接
+        avatar: "/avatar.webp", // 你的头像，可为public目录下的文件或外部链接
         bio: "Hello World", // 你的喜欢的一句话，可为空
         birthday: "xxxx-xx-xx", // 你的生日，可为空
         gender: "", // 你的性别，可为空
@@ -66,7 +66,7 @@ const siteConfig: SiteConfig = {
 
     siteMeta: {
         title: "Example Title", // 网站标题
-        icon: "favicon.ico", // 网站图标，可为public目录下的文件或外部链接
+        icon: "/favicon.ico", // 网站图标，可为public目录下的文件或外部链接
         startDate:"xxxx-xx-xx", // 网站创建日期
     },
 
@@ -90,6 +90,10 @@ const siteConfig: SiteConfig = {
         autoplay: false,
         // 是否默认以黑胶唱片状态启动（仅浮动模式）
         defaultMinimized: true,
+        // 标签页非激活时是否自动暂停
+        autoPause: false,
+        // Music API 配置
+        apiUrls: ["https://www.bilibili.uno/api", "https://meting-api.wangcy.site/api"],
     },
 
     umami: {
@@ -166,16 +170,17 @@ const siteConfig: SiteConfig = {
 
 在 Vercel 控制台或本地 `.env` 配置：
 
-- `VITE_GITHUB_TOKEN`: 具有仓库读取权限的 GitHub Token，用于绕过 GitHub API 速率限制。（可选）
-- `UMAMI_API_KEY`: Umami 分析的 API Key。
+- `NUXT_PUBLIC_GITHUB_TOKEN`: 具有仓库读取权限的 GitHub Token，用于绕过 GitHub API 速率限制。（可选）
+- `NUXT_PUBLIC_UMAMI_API_KEY`: 可选的 Umami API Key，用于展示访问量统计数据。
 - `WAKATIME_API_KEY`: Wakatime API Key，用于获取编码统计数据。
+- `WAKATIME_API_URL`: Wakatime API 地址，覆盖默认 `https://wakatime.com/api/v1`（可选）。
 - `SMTP_HOST`: 邮件服务器主机名
 - `SMTP_PORT`: 端口（如 465 或 587）
 - `SMTP_USER`: 发件人邮箱账号
 - `SMTP_PASS`: 邮箱授权码或密码
-- `MAIL_FROM`: 发件人地址（通常同 SMTP_USER）
+- `SENDER_EMAIL`: 发件人地址（通常同 SMTP_USER）
 - `ADMIN_EMAIL`: 接收通知的邮箱地址
-- `SMTP_SECURE`：是否启用 SSL/TLS 加密（默认 `true`）
+- `SMTP_SECURE`：是否强制启用 SSL/TLS（默认为 `true` 当端口为 465）。
 
 ## 本地开发
 
@@ -184,7 +189,7 @@ pnpm install
 pnpm dev
 ```
 
-访问 `http://localhost:5173/`。
+访问 `http://localhost:3000/`。
 
 ## 构建
 
@@ -192,7 +197,7 @@ pnpm dev
 pnpm build
 ```
 
-产物输出到
+产物输出到 Nuxt 的 `.output/` 目录，该目录同时包含静态资源与 Nitro 服务器入口。
 
 ## 部署到 Vercel
 
@@ -200,6 +205,8 @@ pnpm build
 2. 设置上文的环境变量。
 
 ## API
+
+雁型的 Nitro 路由位于 `server/api`，依旧暴露同样的 `/api` 前缀。
 
 - `POST /api/send-mail`：友链申请邮件发送。请求体示例：
 

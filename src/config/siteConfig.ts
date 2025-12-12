@@ -2,7 +2,7 @@ const siteConfig = {
     profile: {
         name: "RhenCloud",
         title: "I'm RhenCloud.",
-        avatar: "avatar.webp", // public/avatar.webp
+        avatar: "/avatar.webp", // public/avatar.webp
         bio: "趁世界还未重启之前 约一次爱恋",
         birthday: "2010-03-28",
         // gender: "女",
@@ -31,7 +31,7 @@ const siteConfig = {
 
     siteMeta: {
         title: "RhenCloud",
-        icon: "favicon.svg", // public/favicon.svg
+        icon: "/favicon.svg", // public/favicon.svg
         startDate: "2025-12-06",
     },
 
@@ -65,6 +65,10 @@ const siteConfig = {
         autoplay: false,
         // 是否默认以黑胶唱片状态启动（仅浮动模式）
         defaultMinimized: true,
+        // 标签页非激活时是否自动暂停
+        autoPause: false,
+        // Music API 配置
+        apiUrls: ["https://www.bilibili.uno/api", "https://meting-api.wangcy.site/api"],
     },
 
     umami: {

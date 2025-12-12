@@ -25,6 +25,8 @@ defineProps({ profile: Object });
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid rgba(255, 255, 255, 0.18);
+    border: 3px solid var(--accent);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+    background: #fff;
 }
 </style>

@@ -10,11 +10,13 @@
         :data-theme="music.theme"
         :data-autoplay="music.autoplay"
         :data-default-minimized="music.defaultMinimized"
+        :data-auto-pause="music.autoPause"
+        :data-api-urls="JSON.stringify(music.apiUrls)"
     ></div>
 </template>
 
 <script setup lang="ts">
-import siteConfig from "../config/siteConfig";
+import siteConfig from "~/config/siteConfig";
 
 const music = siteConfig.music;
 </script>

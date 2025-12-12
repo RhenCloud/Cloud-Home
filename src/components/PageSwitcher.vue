@@ -3,15 +3,15 @@
         <button :disabled="currentIndex <= 0" @click="goPrev">上一页</button>
         <div class="dots">
             <button
-                v-for="r in ordered"
-                :key="r.name"
-                :class="{ active: r.name === route.name }"
-                @click="router.push({ name: r.name })"
+                v-for="item in pages"
+                :key="item.name"
+                :class="{ active: item.name === route.name }"
+                @click="router.push({ name: item.name })"
             >
-                {{ r.meta.label || r.name }}
+                {{ item.label }}
             </button>
         </div>
-        <button :disabled="currentIndex >= ordered.length - 1" @click="goNext">下一页</button>
+        <button :disabled="currentIndex >= pages.length - 1" @click="goNext">下一页</button>
     </div>
 </template>
 
@@ -22,21 +22,26 @@ import { useRoute, useRouter } from "vue-router";
 const router = useRouter();
 const route = useRoute();
 
-const ordered = computed(() =>
-    router
-        .getRoutes()
-        .filter((r) => typeof r.meta?.order === "number")
-        .sort((a, b) => a.meta.order - b.meta.order)
-);
+const pages = [
+    { name: "index", label: "首页" },
+    { name: "about", label: "关于" },
+    { name: "sites", label: "网站" },
+    { name: "projects", label: "项目" },
+    { name: "friends", label: "友链" },
+];
 
-const currentIndex = computed(() => ordered.value.findIndex((r) => r.name === route.name));
+const currentIndex = computed(() => pages.findIndex((item) => item.name === route.name));
 
 const goPrev = () => {
-    if (currentIndex.value > 0) router.push({ name: ordered.value[currentIndex.value - 1].name });
+    if (currentIndex.value > 0) {
+        router.push({ name: pages[currentIndex.value - 1].name });
+    }
 };
+
 const goNext = () => {
-    if (currentIndex.value < ordered.value.length - 1)
-        router.push({ name: ordered.value[currentIndex.value + 1].name });
+    if (currentIndex.value < pages.length - 1) {
+        router.push({ name: pages[currentIndex.value + 1].name });
+    }
 };
 </script>
 

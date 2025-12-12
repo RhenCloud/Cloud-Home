@@ -53,24 +53,24 @@
                 <div class="stats-grid">
                     <div class="stat-item">
                         <span class="stat-value">{{
-                            currentWakatimeData.total_seconds ? formatTime(currentWakatimeData.total_seconds) : "N/A"
+                            currentWakatimeData?.total_seconds ? formatTime(currentWakatimeData.total_seconds) : "N/A"
                         }}</span>
                         <span class="stat-label">总时间</span>
                     </div>
                     <div class="stat-item">
                         <span class="stat-value">{{
-                            currentWakatimeData.daily_average ? formatTime(currentWakatimeData.daily_average) : "N/A"
+                            currentWakatimeData?.daily_average ? formatTime(currentWakatimeData.daily_average) : "N/A"
                         }}</span>
                         <span class="stat-label">日均</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-value">{{ currentWakatimeData.days_including_holidays || "N/A" }}</span>
+                        <span class="stat-value">{{ currentWakatimeData?.days_including_holidays ?? "N/A" }}</span>
                         <span class="stat-label">活跃天数</span>
                     </div>
                 </div>
             </div>
 
-            <div class="lang-wrap" v-if="currentWakatimeData.languages && currentWakatimeData.languages.length">
+            <div class="lang-wrap" v-if="currentWakatimeData?.languages && currentWakatimeData.languages.length">
                 <h3>编程语言</h3>
                 <p class="muted">语言使用统计 · Languages</p>
                 <div class="lang-chart">
@@ -177,13 +177,10 @@ const fetchWakatimeData = async () => {
             params.append("apiUrl", wakatime.apiUrl);
         }
         const url = `/api/wakatime${params.toString() ? `?${params.toString()}` : ""}`;
-        console.log("Fetching Wakatime data from:", url);
         const response = await fetch(url);
-        console.log("Response status:", response.status);
 
         if (response.ok) {
             const data = await response.json();
-            console.log("Wakatime data:", data);
             weeklyData.value = data.weekly;
             allTimeData.value = data.allTime;
             statusData.value = data.status;
@@ -199,34 +196,6 @@ const fetchWakatimeData = async () => {
         }
     } catch (error) {
         console.error("Failed to fetch Wakatime data:", error);
-        // 在开发环境中，如果 API 不可用，设置一些示例数据
-        if (import.meta.env.DEV) {
-            console.log("Using mock data for development");
-            weeklyData.value = {
-                total_seconds: 36000,
-                daily_average: 5142,
-                days_including_holidays: 7,
-                languages: [
-                    { name: "TypeScript", percent: 45.2, total_seconds: 16272 },
-                    { name: "Vue", percent: 30.1, total_seconds: 10836 },
-                    { name: "JavaScript", percent: 15.3, total_seconds: 5508 },
-                    { name: "Python", percent: 9.4, total_seconds: 3384 },
-                ],
-            };
-            allTimeData.value = {
-                total_seconds: 864000,
-                daily_average: 2800,
-                days_including_holidays: 308,
-                languages: [
-                    { name: "JavaScript", percent: 35.2, total_seconds: 304128 },
-                    { name: "TypeScript", percent: 28.1, total_seconds: 242688 },
-                    { name: "Python", percent: 20.3, total_seconds: 175392 },
-                    { name: "Vue", percent: 10.1, total_seconds: 87296 },
-                    { name: "CSS", percent: 6.3, total_seconds: 54432 },
-                ],
-            };
-            statusData.value = { is_coding: false };
-        }
     }
 };
 
