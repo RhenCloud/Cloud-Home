@@ -46,18 +46,12 @@ const checkIfMobile = () => {
 onMounted(() => {
     checkIfMobile();
     window.addEventListener("resize", checkIfMobile);
-    // const script = document.createElement("script");
-    // script.src = "/js/netease-mini-player-v2.js";
-    // document.head.appendChild(script);
 });
 
 const getBackgroundImage = () => {
     if (!bg.enable) return undefined;
-
     const image = isMobile.value && bg.mobileImage ? bg.mobileImage : bg.image;
-
     if (!image) return undefined;
-
     return image.startsWith("http") ? image : `/${image}`;
 };
 
@@ -65,9 +59,7 @@ const backgroundStyle = computed(() => ({ backgroundColor: "#0f1629" }));
 
 const overlayStyle = computed(() => {
     const imageUrl = getBackgroundImage();
-
     if (!bg.enable || !imageUrl) return {};
-
     return {
         backgroundImage: `linear-gradient(${bg.overlay}, ${bg.overlay}), url('${imageUrl}')`,
         backgroundSize: "cover",

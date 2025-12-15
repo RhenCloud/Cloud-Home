@@ -4,6 +4,7 @@ const siteConfig = {
         title: "I'm RhenCloud.",
         avatar: "/avatar.webp", // public/avatar.webp
         bio: "趁世界还未重启之前 约一次爱恋",
+        email: "i@rhen.cloud",
         birthday: "2010-03-28",
         // gender: "女",
         pronouns: "她",
@@ -31,6 +32,7 @@ const siteConfig = {
 
     siteMeta: {
         title: "RhenCloud",
+        url: "https://rhen.cloud",
         icon: "/favicon.svg", // public/favicon.svg
         startDate: "2025-12-06",
     },
@@ -40,7 +42,7 @@ const siteConfig = {
             enable: true,
             // URL 支持：可使用外部 URL 或本地路径
             // 例如: "https://example.com/bg.jpg" 或 "background.webp"
-            image: "background.png", // 背景图片 URL 或本地路径（桌面端）
+            image: "background.webp", // 背景图片 URL 或本地路径（桌面端）
             mobileImage: "https://www.loliapi.com/acg/pe/", // 移动端背景图片（可选，不设置则使用 image）
             blur: 0, // 背景模糊程度 (0-100)
             overlay: "rgba(70, 59, 82, 0.4)", // 背景遮罩颜色与透明度
@@ -117,6 +119,11 @@ const siteConfig = {
         { name: "Cloud Home", url: "https://github.com/RhenCloud/cloud-home", desc: "个人主页模板" },
         { name: "ILP", url: "https://github.com/RhenCloud/ILP", desc: "跨平台、多网站、模块化的小说下载器" },
         { name: "ILP-C++", url: "https://github.com/RhenCloud/ILP-Cpp", desc: "跨平台、多网站、模块化的小说下载器" },
+        {
+            name: "Test",
+            url: "https://github.com/RhenCloud/ILP-Cpp",
+            desc: "",
+        },
     ],
     friends: [
         {
@@ -124,6 +131,12 @@ const siteConfig = {
             desc: "wuxian's web",
             url: "https://www.alxian.cn",
             avatar: "https://www.alxian.cn/_next/image?url=%2Fimages%2Favatar.jpg&w=256&q=75",
+        },
+        {
+            name: "鈴奈咲桜のBlog",
+            desc: "一个普普通通的Blog",
+            url: "https://blog.sakura.ink",
+            avatar: "https://q2.qlogo.cn/headimg_dl?dst_uin=2731443459&spec=5",
         },
         {
             name: "鈴奈咲桜のBlog",

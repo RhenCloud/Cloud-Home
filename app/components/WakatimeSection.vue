@@ -6,12 +6,8 @@
                 <button class="tab-button" :class="{ active: activeTab === 'weekly' }" @click="activeTab = 'weekly'">
                     最近7天
                 </button>
-                <button
-                    class="tab-button"
-                    :class="{ active: activeTab === 'allTime' }"
-                    @click="activeTab = 'allTime'"
-                    v-if="allTimeData"
-                >
+                <button class="tab-button" :class="{ active: activeTab === 'allTime' }" @click="activeTab = 'allTime'"
+                    v-if="allTimeData">
                     所有时间
                 </button>
             </div>

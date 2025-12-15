@@ -6,11 +6,8 @@
                 <button class="tab-button" :class="{ active: activeTab === 'github' }" @click="activeTab = 'github'">
                     GitHub
                 </button>
-                <button
-                    class="tab-button"
-                    :class="{ active: activeTab === 'wakatime' }"
-                    @click="activeTab = 'wakatime'"
-                >
+                <button class="tab-button" :class="{ active: activeTab === 'wakatime' }"
+                    @click="activeTab = 'wakatime'">
                     Wakatime
                 </button>
             </div>
@@ -91,18 +88,12 @@
 
             <div class="wakatime-tabs" v-if="allTimeData">
                 <div class="wakatime-mini-tabs">
-                    <button
-                        class="wakatime-tab-button"
-                        :class="{ active: wakatimeActiveTab === 'weekly' }"
-                        @click="wakatimeActiveTab = 'weekly'"
-                    >
+                    <button class="wakatime-tab-button" :class="{ active: wakatimeActiveTab === 'weekly' }"
+                        @click="wakatimeActiveTab = 'weekly'">
                         最近7天
                     </button>
-                    <button
-                        class="wakatime-tab-button"
-                        :class="{ active: wakatimeActiveTab === 'allTime' }"
-                        @click="wakatimeActiveTab = 'allTime'"
-                    >
+                    <button class="wakatime-tab-button" :class="{ active: wakatimeActiveTab === 'allTime' }"
+                        @click="wakatimeActiveTab = 'allTime'">
                         所有时间
                     </button>
                 </div>
@@ -122,7 +113,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, reactive, computed } from "vue";
+import { ref, onMounted, computed } from "vue";
 
 const props = defineProps({ github: Object, wakatime: Object });
 const github = props.github;

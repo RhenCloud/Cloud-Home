@@ -2,7 +2,16 @@
     <main class="page">
         <HeroSection :profile="profile" />
         <SkillsSection :skills="skills" />
-        <StatsSection :github="github" :wakatime="wakatime" />
+        <Suspense>
+            <template #default>
+                <StatsSection :github="github" :wakatime="wakatime" />
+            </template>
+            <template #fallback>
+                <div class="card" style="text-align: center; padding: 40px">
+                    <p>加载统计数据中...</p>
+                </div>
+            </template>
+        </Suspense>
     </main>
 </template>
 

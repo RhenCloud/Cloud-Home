@@ -1,18 +1,38 @@
 <template>
-    <footer class="card footer">
-        <p class="muted" v-if="showHitokoto && quote">
-            「{{ quote }}」<span v-if="from" class="from">—— {{ from }}</span>
+    <footer class="card text-center mt-auto w-full flex flex-col gap-1">
+        <!-- 一言 -->
+        <p class="text-text-muted text-sm m-0 italic" v-if="showHitokoto && quote">
+            「{{ quote }}」<span v-if="from" class="ml-1.5">—— {{ from }}</span>
         </p>
-        <p class="muted stats" v-if="showStats && !statsError">
-            👁️ {{ visitors }} visitors · 📊 {{ pageviews }} pageviews
+
+        <!-- 访问统计 -->
+        <p class="text-text-muted text-xs m-0" v-if="showStats && !statsError">
+            👁️ {{ visitors }} · 📊 {{ pageviews }}
         </p>
-        <!-- <p class="muted stats" v-if="showStats && statsError">🔒 由于启用了隐私保护拓展，禁用状态统计</p> -->
-        <p class="muted beian" v-if="contact.beian">
-            <a :href="contact.beianLink || 'https://beian.miit.gov.cn/'" target="_blank" rel="noreferrer">
+
+        <!-- 备案信息 -->
+        <p class="text-text-muted text-xs m-0" v-if="contact.beian">
+            <a :href="contact.beianLink || 'https://beian.miit.gov.cn/'" target="_blank" rel="noreferrer"
+                class="opacity-85 transition-all duration-200 hover:text-primary hover:opacity-100">
                 {{ contact.beian }}
             </a>
         </p>
-        <div class="custom-html" v-if="contact.customHtml" v-html="contact.customHtml"></div>
+
+        <!-- 框架与技术栈信息 -->
+        <p class="text-text-muted text-xs m-0">
+            Powered by
+            <a href="https://nuxt.com" target="_blank" rel="noreferrer"
+                class="text-primary hover:text-accent transition-colors">Nuxt 4</a>
+            ·
+            <a href="https://tailwindcss.com" target="_blank" rel="noreferrer"
+                class="text-primary hover:text-accent transition-colors">Tailwind CSS</a>
+            ·
+            <a href="https://vuejs.org" target="_blank" rel="noreferrer"
+                class="text-primary hover:text-accent transition-colors">Vue 3</a>
+        </p>
+
+        <!-- 自定义 HTML -->
+        <div v-if="contact.customHtml" v-html="contact.customHtml"></div>
     </footer>
 </template>
 
@@ -103,45 +123,3 @@ onMounted(() => {
     if (showStats.value) fetchStats();
 });
 </script>
-
-<style scoped>
-.footer {
-    text-align: center;
-    margin-top: auto;
-    width: 100%;
-}
-
-.from {
-    margin-left: 6px;
-}
-
-.beian {
-    font-size: 12px;
-    margin: 6px 0;
-    letter-spacing: 0.2px;
-}
-
-.beian a {
-    color: inherit;
-    opacity: 0.85;
-    padding: 3px 8px;
-    border-radius: 8px;
-    transition: color 0.2s ease, background 0.2s ease, opacity 0.2s ease;
-}
-
-.beian a:hover {
-    color: var(--accent, #7cc1ff);
-    background: rgba(124, 193, 255, 0.1);
-    opacity: 1;
-}
-
-.custom-html {
-    margin-top: 6px;
-}
-
-.stats {
-    font-size: 12px;
-    margin: 6px 0;
-    letter-spacing: 0.2px;
-}
-</style>
