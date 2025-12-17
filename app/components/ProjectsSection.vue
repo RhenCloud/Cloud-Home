@@ -1,9 +1,7 @@
 <template>
     <section class="card panel flex flex-col gap-2.5">
         <h2 class="m-0 mb-1 text-lg font-semibold">项目作品</h2>
-
         <p class="text-sm text-white/60 mb-3">一些正在维护或已发布的项目 · Projects</p>
-
         <div class="grid grid-cols-1 gap-4 w-full max-w-[1100px] mx-auto sm:grid-cols-2">
             <article v-for="p in projects" :key="p.url"
                 class="rounded-[14px] border border-white/10 bg-gradient-to-br from-white/5 to-white/0 px-4 py-3.5 transition-all duration-200 hover:-translate-y-[3px] hover:border-yellow-400/50 w-[290px] h-[145px] flex flex-col">

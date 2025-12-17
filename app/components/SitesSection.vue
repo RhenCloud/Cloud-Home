@@ -1,8 +1,8 @@
 <template>
     <section class="card panel flex flex-col gap-2.5">
-        <h2 class="m-0 mb-1 text-lg font-semibold">项目作品</h2>
+        <h2 class="m-0 mb-1 text-lg font-semibold">我的网站</h2>
 
-        <p class="text-sm text-white/60 mb-3">一些正在维护或已发布的项目 · Projects</p>
+        <p class="text-sm text-white/60 mb-3">正在运行的站点 · Websites</p>
 
         <div class="grid grid-cols-1 gap-4 w-full max-w-[1100px] mx-auto sm:grid-cols-2">
             <article v-for="site in sites" :key="site.url"

@@ -119,12 +119,8 @@ const siteConfig = {
         { name: "Cloud Home", url: "https://github.com/RhenCloud/cloud-home", desc: "个人主页模板" },
         { name: "ILP", url: "https://github.com/RhenCloud/ILP", desc: "跨平台、多网站、模块化的小说下载器" },
         { name: "ILP-C++", url: "https://github.com/RhenCloud/ILP-Cpp", desc: "跨平台、多网站、模块化的小说下载器" },
-        {
-            name: "Test",
-            url: "https://github.com/RhenCloud/ILP-Cpp",
-            desc: "",
-        },
     ],
+
     friends: [
         {
             name: "wuxian",
@@ -138,13 +134,25 @@ const siteConfig = {
             url: "https://blog.sakura.ink",
             avatar: "https://q2.qlogo.cn/headimg_dl?dst_uin=2731443459&spec=5",
         },
-        {
-            name: "鈴奈咲桜のBlog",
-            desc: "一个普普通通的Blog",
-            url: "https://blog.sakura.ink",
-            avatar: "https://q2.qlogo.cn/headimg_dl?dst_uin=2731443459&spec=5",
-        },
     ],
+
+    comments: {
+        enable: true,
+        // twikoo: {
+        //     url: "https://twikoo.rhen.cloud",
+        // },
+        giscus: {
+            repo: "RhenCloud/Cloud-Home",
+            repoId: "R_kgDOQjx8rQ",
+            category: "Announcements",
+            categoryId: "DIC_kwDOQjx8rc4Cz4Qb",
+            mapping: "pathname",
+            reactionsEnabled: "1",
+            emitMetadata: "0",
+            inputPosition: "bottom",
+            theme: "preferred_color_scheme",
+        },
+    },
 
     footer: {
         beian: "津ICP备2025039003号-1",

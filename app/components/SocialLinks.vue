@@ -1,6 +1,6 @@
 <template>
     <section class="card flex flex-col gap-2.5">
-        <h2 class="m-0 mb-1">社交链接</h2>
+        <h2 class="m-0 mb-1 text-lg font-semibold">社交链接</h2>
         <p class="text-text-muted text-sm m-0 mb-3 block">社交账号 · Links</p>
         <div class="flex flex-wrap gap-2.5">
             <a v-for="link in links" :key="link.url" :href="link.url" target="_blank" rel="noreferrer"

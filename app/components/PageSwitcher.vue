@@ -33,6 +33,7 @@ const pages = [
     { name: "sites", label: "网站" },
     { name: "projects", label: "项目" },
     { name: "friends", label: "友链" },
+    { name: "comments", label: "留言" },
 ];
 
 const currentIndex = computed(() => pages.findIndex((item) => item.name === route.name));

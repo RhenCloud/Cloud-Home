@@ -1,6 +1,6 @@
 <template>
     <div class="card panel flex flex-col gap-2.5">
-        <h2 class="m-0 mb-1 gradient-text">友情链接</h2>
+        <h2 class="m-0 mb-1 text-lg font-semibold">友情链接</h2>
         <p class="text-text-muted text-sm m-0 mb-3 block">欢迎互换友链 · Friends</p>
         <div class="grid grid-cols-1 gap-4 w-full max-w-[1100px] mx-auto sm:grid-cols-2">
             <article v-for="f in displayedFriends" :key="f.url"

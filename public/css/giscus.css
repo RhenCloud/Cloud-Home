@@ -1,0 +1,167 @@
+/*!
+ * Modified from GitHub's Dark Dimmed theme, adapted for Cloud-Home
+ * License: MIT (see original project primer/primitives)
+ * Modified from GitHub's Dark Dimmed theme, licensed under the MIT License
+ * Copyright (c) 2018 GitHub Inc.
+ * https://github.com/primer/primitives/blob/main/LICENSE
+ */
+
+:root {
+    --ch-bg: #0a0c14; /* 深色卡片背景 */
+    --ch-bg-2: rgba(6, 8, 15, 0.55);
+    --ch-border: rgba(255, 255, 255, 0.04);
+    --muted: #768390;
+    --fg: #e6eef8;
+
+    /* 添加 1.css 中的颜色变量 */
+    --color-prettylights-syntax-comment: #768390;
+    --color-prettylights-syntax-constant: #6cb6ff;
+    --color-prettylights-syntax-entity: #dcbdfb;
+    --color-prettylights-syntax-storage-modifier-import: #adbac7;
+    --color-prettylights-syntax-entity-tag: #8ddb8c;
+    --color-prettylights-syntax-keyword: #f47067;
+    --color-prettylights-syntax-string: #96d0ff;
+    --color-prettylights-syntax-variable: #f69d50;
+    --color-prettylights-syntax-brackethighlighter-unmatched: #e5534b;
+    --color-prettylights-syntax-invalid-illegal-text: #cdd9e5;
+    --color-prettylights-syntax-invalid-illegal-bg: #922323;
+    --color-prettylights-syntax-carriage-return-text: #cdd9e5;
+    --color-prettylights-syntax-carriage-return-bg: #ad2e2c;
+    --color-prettylights-syntax-string-regexp: #8ddb8c;
+    --color-prettylights-syntax-markup-list: #eac55f;
+    --color-prettylights-syntax-markup-heading: #316dca;
+    --color-prettylights-syntax-markup-italic: #adbac7;
+    --color-prettylights-syntax-markup-bold: #adbac7;
+    --color-prettylights-syntax-markup-deleted-text: #ffd8d3;
+    --color-prettylights-syntax-markup-deleted-bg: #78191b;
+    --color-prettylights-syntax-markup-inserted-text: #b4f1b4;
+    --color-prettylights-syntax-markup-inserted-bg: #1b4721;
+    --color-prettylights-syntax-markup-changed-text: #ffddb0;
+    --color-prettylights-syntax-markup-changed-bg: #682d0f;
+    --color-prettylights-syntax-markup-ignored-text: #adbac7;
+    --color-prettylights-syntax-markup-ignored-bg: #255ab2;
+    --color-prettylights-syntax-meta-diff-range: #dcbdfb;
+    --color-prettylights-syntax-brackethighlighter-angle: #768390;
+    --color-prettylights-syntax-sublimelinter-gutter-mark: #545d68;
+    --color-prettylights-syntax-constant-other-reference-link: #96d0ff;
+    --color-btn-text: #adbac7;
+    --color-btn-bg: #373e47;
+    --color-btn-border: #cdd9e51a;
+    --color-btn-shadow: 0 0 #0000;
+    --color-btn-inset-shadow: 0 0 #0000;
+    --color-btn-hover-bg: #444c56;
+    --color-btn-hover-border: #768390;
+    --color-btn-active-bg: #3d444d;
+    --color-btn-active-border: #636e7b;
+    --color-btn-selected-bg: #2d333b;
+    --color-btn-primary-text: #fff;
+    --color-btn-primary-bg: #347d39;
+    --color-btn-primary-border: #cdd9e51a;
+    --color-btn-primary-shadow: 0 0 #0000;
+    --color-btn-primary-inset-shadow: 0 0 #0000;
+    --color-btn-primary-hover-bg: #46954a;
+    --color-btn-primary-hover-border: #cdd9e51a;
+    --color-btn-primary-selected-bg: #347d39;
+    --color-btn-primary-selected-shadow: 0 0 #0000;
+    --color-btn-primary-disabled-text: #cdd9e580;
+    --color-btn-primary-disabled-bg: #347d3999;
+    --color-btn-primary-disabled-border: #cdd9e51a;
+    --color-action-list-item-default-hover-bg: #909dab1f;
+    --color-segmented-control-bg: #636e7b1a;
+    --color-segmented-control-button-bg: #22272e;
+    --color-segmented-control-button-selected-border: #636e7b;
+}
+
+/* 外部容器（在组件中也有一层） */
+.giscus-wrapper {
+    background: linear-gradient(180deg, rgba(6, 8, 15, 0.55), rgba(10, 12, 20, 0.45));
+    border: 1px solid var(--ch-border);
+    border-radius: 12px;
+    padding: 0.75rem;
+    box-shadow: 0 8px 24px rgba(2, 6, 23, 0.6);
+    backdrop-filter: blur(6px) saturate(120%);
+    -webkit-backdrop-filter: blur(6px) saturate(120%);
+    margin-bottom: 1.25rem;
+}
+
+.giscus {
+    width: 100%;
+    color-scheme: dark;
+    overflow: hidden;
+}
+
+/* 兼容非组件 fallback 容器 */
+#giscus-container {
+    padding: 0.5rem;
+}
+
+/* GitHub Dark Dimmed inspired tweaks adapted to site theme */
+.gsc-reactions-count {
+    display: none !important;
+}
+.gsc-timeline {
+    flex-direction: column-reverse;
+}
+.gsc-header {
+    padding-bottom: 1rem;
+    color: var(--muted) !important;
+}
+.gsc-comments > .gsc-comment-box {
+    margin-bottom: 1rem;
+}
+.gsc-comments > .gsc-header {
+    order: 1;
+}
+.gsc-comments > .gsc-timeline {
+    order: 3;
+}
+
+/* 卡片风格：半透明+圆角+内阴影，契合站点 */
+.gsc-comment,
+.gsc-comment-body,
+.gsc-comment .gsc-comment-body {
+    background: linear-gradient(180deg, rgba(6, 8, 15, 0.5), rgba(10, 12, 20, 0.45)) !important;
+    border: 1px solid var(--ch-border) !important;
+    border-radius: 10px !important;
+    padding: 0.75rem !important;
+    box-shadow: 0 8px 20px rgba(2, 6, 23, 0.55) !important;
+}
+
+/* 评论作者/元信息颜色 */
+.gsc-comment .gsc-comment-header,
+.gsc-comment .gsc-comment-meta {
+    color: var(--muted) !important;
+}
+
+/* 按钮 / 交互控件微调 */
+.gsc-reaction-button,
+.gsc-input button {
+    background: var(--color-btn-bg) !important;
+    border: var(--color-btn-border) !important;
+    color: var(--color-btn-text) !important;
+    border-radius: 6px !important;
+    box-shadow: var(--color-btn-shadow) !important;
+    border-radius: 6px !important;
+}
+
+/* 输入框样式 */
+.gsc-input textarea,
+.gsc-input input {
+    background: rgba(0, 0, 0, 0.35) !important;
+    color: var(--fg) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: 8px !important;
+}
+
+/* 加载图像和首页背景微调 */
+main .gsc-loading-image {
+    background-image: url(https://github.githubassets.com/images/mona-loading-dimmed.gif) !important;
+}
+.gsc-homepage-bg {
+    background-color: var(--color-canvas-subtle) !important;
+}
+
+/* 语义辅助：让嵌入内容更好地适配窄屏 */
+.giscus {
+    overflow: hidden;
+}

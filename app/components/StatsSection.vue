@@ -1,7 +1,7 @@
 <template>
     <section class="card">
         <div class="header">
-            <h2>开发统计</h2>
+            <h2 class="m-0 mb-1 font-semibold">开发统计</h2>
             <div class="tabs">
                 <button class="tab-button" :class="{ active: activeTab === 'github' }" @click="activeTab = 'github'">
                     GitHub
