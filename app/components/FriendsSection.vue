@@ -3,11 +3,13 @@
         <h2 class="m-0 mb-1 text-lg font-semibold">友情链接</h2>
         <p class="text-text-muted text-sm m-0 mb-3 block">欢迎互换友链 · Friends</p>
         <div class="grid grid-cols-1 gap-4 w-full max-w-[1100px] mx-auto sm:grid-cols-2">
-            <article v-for="f in displayedFriends" :key="f.url"
+            <article
+v-for="f in displayedFriends" :key="f.url"
                 class="rounded-[14px] border border-white/10 bg-gradient-to-br from-white/5 to-white/0 px-4 py-3.5 transition-all duration-200 hover:-translate-y-[3px] hover:border-pink-400/50 w-[290px] h-[145px] flex flex-col">
                 <div class="flex items-center justify-between mb-1.5">
                     <div class="flex items-center gap-2 min-w-0">
-                        <img v-if="f.avatar" :src="f.avatar" :alt="f.name" loading="lazy"
+                        <NuxtImg
+v-if="f.avatar" :src="f.avatar" :alt="f.name" loading="lazy"
                             class="w-12 h-12 rounded-full object-cover border border-white/15" />
                         <h3 class="m-0 font-semibold text-base whitespace-nowrap overflow-hidden text-ellipsis">
                             {{ f.name }}
@@ -20,31 +22,35 @@
                     {{ f.desc || "一个有趣的站点" }}
                 </p>
 
-                <a :href="f.url" target="_blank" rel="noreferrer"
+                <NuxtLink
+:to="f.url"
                     class="inline-flex items-center gap-1.5 mt-auto shrink-0 font-semibold text-pink-300 hover:text-pink-400 transition-all duration-200 hover:gap-2">
                     访问 →
-                </a>
+                </NuxtLink>
             </article>
         </div>
     </div>
     <section class="card flex flex-col gap-2.5">
         <div class="flex justify-center items-center align-center flex-wrap">
-            <button @click="openForm"
-                class="px-3 py-2 rounded-2xl border border-primary/50 bg-primary/12 text-text-primary cursor-pointer transition-all duration-200 hover:bg-primary/20 hover:border-primary/80 hover:shadow-lg hover:shadow-primary/25">
+            <button
+class="px-3 py-2 rounded-2xl border border-primary/50 bg-primary/12 text-text-primary cursor-pointer transition-all duration-200 hover:bg-primary/20 hover:border-primary/80 hover:shadow-lg hover:shadow-primary/25"
+                @click="openForm">
                 申请友链
             </button>
         </div>
     </section>
     <Teleport to="body">
-        <div v-if="showDialog" class="fixed inset-0 bg-black/45 backdrop-blur-sm flex items-center justify-center z-50"
+        <div
+v-if="showDialog" class="fixed inset-0 bg-black/45 backdrop-blur-sm flex items-center justify-center z-50"
             @click.self="closeDialog">
             <div
                 class="min-w-[280px] max-w-[420px] bg-gradient-to-br from-pink-500/12 to-white/8 border border-white/15 rounded-2xl p-4 shadow-xl">
                 <h3 class="m-0 mb-2">{{ dialogTitle }}</h3>
                 <p class="text-text-muted text-sm mb-4">{{ dialogText }}</p>
                 <div class="flex justify-end">
-                    <button @click="closeDialog"
-                        class="px-3 py-2 rounded-2xl border border-primary/50 bg-primary/12 text-text-primary cursor-pointer hover:bg-primary/20 transition-all">
+                    <button
+class="px-3 py-2 rounded-2xl border border-primary/50 bg-primary/12 text-text-primary cursor-pointer hover:bg-primary/20 transition-all"
+                        @click="closeDialog">
                         好的
                     </button>
                 </div>
@@ -54,7 +60,8 @@
 
     <!-- 申请友链模态弹窗 -->
     <Teleport to="body">
-        <div v-if="showFormModal"
+        <div
+v-if="showFormModal"
             class="fixed inset-0 bg-black/45 backdrop-blur-sm flex items-center justify-center z-50"
             @click.self="showFormModal = false">
             <div
@@ -63,55 +70,64 @@
 
                 <div class="mb-4 text-sm text-text-primary">
                     <div class="mb-2 font-semibold">请在申请前在你站点添加以下信息（示例 JSON）：</div>
-                    <pre
-                        class="bg-white/6 border border-white/10 rounded-lg p-3 text-xs overflow-auto"><code>{{ exampleJson }}</code></pre>
+                    <pre class="bg-white/6 border border-white/10 rounded-lg p-3 text-xs overflow-auto">
+                    <code>{{ exampleJson }}</code>
+                </pre>
                 </div>
 
-                <form @submit.prevent="submitForm" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <form class="grid grid-cols-1 sm:grid-cols-2 gap-3" @submit.prevent="submitForm">
                     <label class="flex flex-col gap-1 text-sm text-text-primary font-semibold sm:col-span-2">
                         网站名称 *
-                        <input v-model="form.name" required placeholder="网站名称"
-                            class="px-2.5 py-2 rounded-xl border border-white/20 bg-white/8 text-text-primary focus:outline-none" />
+                        <input
+v-model="form.name" required placeholder="网站名称"
+                            class="px-2.5 py-2 rounded-xl border border-white/20 bg-white/8 text-text-primary focus:outline-none" >
                     </label>
 
                     <!-- URL 与 Email 同行 -->
                     <label class="flex flex-col gap-1 text-sm text-text-primary font-semibold">
                         网站链接 *
-                        <input v-model="form.url" type="url" required placeholder="https://example.com"
-                            class="px-2.5 py-2 rounded-xl border border-white/20 bg-white/8 text-text-primary focus:outline-none" />
+                        <input
+v-model="form.url" type="url" required placeholder="https://example.com"
+                            class="px-2.5 py-2 rounded-xl border border-white/20 bg-white/8 text-text-primary focus:outline-none" >
                     </label>
                     <label class="flex flex-col gap-1 text-sm text-text-primary font-semibold">
                         联系邮箱 *
-                        <input v-model="form.email" type="email" required placeholder="example@example.com"
-                            class="px-2.5 py-2 rounded-xl border border-white/20 bg-white/8 text-text-primary focus:outline-none" />
+                        <input
+v-model="form.email" type="email" required placeholder="example@example.com"
+                            class="px-2.5 py-2 rounded-xl border border-white/20 bg-white/8 text-text-primary focus:outline-none" >
                     </label>
 
                     <!-- 描述 与 头像 同行 -->
                     <label class="flex flex-col gap-1 text-sm text-text-primary font-semibold">
                         网站描述
-                        <input v-model="form.desc" placeholder="可选"
-                            class="px-2.5 py-2 rounded-xl border border-white/20 bg-white/8 text-text-primary focus:outline-none" />
+                        <input
+v-model="form.desc" placeholder="可选"
+                            class="px-2.5 py-2 rounded-xl border border-white/20 bg-white/8 text-text-primary focus:outline-none" >
                     </label>
                     <label class="flex flex-col gap-1 text-sm text-text-primary font-semibold">
                         头像链接
-                        <input v-model="form.avatar" type="url" placeholder="可选，展示头像"
-                            class="px-2.5 py-2 rounded-xl border border-white/20 bg-white/8 text-text-primary focus:outline-none" />
+                        <input
+v-model="form.avatar" type="url" placeholder="可选，展示头像"
+                            class="px-2.5 py-2 rounded-xl border border-white/20 bg-white/8 text-text-primary focus:outline-none" >
                     </label>
 
                     <label class="flex flex-col gap-1 text-sm text-text-primary font-semibold sm:col-span-2">
                         想说的话
                         <div class="flex items-center gap-2">
-                            <textarea v-model="form.message" placeholder="可选，最多50字" maxlength="50"
-                                class="flex-1 px-2.5 py-2 rounded-xl border border-white/20 bg-white/8 text-text-primary h-24 resize-none"></textarea>
+                            <textarea
+v-model="form.message" placeholder="可选，最多50字" maxlength="50"
+                                class="flex-1 px-2.5 py-2 rounded-xl border border-white/20 bg-white/8 text-text-primary h-24 resize-none"/>
                         </div>
                     </label>
 
                     <div class="sm:col-span-2 flex items-center justify-center gap-3 mt-2">
-                        <button type="button" @click="showFormModal = false"
-                            class="px-3 py-2 rounded-2xl border border-white/10 bg-white/6">
+                        <button
+type="button" class="px-3 py-2 rounded-2xl border border-white/10 bg-white/6"
+                            @click="showFormModal = false">
                             取消
                         </button>
-                        <button type="submit" :disabled="loading"
+                        <button
+type="submit" :disabled="loading"
                             class="px-3 py-2 rounded-2xl border border-primary/50 bg-primary/12 text-text-primary disabled:opacity-50">
                             {{ loading ? "提交中..." : "提交" }}
                         </button>

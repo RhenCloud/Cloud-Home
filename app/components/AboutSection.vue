@@ -4,8 +4,10 @@
         <p class="text-text-muted text-sm m-0 mb-3 block">关于我 · About Me</p>
 
         <div class="flex flex-wrap justify-center gap-3.5">
-            <article v-if="age"
-                class="flex-1 min-w-[140px] flex items-center justify-between gap-2 bg-gradient-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-2.5 px-3.5 shadow-md-dark transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg-dark hover:bg-gradient-to-br hover:from-primary/6">
+            <article
+                v-if="age"
+                class="flex-1 min-w-[140px] flex items-center justify-between gap-2 bg-gradient-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-2.5 px-3.5 shadow-md-dark transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg-dark hover:bg-gradient-to-br hover:from-primary/6"
+            >
                 <div class="flex items-center gap-2">
                     <span class="text-xl leading-none">🎂</span>
                     <h3 class="m-0 text-sm font-semibold text-white/90">年龄</h3>
@@ -15,8 +17,10 @@
                 </p>
             </article>
 
-            <article v-if="profile?.gender"
-                class="flex-1 min-w-[140px] flex items-center justify-between gap-2 bg-gradient-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-2.5 px-3.5 shadow-md-dark transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg-dark">
+            <article
+                v-if="profile?.gender"
+                class="flex-1 min-w-[140px] flex items-center justify-between gap-2 bg-gradient-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-2.5 px-3.5 shadow-md-dark transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg-dark"
+            >
                 <div class="flex items-center gap-2">
                     <span class="text-xl leading-none">⚧️</span>
                     <h3 class="m-0 text-sm font-semibold text-white/90">性别</h3>
@@ -26,8 +30,10 @@
                 </p>
             </article>
 
-            <article v-if="profile?.pronouns"
-                class="flex-1 min-w-[140px] flex items-center justify-between gap-2 bg-gradient-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-2.5 px-3.5 shadow-md-dark transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg-dark">
+            <article
+                v-if="profile?.pronouns"
+                class="flex-1 min-w-[140px] flex items-center justify-between gap-2 bg-gradient-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-2.5 px-3.5 shadow-md-dark transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg-dark"
+            >
                 <div class="flex items-center gap-2">
                     <span class="text-xl leading-none">🗣️</span>
                     <h3 class="m-0 text-sm font-semibold text-white/90">代词</h3>
@@ -37,8 +43,10 @@
                 </p>
             </article>
 
-            <article v-if="profile?.location"
-                class="flex-1 min-w-[140px] flex items-center justify-between gap-2 bg-gradient-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-2.5 px-3.5 shadow-md-dark transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg-dark">
+            <article
+                v-if="profile?.location"
+                class="flex-1 min-w-[140px] flex items-center justify-between gap-2 bg-gradient-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-2.5 px-3.5 shadow-md-dark transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg-dark"
+            >
                 <div class="flex items-center gap-2">
                     <span class="text-xl leading-none">📍</span>
                     <h3 class="m-0 text-sm font-semibold text-white/90">地区</h3>
@@ -50,8 +58,11 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mt-2.5">
-            <article v-for="item in items" :key="item.title"
-                class="bg-gradient-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-3 shadow-md-dark transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg-dark">
+            <article
+                v-for="item in items"
+                :key="item.title"
+                class="bg-gradient-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-3 shadow-md-dark transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg-dark"
+            >
                 <div class="flex items-center gap-2 mb-1.5">
                     <span class="text-2xl leading-none">{{ item.icon }}</span>
                     <h3 class="m-0 text-base font-semibold">{{ item.title }}</h3>
@@ -66,8 +77,14 @@
 import { computed } from "vue";
 
 const props = defineProps({
-    items: Array,
-    profile: Object,
+    items: {
+        type: Array,
+        default: () => [],
+    },
+    profile: {
+        type: Object,
+        default: () => ({}),
+    },
 });
 
 const age = computed(() => {

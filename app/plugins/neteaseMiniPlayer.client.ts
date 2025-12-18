@@ -1,6 +1,15 @@
 import { defineNuxtPlugin } from "#app";
 import siteConfig from "~/config/siteConfig";
 
+type NeteaseMiniPlayerGlobal = {
+    init?: () => void;
+};
+
+type NeteaseWindow = Window & {
+    NeteaseMiniPlayer?: NeteaseMiniPlayerGlobal;
+    __NETEASE_MUSIC_CONFIG__?: unknown;
+};
+
 export default defineNuxtPlugin(() => {
     if (import.meta.server) return;
 
@@ -35,7 +44,7 @@ export default defineNuxtPlugin(() => {
     const ensureScript = () =>
         new Promise<void>((resolve) => {
             // 检查全局对象是否已存在，表示脚本已加载
-            const anyWin = window as any;
+            const anyWin = window as NeteaseWindow;
             if (anyWin.NeteaseMiniPlayer) {
                 resolve();
                 return;
@@ -62,7 +71,7 @@ export default defineNuxtPlugin(() => {
         });
 
     const initPlayer = () => {
-        const anyWin = window as any;
+        const anyWin = window as NeteaseWindow;
 
         // 将 siteConfig 的音乐配置传递给全局 window 对象
         if (!anyWin.__NETEASE_MUSIC_CONFIG__) {

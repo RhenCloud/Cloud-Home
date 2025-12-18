@@ -1,13 +1,17 @@
 <template>
-    <section class="card" v-if="showComponent && (weeklyData || allTimeData)">
+    <section v-if="showComponent && (weeklyData || allTimeData)" class="card">
         <div class="header">
             <h2>Wakatime</h2>
             <div class="tabs">
                 <button class="tab-button" :class="{ active: activeTab === 'weekly' }" @click="activeTab = 'weekly'">
                     最近7天
                 </button>
-                <button class="tab-button" :class="{ active: activeTab === 'allTime' }" @click="activeTab = 'allTime'"
-                    v-if="allTimeData">
+                <button
+                    v-if="allTimeData"
+                    class="tab-button"
+                    :class="{ active: activeTab === 'allTime' }"
+                    @click="activeTab = 'allTime'"
+                >
                     所有时间
                 </button>
             </div>
@@ -36,32 +40,32 @@
             </div>
         </div>
 
-        <div class="lang-wrap" v-if="currentData.languages && currentData.languages.length">
+        <div v-if="currentData.languages && currentData.languages.length" class="lang-wrap">
             <h3>编程语言</h3>
             <p class="muted">语言使用统计 · Languages</p>
             <div class="lang-chart">
                 <ul class="list lang-list">
                     <li v-for="lang in topLanguages" :key="lang.name" class="lang-row">
                         <div class="lang-label">
-                            <span class="dot" :style="{ background: colorFor(lang.name) }"></span>
+                            <span class="dot" :style="{ background: colorFor(lang.name) }" />
                             <span class="lang-name">{{ lang.name }}</span>
                             <span class="lang-percent">{{ lang.percent }}%</span>
                         </div>
                         <div class="lang-bar">
-                            <span class="lang-bar-fill" :style="barStyle(lang)"></span>
+                            <span class="lang-bar-fill" :style="barStyle(lang)" />
                         </div>
                     </li>
                 </ul>
             </div>
         </div>
 
-        <div class="status-wrap" v-if="statusData">
+        <div v-if="statusData" class="status-wrap">
             <h3>当前状态</h3>
             <p class="muted">实时状态 · Current Status</p>
             <div class="status-item">
-                <span class="status-indicator" :class="{ active: statusData.is_coding }"></span>
+                <span class="status-indicator" :class="{ active: statusData.is_coding }" />
                 <span class="status-text">{{ statusData.is_coding ? "正在编码" : "未在编码" }}</span>
-                <span class="status-project" v-if="statusData.project">{{ statusData.project }}</span>
+                <span v-if="statusData.project" class="status-project">{{ statusData.project }}</span>
             </div>
         </div>
     </section>
@@ -70,7 +74,13 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
 
-const props = defineProps({ wakatime: Object });
+const props = defineProps({
+    wakatime: {
+        type: Object,
+        required: false,
+        default: () => ({ languages: [] }),
+    },
+});
 const wakatime = props.wakatime;
 
 const weeklyData = ref(null);
@@ -79,7 +89,7 @@ const statusData = ref(null);
 const showComponent = ref(true);
 const activeTab = ref("weekly");
 
-const palette = ["#7cc1ff", "#6bdba6", "#ffd166", "#f497da", "#9b8cfc", "#5ce1e6", "#ffa3a3"];
+const palette = ["#7cc1ff", "#6bdba6", "#ffd166", "#201a1fff", "#9b8cfc", "#5ce1e6", "#ffa3a3"];
 
 const currentData = computed(() => {
     return activeTab.value === "weekly" ? weeklyData.value : allTimeData.value;

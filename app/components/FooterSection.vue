@@ -1,38 +1,55 @@
 <template>
     <footer class="card text-center mt-auto w-full flex flex-col gap-1">
         <!-- 一言 -->
-        <p class="text-text-muted text-sm m-0 italic" v-if="showHitokoto && quote">
+        <p v-if="showHitokoto && quote" class="text-text-muted text-sm m-0 italic">
             「{{ quote }}」<span v-if="from" class="ml-1.5">—— {{ from }}</span>
         </p>
 
         <!-- 访问统计 -->
-        <p class="text-text-muted text-xs m-0" v-if="showStats && !statsError">
+        <p v-if="showStats && !statsError" class="text-text-muted text-xs m-0">
             👁️ {{ visitors }} · 📊 {{ pageviews }}
         </p>
 
         <!-- 备案信息 -->
-        <p class="text-text-muted text-xs m-0" v-if="contact.beian">
-            <a :href="contact.beianLink || 'https://beian.miit.gov.cn/'" target="_blank" rel="noreferrer"
-                class="opacity-85 transition-all duration-200 hover:text-primary hover:opacity-100">
+        <p v-if="contact?.beian" class="text-text-muted text-xs m-0">
+            <NuxtLink
+                :to="contact.beianLink || '/'"
+                class="opacity-85 transition-all duration-200 hover:text-primary hover:opacity-100"
+            >
                 {{ contact.beian }}
-            </a>
+            </NuxtLink>
         </p>
 
         <!-- 框架与技术栈信息 -->
         <p class="text-text-muted text-xs m-0">
             Powered by
-            <a href="https://nuxt.com" target="_blank" rel="noreferrer"
-                class="text-primary hover:text-accent transition-colors">Nuxt 4</a>
+            <a
+                href="https://nuxt.com"
+                target="_blank"
+                rel="noreferrer"
+                class="text-primary hover:text-accent transition-colors"
+                >Nuxt 4</a
+            >
             ·
-            <a href="https://tailwindcss.com" target="_blank" rel="noreferrer"
-                class="text-primary hover:text-accent transition-colors">Tailwind CSS</a>
+            <a
+                href="https://tailwindcss.com"
+                target="_blank"
+                rel="noreferrer"
+                class="text-primary hover:text-accent transition-colors"
+                >Tailwind CSS</a
+            >
             ·
-            <a href="https://vuejs.org" target="_blank" rel="noreferrer"
-                class="text-primary hover:text-accent transition-colors">Vue 3</a>
+            <a
+                href="https://vuejs.org"
+                target="_blank"
+                rel="noreferrer"
+                class="text-primary hover:text-accent transition-colors"
+                >Vue 3</a
+            >
         </p>
 
-        <!-- 自定义 HTML -->
-        <div v-if="contact.customHtml" v-html="contact.customHtml"></div>
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <div v-if="contact?.customHtml" v-html="contact.customHtml" />
     </footer>
 </template>
 
@@ -40,7 +57,7 @@
 import { onMounted, ref } from "vue";
 import { useRuntimeConfig } from "#imports";
 import siteConfig from "~/config/siteConfig";
-const props = defineProps({ contact: Object });
+const contact = siteConfig.footer || {};
 const config = useRuntimeConfig();
 const quote = ref("");
 const from = ref("");

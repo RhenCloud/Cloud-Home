@@ -1,2 +1,3 @@
 onlyBuiltDependencies:
-  - esbuild
+    - esbuild
+    - sharp@0.34.5

@@ -3,21 +3,36 @@
         <h2 class="m-0 mb-1 text-lg font-semibold">社交链接</h2>
         <p class="text-text-muted text-sm m-0 mb-3 block">社交账号 · Links</p>
         <div class="flex flex-wrap gap-2.5">
-            <a v-for="link in links" :key="link.url" :href="link.url" target="_blank" rel="noreferrer"
-                class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-text-primary text-sm font-medium transition-all duration-200 hover:bg-primary/20 hover:border-primary/40 hover:text-primary hover:-translate-y-1">
-                <span v-if="iconFor(link)" class="inline-flex items-center justify-center w-5 h-5">
-                    <i v-if="iconFor(link).fa" :class="iconFor(link).fa"></i>
-                    <img v-else :src="iconFor(link).src" :alt="link.name" loading="lazy" class="w-full h-full" />
-                </span>
-                <span>{{ link.name }}</span>
-            </a>
+            <template v-for="link in links" :key="link.url">
+                <NuxtLink
+                    :to="link.url"
+                    class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-text-primary text-sm font-medium transition-all duration-200 hover:bg-primary/20 hover:border-primary/40 hover:text-primary hover:-translate-y-1"
+                >
+                    <span v-if="iconFor(link)" class="inline-flex items-center justify-center w-5 h-5">
+                        <i v-if="iconFor(link).fa" :class="iconFor(link).fa" />
+                        <NuxtImg
+                            v-else
+                            :src="iconFor(link).src"
+                            :alt="link.name"
+                            loading="lazy"
+                            class="w-full h-full"
+                        />
+                    </span>
+                    <span>{{ link.name }}</span>
+                </NuxtLink>
+            </template>
         </div>
     </section>
 </template>
 
 <script setup>
 import { onMounted } from "vue";
-const props = defineProps({ links: Array });
+defineProps({
+    links: {
+        type: Array,
+        required: true,
+    },
+});
 
 const iconMap = {
     bilibili: "fa-brands fa-bilibili",

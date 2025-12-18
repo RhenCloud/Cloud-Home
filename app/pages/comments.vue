@@ -6,11 +6,22 @@
                 <h2 class="m-0 mb-1 text-lg font-semibold">留言板</h2>
                 <p class="text-sm text-white/60 mb-3">在这里留下想说的话吧 · Comments</p>
                 <div class="giscus-wrapper">
-                    <component v-if="GiscusComponent" :is="GiscusComponent" :repo="giscus.repo" :repo-id="giscus.repoId"
-                        :category="giscus.category" :category-id="giscus.categoryId" :mapping="giscus.mapping"
-                        :strict="giscus.strict" :reactions-enabled="giscus.reactionsEnabled"
-                        :emit-metadata="giscus.emitMetadata" :input-position="giscus.inputPosition"
-                        :theme="'/css/giscus.css'" lang="zh-CN" class="giscus" />
+                    <component
+                        :is="GiscusComponent"
+                        v-if="GiscusComponent"
+                        :repo="giscus.repo"
+                        :repo-id="giscus.repoId"
+                        :category="giscus.category"
+                        :category-id="giscus.categoryId"
+                        :mapping="giscus.mapping"
+                        :strict="giscus.strict"
+                        :reactions-enabled="giscus.reactionsEnabled"
+                        :emit-metadata="giscus.emitMetadata"
+                        :input-position="giscus.inputPosition"
+                        :theme="'/css/giscus.css'"
+                        lang="zh-CN"
+                        class="giscus"
+                    />
                     <div v-else id="giscus-container" class="giscus" />
                 </div>
             </section>
@@ -21,10 +32,11 @@
 <script setup lang="ts">
 import { definePageMeta } from "#imports";
 import { onMounted, shallowRef, markRaw } from "vue";
+import type { Component } from "vue";
 import siteConfig from "~/config/siteConfig";
 
 const giscus = siteConfig.comments.giscus || {};
-const GiscusComponent = shallowRef(null as any);
+const GiscusComponent = shallowRef<Component | null>(null);
 
 async function tryUseOfficialComponent() {
     try {
@@ -38,12 +50,14 @@ async function tryUseOfficialComponent() {
     }
 }
 
-
 onMounted(async () => {
     // 如果没有配置 giscus，显示提示（由模板处理）
     if (!siteConfig.comments.enable) return;
     if (!giscus || !giscus.repo) return;
     const ok = await tryUseOfficialComponent();
+    if (!ok) {
+        console.error("Failed to load Giscus component.");
+    }
 });
 
 definePageMeta({

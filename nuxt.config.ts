@@ -5,17 +5,30 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
     compatibilityDate: "2025-12-12",
     srcDir: "app/",
+    modules: ["@nuxt/image", "@nuxt/eslint"],
+
     // 禁用 Vue Router 的非关键警告
     vue: {
         compilerOptions: {
             isCustomElement: (tag) => tag.startsWith("ion-"),
         },
     },
+
     // Tailwind CSS 集成
     css: ["~/styles.global.css"],
+
     vite: {
         plugins: [tailwindcss()],
     },
+
+    routeRules: {
+        "/": { prerender: true },
+        "/about": { isr: 3600 },
+        "/sites": { prerender: true },
+        "/projects": { prerender: true },
+        "/friends": { prerender: true },
+    },
+
     app: {
         head: {
             title: siteConfig.siteMeta.title,
@@ -45,6 +58,7 @@ export default defineNuxtConfig({
             ],
         },
     },
+
     nitro: {
         prerender: {
             crawlLinks: true,
@@ -52,6 +66,7 @@ export default defineNuxtConfig({
         },
         minify: true,
     },
+
     runtimeConfig: {
         smtpHost: process.env.SMTP_HOST ?? "",
         smtpPort: Number(process.env.SMTP_PORT ?? 465),

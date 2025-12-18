@@ -6,8 +6,11 @@
                 <button class="tab-button" :class="{ active: activeTab === 'github' }" @click="activeTab = 'github'">
                     GitHub
                 </button>
-                <button class="tab-button" :class="{ active: activeTab === 'wakatime' }"
-                    @click="activeTab = 'wakatime'">
+                <button
+                    class="tab-button"
+                    :class="{ active: activeTab === 'wakatime' }"
+                    @click="activeTab = 'wakatime'"
+                >
                     Wakatime
                 </button>
             </div>
@@ -18,7 +21,7 @@
             <div class="heatmap">
                 <h3>提交热力图</h3>
                 <p class="muted">我的提交热力图 · Activity Heatmap</p>
-                <img :src="github.heatmapUrl" alt="GitHub Heatmap" loading="lazy" />
+                <NuxtImg :src="github.heatmapUrl" alt="GitHub Heatmap" loading="lazy" />
             </div>
             <div class="lang-wrap">
                 <h3>常用语言</h3>
@@ -27,12 +30,12 @@
                     <ul class="list lang-list">
                         <li v-for="lang in githubLanguages" :key="lang.name" class="lang-row">
                             <div class="lang-label">
-                                <span class="dot" :style="{ background: colorFor(lang.name, 'github') }"></span>
+                                <span class="dot" :style="{ background: colorFor(lang.name, 'github') }" />
                                 <span class="lang-name">{{ lang.name }}</span>
                                 <span class="lang-percent">{{ lang.percent }}%</span>
                             </div>
                             <div class="lang-bar">
-                                <span class="lang-bar-fill" :style="barStyle(lang, 'github')"></span>
+                                <span class="lang-bar-fill" :style="barStyle(lang, 'github')" />
                             </div>
                         </li>
                     </ul>
@@ -67,45 +70,51 @@
                 </div>
             </div>
 
-            <div class="lang-wrap" v-if="currentWakatimeData?.languages && currentWakatimeData.languages.length">
+            <div v-if="currentWakatimeData?.languages && currentWakatimeData.languages.length" class="lang-wrap">
                 <h3>编程语言</h3>
                 <p class="muted">语言使用统计 · Languages</p>
                 <div class="lang-chart">
                     <ul class="list lang-list">
                         <li v-for="lang in wakatimeLanguages" :key="lang.name" class="lang-row">
                             <div class="lang-label">
-                                <span class="dot" :style="{ background: colorFor(lang.name, 'wakatime') }"></span>
+                                <span class="dot" :style="{ background: colorFor(lang.name, 'wakatime') }" />
                                 <span class="lang-name">{{ lang.name }}</span>
                                 <span class="lang-percent">{{ lang.percent }}%</span>
                             </div>
                             <div class="lang-bar">
-                                <span class="lang-bar-fill" :style="barStyle(lang, 'wakatime')"></span>
+                                <span class="lang-bar-fill" :style="barStyle(lang, 'wakatime')" />
                             </div>
                         </li>
                     </ul>
                 </div>
             </div>
 
-            <div class="wakatime-tabs" v-if="allTimeData">
+            <div v-if="allTimeData" class="wakatime-tabs">
                 <div class="wakatime-mini-tabs">
-                    <button class="wakatime-tab-button" :class="{ active: wakatimeActiveTab === 'weekly' }"
-                        @click="wakatimeActiveTab = 'weekly'">
+                    <button
+                        class="wakatime-tab-button"
+                        :class="{ active: wakatimeActiveTab === 'weekly' }"
+                        @click="wakatimeActiveTab = 'weekly'"
+                    >
                         最近7天
                     </button>
-                    <button class="wakatime-tab-button" :class="{ active: wakatimeActiveTab === 'allTime' }"
-                        @click="wakatimeActiveTab = 'allTime'">
+                    <button
+                        class="wakatime-tab-button"
+                        :class="{ active: wakatimeActiveTab === 'allTime' }"
+                        @click="wakatimeActiveTab = 'allTime'"
+                    >
                         所有时间
                     </button>
                 </div>
             </div>
 
-            <div class="status-wrap" v-if="statusData">
+            <div v-if="statusData" class="status-wrap">
                 <h3>当前状态</h3>
                 <p class="muted">实时状态 · Current Status</p>
                 <div class="status-item">
-                    <span class="status-indicator" :class="{ active: statusData.is_coding }"></span>
+                    <span class="status-indicator" :class="{ active: statusData.is_coding }" />
                     <span class="status-text">{{ statusData.is_coding ? "正在编码" : "未在编码" }}</span>
-                    <span class="status-project" v-if="statusData.project">{{ statusData.project }}</span>
+                    <span v-if="statusData.project" class="status-project">{{ statusData.project }}</span>
                 </div>
             </div>
         </div>
@@ -115,7 +124,16 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
 
-const props = defineProps({ github: Object, wakatime: Object });
+const props = defineProps({
+    github: {
+        type: Object,
+        default: () => ({}),
+    },
+    wakatime: {
+        type: Object,
+        default: () => ({}),
+    },
+});
 const github = props.github;
 const wakatime = props.wakatime;
 

@@ -4,7 +4,7 @@ import type { Router } from "vue-router";
 import siteConfig from "~/config/siteConfig";
 
 export default defineNuxtPlugin((nuxtApp) => {
-    if (!process.client) return;
+    if (!import.meta.client) return;
     if (!siteConfig.umami?.enable) return;
 
     // 跳过在 localhost 环境下加载 Umami

@@ -1,18 +1,18 @@
 <template>
     <div class="app-shell" :style="backgroundStyle">
-        <div class="background-overlay" :style="overlayStyle"></div>
+        <div class="background-overlay" :style="overlayStyle"/>
         <button
             class="background-toggle"
-            @click="hideComponents = !hideComponents"
             :title="hideComponents ? '显示内容' : '隐藏内容'"
             :class="{ active: hideComponents }"
+            @click="hideComponents = !hideComponents"
         >
             <span class="toggle-icon">{{ hideComponents ? "👁️" : "🙈" }}</span>
             <span class="toggle-label">{{ hideComponents ? "显示" : "隐藏" }}</span>
         </button>
         <div class="content-stack">
             <Transition name="fade-down">
-                <main class="app-body" v-if="!hideComponents" key="content">
+                <main v-if="!hideComponents" key="content" class="app-body">
                     <NuxtPage />
                 </main>
             </Transition>
@@ -20,7 +20,7 @@
                 <PageSwitcher v-if="!hideComponents" key="switcher" />
             </Transition>
             <Transition name="fade-down">
-                <FooterSection v-if="!hideComponents" :contact="contact" key="footer" />
+                <FooterSection v-if="!hideComponents" key="footer" :contact="contact" />
             </Transition>
         </div>
         <MusicPlayer />
