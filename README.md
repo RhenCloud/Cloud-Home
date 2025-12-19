@@ -38,132 +38,143 @@
 
 ```typescript
 const siteConfig: SiteConfig = {
-    profile: {
-        name: "Example User", // 你的名字
-        title: "I'm a software developer.", // 你的简介，可为空
-        avatar: "/avatar.webp", // 你的头像，可为public目录下的文件或外部链接
-        bio: "Hello World", // 你的喜欢的一句话，可为空
-        birthday: "xxxx-xx-xx", // 你的生日，可为空
-        gender: "", // 你的性别，可为空
-        pronouns: "", // 你希望别人如何称呼你，可为空
-        location: "", // 你的居住地，可为空
+  profile: {
+    name: "Example User", // 你的名字
+    title: "I'm a software developer.", // 你的简介，可为空
+    avatar: "/avatar.webp", // 你的头像，可为public目录下的文件或外部链接
+    bio: "Hello World", // 你的喜欢的一句话，可为空
+    birthday: "xxxx-xx-xx", // 你的生日，可为空
+    gender: "", // 你的性别，可为空
+    pronouns: "", // 你希望别人如何称呼你，可为空
+    location: "", // 你的居住地，可为空
+  },
+
+  // 社交链接，预定义的社交链接可在 `src/components/SocialLink.vue` 中查阅
+  socialLinks: [
+    { name: "GitHub", url: "https://github.com/ExampleUser" },
+    { name: "Email", url: "mailto:you@example.com" },
+    { name: "Telegram", url: "https://t.me/ExampleUser" },
+    { name: "Bilibili", url: "https://space.bilibili.com/1502883335" },
+    { name: "Blog", url: "https://blog.example.com" },
+  ],
+
+  github: {
+    username: "ExampleUser", // 你的 GitHub 用户名
+  },
+
+  // 个人介绍卡片
+  about: [
+    { title: "Example", desc: "Example description", icon: "🧠" },
+    { title: "Example", desc: "Example description", icon: "🛠️" },
+    { title: "Example", desc: "Example description", icon: "🎬" },
+    { title: "Example", desc: "Example description", icon: "🎮" },
+  ],
+
+  siteMeta: {
+    title: "Example Title", // 网站标题
+    icon: "/favicon.ico", // 网站图标，可为public目录下的文件或外部链接
+    startDate: "xxxx-xx-xx", // 网站创建日期
+  },
+
+  music: {
+    // 是否启用音乐播放器
+    enable: true,
+    // floating - 浮动模式播放器（推荐）- 用于播放网易云歌单
+    // embed - 嵌入模式播放器 - 用于播放网易云单曲
+    mode: "floating", // "floating" 或 "embed"
+    // 歌单ID：从网易云音乐链接获取，如 https://music.163.com/#/playlist?id=14273792576
+    playlistId: undefined, // 例如: "14273792576"
+    // 歌曲ID：仅在嵌入模式下使用
+    songId: undefined, // 例如: "554242291"
+    // 播放器位置（浮动模式）: "bottom-left" | "bottom-right" | "top-left" | "top-right"
+    position: "bottom-left",
+    // 是否显示歌词
+    lyric: true,
+    // 主题: "light" | "dark" | "auto"
+    theme: "dark",
+    // 是否自动播放
+    autoplay: false,
+    // 是否默认以黑胶唱片状态启动（仅浮动模式）
+    defaultMinimized: true,
+    // 标签页非激活时是否自动暂停
+    autoPause: false,
+    // Music API 配置
+    apiUrls: ["https://www.bilibili.uno/api", "https://meting-api.wangcy.site/api"],
+  },
+
+  umami: {
+    enable: true, // 是否启用 Umami 分析
+    url: "https://cloud.umami.is/script.js", // Umami 分析脚本 URL，一般无需修改
+    websiteId: "YOUR_WEBSITE_ID", // Umami 网站 ID
+    apiBase: "https://api.umami.is", // Umami API 地址，一般无需修改
+  },
+
+  wakatime: {
+    enable: true, // 是否启用 Wakatime 统计
+    apiUrl: "https://wakatime.com/api/v1", // Wakatime API 地址，默认官方地址
+  },
+
+  // 技能图标展示，详见https://github.com/tandpfun/skill-icons#icons-list
+  skills: [
+    { title: "前端", items: ["css", "html", "javascript", "typescript", "vue"] },
+    {
+      title: "后端 / 云",
+      items: ["cpp", "cloudflare", "docker", "java", "mysql", "nodejs", "python", "vercel"],
     },
+    { title: "工具", items: ["ae", "au", "git", "github", "md", "ps", "pr", "vscode"] },
+    { title: "操作系统", items: ["arch", "linux", "windows"] },
+  ],
 
-    // 社交链接，预定义的社交链接可在 `src/components/SocialLink.vue` 中查阅
-    socialLinks: [
-        { name: "GitHub", url: "https://github.com/ExampleUser" },
-        { name: "Email", url: "mailto:you@example.com" },
-        { name: "Telegram", url: "https://t.me/ExampleUser" },
-        { name: "Bilibili", url: "https://space.bilibili.com/1502883335" },
-        { name: "Blog", url: "https://blog.example.com" },
-    ],
-
-    github: {
-        username: "ExampleUser", // 你的 GitHub 用户名
+  sites: [
+    {
+      name: "Example Site 1",
+      desc: "Example Site 1",
+      url: "https://example1.com",
     },
-
-    // 个人介绍卡片
-    about: [
-        { title: "Example", desc: "Example description", icon: "🧠" },
-        { title: "Example", desc: "Example description", icon: "🛠️" },
-        { title: "Example", desc: "Example description", icon: "🎬" },
-        { title: "Example", desc: "Example description", icon: "🎮" },
-    ],
-
-    siteMeta: {
-        title: "Example Title", // 网站标题
-        icon: "/favicon.ico", // 网站图标，可为public目录下的文件或外部链接
-        startDate:"xxxx-xx-xx", // 网站创建日期
+    {
+      name: "Example Site 2",
+      desc: "Example Site 2",
+      url: "https://example2.com",
     },
+  ],
 
-    music: {
-        // 是否启用音乐播放器
-        enable: true,
-        // floating - 浮动模式播放器（推荐）- 用于播放网易云歌单
-        // embed - 嵌入模式播放器 - 用于播放网易云单曲
-        mode: "floating", // "floating" 或 "embed"
-        // 歌单ID：从网易云音乐链接获取，如 https://music.163.com/#/playlist?id=14273792576
-        playlistId: undefined, // 例如: "14273792576"
-        // 歌曲ID：仅在嵌入模式下使用
-        songId: undefined, // 例如: "554242291"
-        // 播放器位置（浮动模式）: "bottom-left" | "bottom-right" | "top-left" | "top-right"
-        position: "bottom-left",
-        // 是否显示歌词
-        lyric: true,
-        // 主题: "light" | "dark" | "auto"
-        theme: "dark",
-        // 是否自动播放
-        autoplay: false,
-        // 是否默认以黑胶唱片状态启动（仅浮动模式）
-        defaultMinimized: true,
-        // 标签页非激活时是否自动暂停
-        autoPause: false,
-        // Music API 配置
-        apiUrls: ["https://www.bilibili.uno/api", "https://meting-api.wangcy.site/api"],
+  projects: [
+    {
+      name: "Example Project 1",
+      url: "https://github.com/ExampleUser/example-project-1",
+      desc: "Example Project 1",
     },
-
-    umami: {
-        enable: true, // 是否启用 Umami 分析
-        url: "https://cloud.umami.is/script.js", // Umami 分析脚本 URL，一般无需修改
-        websiteId: "YOUR_WEBSITE_ID", // Umami 网站 ID
-        apiBase: "https://api.umami.is", // Umami API 地址，一般无需修改
+    {
+      name: "Example Project 2",
+      url: "https://github.com/ExampleUser/example-project-2",
+      desc: "Example Project 2",
     },
+  ],
 
-    wakatime: {
-        enable: true, // 是否启用 Wakatime 统计
-        apiUrl: "https://wakatime.com/api/v1", // Wakatime API 地址，默认官方地址
+  friends: [
+    {
+      name: "Example Site 1",
+      desc: "Example Site 1",
+      url: "https://example1.com",
+      avatar: "https://example1.com/avatar.png",
     },
-
-    // 技能图标展示，详见https://github.com/tandpfun/skill-icons#icons-list
-    skills: [
-        { title: "前端", items: ["css", "html", "javascript", "typescript", "vue"] },
-        { title: "后端 / 云", items: ["cpp", "cloudflare", "docker", "java", "mysql", "nodejs", "python", "vercel"] },
-        { title: "工具", items: ["ae", "au", "git", "github", "md", "ps", "pr", "vscode"] },
-        { title: "操作系统", items: ["arch", "linux", "windows"] },
-    ],
-
-    sites: [
-        {
-            name: "Example Site 1",
-            desc: "Example Site 1",
-            url: "https://example1.com",
-        },
-        {
-            name: "Example Site 2",
-            desc: "Example Site 2",
-            url: "https://example2.com",
-        },
-    ],
-
-    projects: [
-        { name: "Example Project 1", url: "https://github.com/ExampleUser/example-project-1", desc: "Example Project 1" },
-        { name: "Example Project 2", url: "https://github.com/ExampleUser/example-project-2", desc: "Example Project 2" },
-    ],
-
-    friends: [
-        {
-            name: "Example Site 1",
-            desc: "Example Site 1",
-            url: "https://example1.com",
-            avatar: "https://example1.com/avatar.png",
-        },
-        {
-            name: "Example Site 2",
-            desc: "Example Site 2",
-            url: "https://example2.com",
-            avatar: "https://example2.com/avatar.png",
-        },
-    ],
-
-    footer: {
-        beian: "备案号", // 备案号，留空则不显示
-        beianLink: "https://beian.miit.gov.cn/", // 备案号链接，一般无需修改
-        customHtml: '', // 自定义 HTML 代码，如统计代码等
-        hitokoto: {
-            enable: true, // 是否启用一言
-            type: "a&b&c&d&j", // 一言类型，详见 https://developer.hitokoto.cn/sentence/#%E5%8F%A5%E5%AD%90%E7%B1%BB%E5%9E%8B-%E5%8F%82%E6%95%B0
-        },
+    {
+      name: "Example Site 2",
+      desc: "Example Site 2",
+      url: "https://example2.com",
+      avatar: "https://example2.com/avatar.png",
     },
+  ],
+
+  footer: {
+    beian: "备案号", // 备案号，留空则不显示
+    beianLink: "https://beian.miit.gov.cn/", // 备案号链接，一般无需修改
+    customHtml: "", // 自定义 HTML 代码，如统计代码等
+    hitokoto: {
+      enable: true, // 是否启用一言
+      type: "a&b&c&d&j", // 一言类型，详见 https://developer.hitokoto.cn/sentence/#%E5%8F%A5%E5%AD%90%E7%B1%BB%E5%9E%8B-%E5%8F%82%E6%95%B0
+    },
+  },
 };
 ```
 
@@ -218,11 +229,11 @@ pnpm build
 
 ```json
 {
-    "name": "RhenCloud",
-    "url": "https://example.com",
-    "desc": "个人博客",
-    "email": "you@example.com",
-    "avatar": "https://example.com/avatar.png"
+  "name": "RhenCloud",
+  "url": "https://example.com",
+  "desc": "个人博客",
+  "email": "you@example.com",
+  "avatar": "https://example.com/avatar.png"
 }
 ```
 

@@ -1,7 +1,7 @@
 <template>
-    <main class="page">
-        <FriendsSection :friends="friends" />
-    </main>
+  <main class="page">
+    <FriendsSection :friends="friends" />
+  </main>
 </template>
 
 <script setup>
@@ -11,7 +11,7 @@ import siteConfig from "~/config/siteConfig";
 const friends = siteConfig.friends;
 
 definePageMeta({
-    order: 4,
-    label: "友链",
+  order: 4,
+  label: "友链",
 });
 </script>

@@ -1,10 +1,10 @@
 {
-    "extends": "./.nuxt/tsconfig.json",
-    "compilerOptions": {
-        "types": ["node"]
-    },
-    "vueCompilerOptions": {
-        "globalTypesPath": "./node_modules/.vue-global-types"
-    },
-    "include": ["nuxt.config.ts", "app/**/*.ts", "app/**/*.vue", "app/**/*.d.ts", "server/**/*.ts"]
+  "extends": "./.nuxt/tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"]
+  },
+  "vueCompilerOptions": {
+    "globalTypesPath": "./node_modules/.vue-global-types"
+  },
+  "include": ["nuxt.config.ts", "app/**/*.ts", "app/**/*.vue", "app/**/*.d.ts", "server/**/*.ts"]
 }

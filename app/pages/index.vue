@@ -1,9 +1,9 @@
 <template>
-    <main class="page">
-        <HeroSection :profile="profile" />
-        <SocialLinks :links="socialLinks" />
-        <AboutSection :items="about" :profile="profile" />
-    </main>
+  <main class="page">
+    <HeroSection :profile="profile" />
+    <SocialLinks :links="socialLinks" />
+    <AboutSection :items="about" :profile="profile" />
+  </main>
 </template>
 
 <script setup>
@@ -17,7 +17,7 @@ const socialLinks = siteConfig.socialLinks;
 const about = siteConfig.about;
 
 definePageMeta({
-    order: 0,
-    label: "首页",
+  order: 0,
+  label: "首页",
 });
 </script>

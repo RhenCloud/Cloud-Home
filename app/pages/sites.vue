@@ -1,7 +1,7 @@
 <template>
-    <main class="page">
-        <SitesSection :sites="sites" />
-    </main>
+  <main class="page">
+    <SitesSection :sites="sites" />
+  </main>
 </template>
 
 <script setup>
@@ -11,7 +11,7 @@ import siteConfig from "~/config/siteConfig";
 const sites = siteConfig.sites;
 
 definePageMeta({
-    order: 2,
-    label: "网站",
+  order: 2,
+  label: "网站",
 });
 </script>
