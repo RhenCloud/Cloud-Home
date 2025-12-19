@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   compatibilityDate: "2025-12-12",
   srcDir: "app/",
-  modules: ["@nuxt/image", "@nuxt/eslint"],
+  modules: ["@nuxt/image", "@nuxt/eslint", "@nuxtjs/sitemap"],
 
   // eslint: {
   //   config: {
@@ -30,6 +30,11 @@ export default defineNuxtConfig({
 
   vite: {
     plugins: [tailwindcss()],
+  },
+
+  site: {
+    url: siteConfig.siteMeta.url,
+    title: siteConfig.siteMeta.title,
   },
 
   routeRules: {

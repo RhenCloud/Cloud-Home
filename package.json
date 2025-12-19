@@ -16,6 +16,7 @@
     "@giscus/vue": "^3.1.1",
     "@jaseeey/vue-umami-plugin": "^1.4.0",
     "@nuxt/image": "2.0.0",
+    "@nuxtjs/sitemap": "^7.5.0",
     "nodemailer": "^7.0.11",
     "nuxt": "^4.2.2",
     "vite-tsconfig-paths": "^6.0.1"
@@ -31,6 +32,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "prettier": "^3.7.4",
+    "prettier-eslint": "^16.4.2",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3"
   }
