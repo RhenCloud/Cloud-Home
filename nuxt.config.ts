@@ -88,23 +88,7 @@ export default defineNuxtConfig({
     smtpSecure: process.env.SMTP_SECURE ? process.env.SMTP_SECURE === "true" : undefined,
     wakatimeApiKey: process.env.WAKATIME_API_KEY ?? "",
     wakatimeApiUrl: process.env.WAKATIME_API_URL ?? "https://wakatime.com/api/v1",
-    public: {
-      githubToken: process.env.NUXT_PUBLIC_GITHUB_TOKEN ?? "",
-      umamiApiKey: process.env.NUXT_PUBLIC_UMAMI_API_KEY ?? "",
-      // Twikoo 评论服务地址（在 Netlify 或部署环境中设置 NUXT_PUBLIC_TWIKOO_URL）
-      twikooUrl: process.env.NUXT_PUBLIC_TWIKOO_URL ?? "",
-      // Giscus 配置（在部署环境中设置 NUXT_PUBLIC_GISCUS_* 系列变量）
-      giscus: {
-        repo: process.env.NUXT_PUBLIC_GISCUS_REPO ?? "",
-        repoId: process.env.NUXT_PUBLIC_GISCUS_REPO_ID ?? "",
-        category: process.env.NUXT_PUBLIC_GISCUS_CATEGORY ?? "",
-        categoryId: process.env.NUXT_PUBLIC_GISCUS_CATEGORY_ID ?? "",
-        mapping: process.env.NUXT_PUBLIC_GISCUS_MAPPING ?? "pathname",
-        reactionsEnabled: process.env.NUXT_PUBLIC_GISCUS_REACTIONS_ENABLED ?? "1",
-        emitMetadata: process.env.NUXT_PUBLIC_GISCUS_EMIT_METADATA ?? "0",
-        inputPosition: process.env.NUXT_PUBLIC_GISCUS_INPUT_POSITION ?? "bottom",
-        theme: process.env.NUXT_PUBLIC_GISCUS_THEME ?? "light",
-      },
-    },
+    githubToken: process.env.NUXT_PUBLIC_GITHUB_TOKEN ?? "",
+    umamiApiKey: process.env.UMAMI_API_KEY ?? "",
   },
 });

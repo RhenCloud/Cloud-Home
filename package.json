@@ -1,6 +1,6 @@
 {
   "name": "cloud-home",
-  "private": true,
+  "private": false,
   "type": "module",
   "scripts": {
     "dev": "nuxt dev",
