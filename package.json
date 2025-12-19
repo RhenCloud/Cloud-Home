@@ -1,31 +1,37 @@
 {
-    "name": "cloud-home",
-    "private": true,
-    "type": "module",
-    "scripts": {
-        "dev": "nuxt dev",
-        "build": "nuxt build",
-        "generate": "nuxt generate",
-        "preview": "nuxt preview",
-        "lint": "eslint .",
-        "lint:fix": "eslint . --fix"
-    },
-    "dependencies": {
-        "@giscus/vue": "^3.1.1",
-        "@jaseeey/vue-umami-plugin": "^1.4.0",
-        "@nuxt/eslint": "1.12.1",
-        "@nuxt/image": "2.0.0",
-        "eslint": "^9.39.2",
-        "nodemailer": "^7.0.11",
-        "nuxt": "^4.2.2",
-        "vite-tsconfig-paths": "^6.0.1"
-    },
-    "devDependencies": {
-        "@tailwindcss/vite": "^4.1.18",
-        "@types/node": "^24.10.1",
-        "@types/nodemailer": "^7.0.4",
-        "autoprefixer": "^10.4.22",
-        "tailwindcss": "^4.1.18",
-        "typescript": "^5.9.3"
-    }
+  "name": "cloud-home",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "@giscus/vue": "^3.1.1",
+    "@jaseeey/vue-umami-plugin": "^1.4.0",
+    "@nuxt/image": "2.0.0",
+    "nodemailer": "^7.0.11",
+    "nuxt": "^4.2.2",
+    "vite-tsconfig-paths": "^6.0.1"
+  },
+  "devDependencies": {
+    "@nuxt/eslint": "1.12.1",
+    "@tailwindcss/vite": "^4.1.18",
+    "@types/node": "^24.10.1",
+    "@types/nodemailer": "^7.0.4",
+    "@typescript-eslint/parser": "^8.50.0",
+    "autoprefixer": "^10.4.22",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "prettier": "^3.7.4",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3"
+  }
 }
