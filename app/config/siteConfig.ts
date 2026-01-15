@@ -2,7 +2,7 @@ const siteConfig = {
   profile: {
     name: "RhenCloud",
     title: "I'm RhenCloud.",
-    avatar: "/avatar.webp", // public/avatar.webp
+    avatar: "/avatar-1.webp", // public/avatar.webp
     bio: "趁世界还未重启之前 约一次爱恋",
     email: "i@rhen.cloud",
     birthday: "2010-03-28",
@@ -32,9 +32,13 @@ const siteConfig = {
 
   siteMeta: {
     title: "RhenCloud",
+    description: "RhenCloud的个人主页，分享技术、生活、兴趣。",
+    keywords: ["Technology", "Blog", "Development", "Programming"],
+    author: "RhenCloud",
     url: "https://rhen.cloud",
-    icon: "/favicon.svg", // public/favicon.svg
+    favicon: "/favicon.svg", // public/favicon.svg
     startDate: "2025-12-06",
+    lang: "zh-CN",
   },
 
   appearance: {
@@ -80,9 +84,10 @@ const siteConfig = {
     apiBase: "https://api.umami.is",
   },
 
-  wakatime: {
-    enable: true,
+  wakapi: {
+    enable: false,
     apiUrl: "https://wakapi.rhen.cloud/api/v1",
+    username: "RhenCloud",
   },
 
   skills: [

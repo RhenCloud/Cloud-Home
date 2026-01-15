@@ -79,15 +79,9 @@
 
 <script setup>
 import { ref, onMounted, computed } from "vue";
+import siteConfig from "~/config/siteConfig";
 
-const props = defineProps({
-  wakatime: {
-    type: Object,
-    required: false,
-    default: () => ({ languages: [] }),
-  },
-});
-const wakatime = props.wakatime;
+const wakapi = siteConfig.wakapi;
 
 const weeklyData = ref(null);
 const allTimeData = ref(null);
@@ -123,65 +117,45 @@ const formatTime = (seconds) => {
 };
 
 const fetchWakatimeData = async () => {
-  if (!wakatime.enable) return;
+  if (!wakapi.enable) {
+    console.warn("Wakatime is disabled in siteConfig.");
+    return;
+  }
+
+  const apiUrl = wakapi.apiUrl || "https://wakatime.com/api/v1";
+  const username = wakapi.username;
+
+  if (!username) {
+    console.error("Wakatime username is not configured.");
+    return;
+  }
 
   try {
-    const params = new URLSearchParams();
-    if (wakatime.apiUrl && wakatime.apiUrl !== "https://wakatime.com/api/v1") {
-      params.append("apiUrl", wakatime.apiUrl);
-    }
-    const url = `/api/wakatime${params.toString() ? `?${params.toString()}` : ""}`;
-    console.log("Fetching Wakatime data from:", url);
-    const response = await fetch(url);
-    console.log("Response status:", response.status);
-    console.log("Response headers:", Object.fromEntries(response.headers.entries()));
+    const [weeklyStatsResponse, allTimeStatsResponse, statusResponse] = await Promise.all([
+      fetch(`${apiUrl}/users/${username}/stats/last_7_days`),
+      fetch(`${apiUrl}/users/${username}/stats`),
+      fetch(`${apiUrl}/users/${username}/status`),
+    ]);
 
-    if (response.ok) {
-      const data = await response.json();
-      console.log("Wakatime data:", data);
-      weeklyData.value = data.weekly;
-      allTimeData.value = data.allTime;
-      statusData.value = data.status;
+    if (weeklyStatsResponse.ok) {
+      weeklyData.value = await weeklyStatsResponse.json();
     } else {
-      const errorText = await response.text();
-      console.error("API Error:", response.status, errorText);
-      if (response.status === 500 && errorText.includes("Wakatime API Key not configured")) {
-        console.warn("Wakatime API Key not configured - hiding component");
-        showComponent.value = false;
-        return;
-      }
-      throw new Error(`API returned ${response.status}: ${errorText}`);
+      console.error("Failed to fetch weekly stats:", weeklyStatsResponse.status);
+    }
+
+    if (allTimeStatsResponse.ok) {
+      allTimeData.value = await allTimeStatsResponse.json();
+    } else {
+      console.warn("All-time stats not available:", allTimeStatsResponse.status);
+    }
+
+    if (statusResponse.ok) {
+      statusData.value = await statusResponse.json();
+    } else {
+      console.warn("Status data not available:", statusResponse.status);
     }
   } catch (error) {
-    console.error("Failed to fetch Wakatime data:", error);
-    // 在开发环境中，如果 API 不可用，设置一些示例数据
-    if (import.meta.env.DEV) {
-      console.log("Using mock data for development");
-      weeklyData.value = {
-        total_seconds: 36000,
-        daily_average: 5142,
-        days_including_holidays: 7,
-        languages: [
-          { name: "TypeScript", percent: 45.2, total_seconds: 16272 },
-          { name: "Vue", percent: 30.1, total_seconds: 10836 },
-          { name: "JavaScript", percent: 15.3, total_seconds: 5508 },
-          { name: "Python", percent: 9.4, total_seconds: 3384 },
-        ],
-      };
-      allTimeData.value = {
-        total_seconds: 864000,
-        daily_average: 2800,
-        days_including_holidays: 308,
-        languages: [
-          { name: "JavaScript", percent: 35.2, total_seconds: 304128 },
-          { name: "TypeScript", percent: 28.1, total_seconds: 242688 },
-          { name: "Python", percent: 20.3, total_seconds: 175392 },
-          { name: "Vue", percent: 10.1, total_seconds: 87296 },
-          { name: "CSS", percent: 6.3, total_seconds: 54432 },
-        ],
-      };
-      statusData.value = { is_coding: false };
-    }
+    console.error("Error fetching Wakatime data:", error);
   }
 };
 
