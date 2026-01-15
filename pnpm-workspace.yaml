@@ -1,3 +1,2 @@
-onlyBuiltDependencies:
-  - esbuild
-  - sharp@0.34.5
+ignoredBuiltDependencies:
+  - core-js
