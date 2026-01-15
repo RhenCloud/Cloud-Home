@@ -17,6 +17,7 @@ const siteConfig = {
     { name: "Telegram", url: "https://t.me/RhenCloud" },
     { name: "Bilibili", url: "https://space.bilibili.com/1502883335" },
     { name: "Blog", url: "https://blog.rhen.cloud" },
+    { name: "Twitter", url: "https://x.com/RhenCloud75" },
   ],
 
   github: {

@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   compatibilityDate: "2025-12-12",
   srcDir: "app/",
-  modules: ["@nuxt/image", "@nuxt/eslint", "@nuxtjs/sitemap", "@nuxtjs/seo"],
+  modules: ["@nuxt/image", "@nuxt/eslint", "@nuxtjs/sitemap", "@nuxt/icon", "@nuxtjs/seo"],
 
   // 禁用 Vue Router 的非关键警告
   vue: {
@@ -47,27 +47,6 @@ export default defineNuxtConfig({
         { rel: "dns-prefetch", href: siteConfig.siteMeta.url },
         { rel: "preconnect", href: siteConfig.siteMeta.url },
         { rel: "icon", href: siteConfig.siteMeta.favicon },
-        // Font Awesome CDN 预加载和优化
-        {
-          rel: "preload",
-          as: "style",
-          href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css?font-display=swap",
-          crossorigin: "anonymous",
-        },
-        {
-          rel: "preload",
-          as: "font",
-          href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2?font-display=swap",
-          type: "font/woff2",
-          crossorigin: "anonymous",
-        },
-        {
-          rel: "preload",
-          as: "font",
-          href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2?font-display=swap",
-          type: "font/woff2",
-          crossorigin: "anonymous",
-        },
       ],
     },
     pageTransition: { name: "page", mode: "out-in" },

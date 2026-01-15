@@ -15,7 +15,9 @@
   "dependencies": {
     "@giscus/vue": "^3.1.1",
     "@jaseeey/vue-umami-plugin": "^1.4.0",
+    "@nuxt/icon": "^2.2.0",
     "@nuxt/image": "2.0.0",
+    "@nuxtjs/icon": "^3.0.0-beta.16",
     "@nuxtjs/seo": "3.3.0",
     "@nuxtjs/sitemap": "^7.5.0",
     "nodemailer": "^7.0.11",
