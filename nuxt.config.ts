@@ -88,6 +88,13 @@ export default defineNuxtConfig({
     },
   },
 
+  site: {
+    url: siteConfig.siteMeta.url,
+    name: siteConfig.siteMeta.title,
+    description: siteConfig.siteMeta.description,
+    author: siteConfig.siteMeta.author,
+  },
+
   runtimeConfig: {
     smtpHost: process.env.SMTP_HOST ?? "",
     smtpPort: Number(process.env.SMTP_PORT ?? 465),
