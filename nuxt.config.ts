@@ -19,6 +19,16 @@ export default defineNuxtConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      sourcemap: false,
+      chunkSizeWarningLimit: 1000,
+    },
+  },
+
+  postcss: {
+    plugins: {
+      "@tailwindcss/postcss": {},
+    },
   },
 
   routeRules: {
@@ -59,6 +69,9 @@ export default defineNuxtConfig({
       // routes: ["/sitemap.xml", "/rss.xml"],
     },
     minify: true,
+    externals: {
+      inline: ["unhead"],
+    },
   },
 
   runtimeConfig: {
