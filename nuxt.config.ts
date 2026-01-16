@@ -5,7 +5,15 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   compatibilityDate: "2025-12-12",
   srcDir: "app",
-  modules: ["@nuxt/image", "@nuxt/eslint", "@nuxtjs/sitemap", "@nuxt/icon", "@nuxtjs/seo"],
+
+  modules: [
+    "@nuxt/image",
+    "@nuxt/eslint",
+    "@nuxtjs/robots",
+    "@nuxtjs/sitemap",
+    "@nuxt/icon",
+    "@nuxtjs/seo",
+  ],
 
   // 禁用 Vue Router 的非关键警告
   vue: {
@@ -37,6 +45,12 @@ export default defineNuxtConfig({
     "/sites": { prerender: true },
     "/projects": { prerender: true },
     "/friends": { prerender: true },
+  },
+
+  robots: { groups: [{ userAgent: ["GPTBot", "ChatGPT-User"], disallow: ["/"] }] },
+
+  sitemap: {
+    zeroRuntime: true,
   },
 
   app: {

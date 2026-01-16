@@ -10,6 +10,7 @@
         "@nuxt/icon": "^2.2.0",
         "@nuxt/image": "2.0.0",
         "@nuxtjs/icon": "^2.6.0",
+        "@nuxtjs/robots": "^5.6.7",
         "@nuxtjs/seo": "3.3.0",
         "@nuxtjs/sitemap": "^7.5.2",
         "nodemailer": "^7.0.12",
