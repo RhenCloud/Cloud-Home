@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
   compatibilityDate: "2025-12-12",
-  srcDir: "app/",
+  srcDir: "app",
   modules: ["@nuxt/image", "@nuxt/eslint", "@nuxtjs/sitemap", "@nuxt/icon", "@nuxtjs/seo"],
 
   // 禁用 Vue Router 的非关键警告

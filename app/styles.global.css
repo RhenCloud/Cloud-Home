@@ -1,24 +1,5 @@
 @import "tailwindcss";
 
-/* Font Awesome 字体优化 */
-@font-face {
-  font-family: "Font Awesome 6 Solid";
-  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2")
-    format("woff2");
-  font-display: swap;
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Font Awesome 6 Brands";
-  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2")
-    format("woff2");
-  font-display: swap;
-  font-weight: 400;
-  font-style: normal;
-}
-
 @layer base {
   html {
     height: 100%;
