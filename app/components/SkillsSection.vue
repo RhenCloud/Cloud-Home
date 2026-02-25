@@ -1,5 +1,5 @@
 <template>
-  <section class="card flex flex-col gap-2.5">
+  <section class="card main-section flex flex-col gap-2.5">
     <div>
       <h2 class="m-0 mb-1 font-semibold">技能专长</h2>
       <p class="text-text-muted text-sm m-0 mb-3">我常用的工具与技术 · Skills & Technologies</p>
@@ -8,7 +8,7 @@
       <article
         v-for="group in skills"
         :key="group.title"
-        class="bg-gradient-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-3.5 shadow-md-dark transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg-dark hover:bg-gradient-to-br hover:from-primary/8"
+        class="bg-linear-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-3.5 shadow-md-dark transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg-dark hover:bg-linear-to-br hover:from-primary/8"
       >
         <header class="mb-3">
           <h3 class="text-base font-semibold m-0">{{ group.title }}</h3>
@@ -24,7 +24,7 @@
               :alt="item"
               :title="item"
               loading="lazy"
-              class="w-7 h-7 rounded-2xl"
+              class="w-6 h-6 rounded-2xl"
             />
           </span>
         </div>

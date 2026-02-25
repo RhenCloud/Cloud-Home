@@ -1,8 +1,10 @@
 <template>
-  <section class="card grid grid-cols-[120px_1fr] gap-4 items-center hover:shadow-lg-dark group">
+  <section
+    class="card main-section grid grid-cols-[120px_1fr] gap-4 items-center hover:shadow-lg-dark group"
+  >
     <div class="relative">
       <div
-        class="absolute inset-0 rounded-full bg-gradient-to-br from-primary/30 to-accent/20 blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100"
+        class="absolute inset-0 rounded-full bg-linear-to-br from-primary/30 to-accent/20 blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100"
       />
       <NuxtImg
         class="relative w-30 h-30 rounded-full object-cover border-2 border-primary/40 shadow-md-dark bg-white transition-transform duration-300 group-hover:scale-105"

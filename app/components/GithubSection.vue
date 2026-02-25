@@ -1,5 +1,5 @@
 <template>
-  <section class="card flex flex-col gap-2.5">
+  <section class="card main-section flex flex-col gap-2.5">
     <h2 class="m-0 mb-1">GitHub</h2>
     <div class="mt-3">
       <h3 class="m-0 mb-1">提交热力图</h3>

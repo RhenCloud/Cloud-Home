@@ -8,7 +8,7 @@
       <article
         v-for="site in sites"
         :key="site.url"
-        class="rounded-[14px] border border-white/10 bg-gradient-to-br from-white/5 to-white/0 px-4 py-3.5 transition-all duration-200 hover:-translate-y-[3px] hover:border-blue-400/50 w-[290px] h-[145px] flex flex-col"
+        class="rounded-[14px] border border-white/10 bg-linear-to-br from-white/5 to-white/0 px-4 py-3.5 transition-all duration-200 hover:-translate-y-[3px] hover:border-blue-400/50 w-[290px] h-[145px] flex flex-col"
       >
         <div class="flex items-center justify-between mb-1.5">
           <h3 class="font-medium truncate">

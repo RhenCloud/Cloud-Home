@@ -1,12 +1,12 @@
 <template>
   <div class="card panel flex flex-col gap-2.5">
     <h2 class="m-0 mb-1 text-lg font-semibold">友情链接</h2>
-    <p class="text-text-muted text-sm m-0 mb-3 block">欢迎互换友链 · Friends</p>
-    <div class="grid grid-cols-1 gap-4 w-full max-w-[1100px] mx-auto sm:grid-cols-2">
+    <p class="text-sm text-white/60 mb-3">欢迎互换友链 · Friends</p>
+    <div class="grid grid-cols-1 gap-4 w-full max-w-275 mx-auto sm:grid-cols-2">
       <article
         v-for="f in displayedFriends"
         :key="f.url"
-        class="rounded-[14px] border border-white/10 bg-gradient-to-br from-white/5 to-white/0 px-4 py-3.5 transition-all duration-200 hover:-translate-y-[3px] hover:border-pink-400/50 w-[290px] h-[145px] flex flex-col"
+        class="rounded-[14px] border border-white/10 bg-linear-to-br from-white/5 to-white/0 px-4 py-3.5 transition-all duration-200 hover:-translate-y-0.75 hover:border-pink-400/50 w-72.5 h-36.25 flex flex-col"
       >
         <div class="flex items-center justify-between mb-1.5">
           <div class="flex items-center gap-2 min-w-0">
@@ -56,7 +56,7 @@
       @click.self="closeDialog"
     >
       <div
-        class="min-w-[280px] max-w-[420px] bg-gradient-to-br from-pink-500/12 to-white/8 border border-white/15 rounded-2xl p-4 shadow-xl"
+        class="min-w-70 max-w-105 bg-linear-to-br from-pink-500/12 to-white/8 border border-white/15 rounded-2xl p-4 shadow-xl"
       >
         <h3 class="m-0 mb-2">{{ dialogTitle }}</h3>
         <p class="text-text-muted text-sm mb-4">{{ dialogText }}</p>
@@ -80,15 +80,15 @@
       @click.self="showFormModal = false"
     >
       <div
-        class="w-[92%] max-w-[540px] bg-gradient-to-br from-white/8 to-primary/6 border border-white/15 rounded-2xl p-6 shadow-xl"
+        class="w-[92%] max-w-135 bg-linear-to-br from-white/8 to-primary/6 border border-white/15 rounded-2xl p-6 shadow-xl"
       >
         <h3 class="m-0 mb-4 text-center">申请友链</h3>
 
         <div class="mb-4 text-sm text-text-primary">
-          <div class="mb-2 font-semibold">请在申请前在你站点添加以下信息（示例 JSON）：</div>
-          <pre class="bg-white/6 border border-white/10 rounded-lg p-3 text-xs overflow-auto">
-                    <code>{{ exampleJson }}</code>
-                </pre>
+          <div class="mb-2 font-semibold">请在申请前在你站点添加本站信息：</div>
+          <pre
+            class="bg-white/6 border border-white/10 rounded-lg p-3 text-xs overflow-auto"
+          ><code class="font-mono whitespace-pre">{{ exampleJson }}</code></pre>
         </div>
 
         <form class="grid grid-cols-1 sm:grid-cols-2 gap-3" @submit.prevent="submitForm">
@@ -103,7 +103,7 @@
           </label>
 
           <!-- URL 与 Email 同行 -->
-          <label class="flex fl ex-col gap-1 text-sm text-text-primary font-semibold">
+          <label class="flex flex-col gap-1 text-sm text-text-primary font-semibold">
             网站链接 *
             <input
               v-model="form.url"

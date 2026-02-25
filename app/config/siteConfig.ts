@@ -14,9 +14,10 @@ const siteConfig = {
   socialLinks: [
     { name: "GitHub", url: "https://github.com/RhenCloud" },
     { name: "Email", url: "mailto:i@rhen.cloud" },
-    { name: "Telegram", url: "https://t.me/RhenCloud" },
+    { name: "Matrix", url: "https://matrix.to/#/@RhenCloud:matrix.org" },
     { name: "Bilibili", url: "https://space.bilibili.com/1502883335" },
     { name: "Blog", url: "https://blog.rhen.cloud" },
+    { name: "Telegram", url: "https://t.me/RhenCloud" },
     { name: "Twitter", url: "https://x.com/RhenCloud75" },
   ],
 
@@ -25,7 +26,8 @@ const siteConfig = {
   },
 
   about: [
-    { title: "Pro-LGBT", desc: "我相信性别多样性是人们应有的自由和权利。", icon: "🧠" },
+    // { title: "Pro-LGBT", desc: "我相信性别多样性是人们应有的自由和权利。", icon: "🧠" },
+    { title: "Night Owl", desc: "灵感通常在深夜降临。", icon: "🌙" },
     { title: "Developer", desc: "专注后端 / 云原生，热爱自动化与高可用。", icon: "🛠️" },
     { title: "Anime Fan", desc: "二次元爱好者，享受故事与想象力。", icon: "🎬" },
     { title: "Just For Fun", desc: "我喜欢尝试新鲜事物，折腾小众技术", icon: "🎮" },
@@ -125,7 +127,6 @@ const siteConfig = {
   ],
 
   projects: [
-    { name: "Cloud Home", url: "https://github.com/RhenCloud/cloud-home", desc: "个人主页模板" },
     {
       name: "ILP",
       url: "https://github.com/RhenCloud/ILP",
@@ -135,6 +136,26 @@ const siteConfig = {
       name: "ILP-C++",
       url: "https://github.com/RhenCloud/ILP-Cpp",
       desc: "跨平台、多网站、模块化的小说下载器",
+    },
+    {
+      name: "Cloud-Home",
+      url: "https://github.com/RhenCloud/Cloud-Home",
+      desc: "个人主页模板",
+    },
+    {
+      name: "Cloud-Blog",
+      url: "https://github.com/RhenCloud/Cloud-Blog",
+      desc: "个人博客模板",
+    },
+    {
+      name: "SleepyXposed",
+      url: "https://github.com/RhenCloud/SleepyXposed",
+      desc: "基于Xposed的Sleepy客户端",
+    },
+    {
+      name: "cloud-pyprland",
+      url: "https://github.com/RhenCloud/cloud-pyprland",
+      desc: "我的pyprland实用插件",
     },
   ],
 
@@ -154,7 +175,7 @@ const siteConfig = {
   ],
 
   comments: {
-    enable: true,
+    enable: false,
     // twikoo: {
     //     url: "https://twikoo.rhen.cloud",
     // },

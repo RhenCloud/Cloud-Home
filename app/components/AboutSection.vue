@@ -1,12 +1,12 @@
 <template>
-  <section class="card flex flex-col gap-2.5">
+  <section class="card main-section flex flex-col gap-2.5">
     <h2 class="m-0 mb-1">个人简介</h2>
     <p class="text-text-muted text-sm m-0 mb-3 block">关于我 · About Me</p>
 
     <div class="flex flex-wrap justify-center gap-3.5">
       <article
         v-if="age"
-        class="flex-1 min-w-[140px] flex items-center justify-between gap-2 bg-gradient-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-2.5 px-3.5 shadow-md-dark transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg-dark hover:bg-gradient-to-br hover:from-primary/6"
+        class="flex-1 min-w-35 flex items-center justify-between gap-2 bg-linear-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-2.5 px-3.5 shadow-md-dark transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg-dark hover:bg-linear-to-br hover:from-primary/6"
       >
         <div class="flex items-center gap-2">
           <span class="text-xl leading-none">🎂</span>
@@ -21,7 +21,7 @@
 
       <article
         v-if="profile?.gender"
-        class="flex-1 min-w-[140px] flex items-center justify-between gap-2 bg-gradient-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-2.5 px-3.5 shadow-md-dark transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg-dark"
+        class="flex-1 min-w-35 flex items-center justify-between gap-2 bg-linear-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-2.5 px-3.5 shadow-md-dark transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg-dark"
       >
         <div class="flex items-center gap-2">
           <span class="text-xl leading-none">⚧️</span>
@@ -36,7 +36,7 @@
 
       <article
         v-if="profile?.pronouns"
-        class="flex-1 min-w-[140px] flex items-center justify-between gap-2 bg-gradient-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-2.5 px-3.5 shadow-md-dark transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg-dark"
+        class="flex-1 min-w-35 flex items-center justify-between gap-2 bg-linear-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-2.5 px-3.5 shadow-md-dark transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg-dark"
       >
         <div class="flex items-center gap-2">
           <span class="text-xl leading-none">🗣️</span>
@@ -51,7 +51,7 @@
 
       <article
         v-if="profile?.location"
-        class="flex-1 min-w-[140px] flex items-center justify-between gap-2 bg-gradient-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-2.5 px-3.5 shadow-md-dark transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg-dark"
+        class="flex-1 min-w-35 flex items-center justify-between gap-2 bg-linear-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-2.5 px-3.5 shadow-md-dark transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg-dark"
       >
         <div class="flex items-center gap-2">
           <span class="text-xl leading-none">📍</span>
@@ -69,7 +69,7 @@
       <article
         v-for="item in items"
         :key="item.title"
-        class="bg-gradient-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-3 shadow-md-dark transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg-dark"
+        class="bg-linear-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-3 shadow-md-dark transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg-dark"
       >
         <div class="flex items-center gap-2 mb-1.5">
           <span class="text-2xl leading-none">{{ item.icon }}</span>

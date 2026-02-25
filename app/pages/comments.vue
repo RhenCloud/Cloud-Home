@@ -1,32 +1,33 @@
 <template>
-  <section class="container mx-auto py-8">
-    <p v-if="!giscus || !giscus.repo" class="text-sm text-red-500 mb-4">Giscus 未配置。</p>
-    <ClientOnly>
-      <section class="card panel flex flex-col gap-2.5">
-        <h2 class="m-0 mb-1 text-lg font-semibold">留言板</h2>
-        <p class="text-sm text-white/60 mb-3">在这里留下想说的话吧 · Comments</p>
-        <div class="giscus-wrapper">
-          <component
-            :is="GiscusComponent"
-            v-if="GiscusComponent"
-            :repo="giscus.repo"
-            :repo-id="giscus.repoId"
-            :category="giscus.category"
-            :category-id="giscus.categoryId"
-            :mapping="giscus.mapping"
-            :strict="giscus.strict"
-            :reactions-enabled="giscus.reactionsEnabled"
-            :emit-metadata="giscus.emitMetadata"
-            :input-position="giscus.inputPosition"
-            :theme="'/css/giscus.css'"
-            lang="zh-CN"
-            class="giscus"
-          />
-          <div v-else id="giscus-container" class="giscus" />
-        </div>
-      </section>
-    </ClientOnly>
-  </section>
+  <main class="page">
+    <section class="card main-section flex flex-col gap-2.5 mx-auto py-8">
+      <p v-if="!giscus || !giscus.repo" class="text-sm text-red-500 mb-4">Giscus 未配置。</p>
+      <ClientOnly>
+        <section class="card panel flex flex-col gap-2.5">
+          <h2 class="m-0 mb-1 text-lg font-semibold">留言板</h2>
+          <p class="text-sm text-white/60 mb-3">在这里留下想说的话吧 · Comments</p>
+          <div class="giscus-wrapper">
+            <component
+              :is="GiscusComponent"
+              v-if="GiscusComponent"
+              :repo="giscus.repo"
+              :repo-id="giscus.repoId"
+              :category="giscus.category"
+              :category-id="giscus.categoryId"
+              :mapping="giscus.mapping"
+              :reactions-enabled="giscus.reactionsEnabled"
+              :emit-metadata="giscus.emitMetadata"
+              :input-position="giscus.inputPosition"
+              :theme="'/css/giscus.css'"
+              lang="zh-CN"
+              class="giscus"
+            />
+            <div v-else id="giscus-container" class="giscus" />
+          </div>
+        </section>
+      </ClientOnly>
+    </section>
+  </main>
 </template>
 
 <script setup lang="ts">
@@ -67,11 +68,10 @@ definePageMeta({
 </script>
 
 <style scoped>
-.container {
-  max-width: 880px;
+/* .container {
   padding-left: 1rem;
   padding-right: 1rem;
-}
+} */
 
 h1 {
   color: #e6eef8;
