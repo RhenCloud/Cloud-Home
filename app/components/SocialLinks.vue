@@ -1,9 +1,9 @@
 <template>
-  <section class="card flex flex-col gap-2.5">
+  <section class="card relative main-section flex flex-col gap-2.5">
     <h2 class="m-0 mb-1 text-lg font-semibold">社交链接</h2>
     <p class="text-text-muted text-sm m-0 mb-3 block">社交账号 · Links</p>
     <div class="relative">
-      <button
+      <!-- <button
         v-show="canScrollLeft"
         aria-label="向左滚动"
         class="scroll-arrow left flex items-center justify-center"
@@ -25,26 +25,26 @@
             stroke-linejoin="round"
           />
         </svg>
-      </button>
+      </button> -->
 
-      <div
-        ref="container"
-        class="flex flex-nowrap gap-2.5 overflow-x-auto social-links-scroll py-1"
-      >
+      <div ref="container" class="relative flex flex-wrap gap-2.5">
         <template v-for="link in links" :key="link.url">
           <NuxtLink
             :to="link.url"
             class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-text-primary text-sm font-medium transition-all duration-200 hover:bg-primary/20 hover:border-primary/40 hover:text-primary hover:-translate-y-1"
           >
-            <span v-if="iconFor(link)" class="inline-flex items-center justify-center w-5 h-5">
-              <Icon v-if="iconFor(link).name" :name="iconFor(link).name" width="20" height="20" />
+            <span
+              v-if="iconFor(link)"
+              class="inline-flex items-center justify-center w-5 h-5 shrink-0"
+            >
+              <Icon :name="iconFor(link).name" width="20" height="20" />
             </span>
-            <span>{{ link.name }}</span>
+            <span class="whitespace-nowrap">{{ link.name }}</span>
           </NuxtLink>
         </template>
       </div>
 
-      <button
+      <!-- <button
         v-show="canScrollRight"
         aria-label="向右滚动"
         class="scroll-arrow right flex items-center justify-center"
@@ -66,7 +66,7 @@
             stroke-linejoin="round"
           />
         </svg>
-      </button>
+      </button> -->
     </div>
   </section>
 </template>
@@ -82,8 +82,7 @@ defineProps({
 });
 
 const container = ref(null);
-const canScrollLeft = ref(false);
-const canScrollRight = ref(false);
+const showOnlyIcons = ref(false);
 
 const iconMap = {
   bilibili: "simple-icons:bilibili",
@@ -118,24 +117,17 @@ const iconFor = (link) => {
 function updateScrollButtons() {
   const el = container.value;
   if (!el) return;
-  canScrollLeft.value = el.scrollLeft > 0;
-  canScrollRight.value = el.scrollWidth - el.clientWidth - el.scrollLeft > 1;
+  // 检测是否需要换行（内容高度大于一行）
+  const hasOverflow = el.scrollHeight > el.clientHeight + 5;
+  showOnlyIcons.value = hasOverflow;
 }
 
-function scrollByAmount(amount) {
-  const el = container.value;
-  if (!el) return;
-  el.scrollBy({ left: amount, behavior: "smooth" });
-  setTimeout(updateScrollButtons, 300);
-}
-
-function scrollLeft() {
-  scrollByAmount(-200);
-}
-
-function scrollRight() {
-  scrollByAmount(200);
-}
+// function scrollByAmount(amount) {
+//   const el = container.value;
+//   if (!el) return;
+//   el.scrollBy({ left: amount, behavior: "smooth" });
+//   setTimeout(updateScrollButtons, 300);
+// }
 
 onMounted(() => {
   updateScrollButtons();
