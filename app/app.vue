@@ -1,4 +1,6 @@
 <template>
+  <!-- eslint-disable-next-line vue/no-v-html -->
+  <div v-if="contact?.customHtml" v-html="customHeaderHtml" />
   <div class="app-shell" :style="backgroundStyle">
     <div class="background-overlay" :style="overlayStyle" />
     <button
@@ -34,6 +36,7 @@ import FooterSection from "~/components/FooterSection.vue";
 import MusicPlayer from "~/components/MusicPlayer.vue";
 import siteConfig from "~/config/siteConfig";
 
+const customHeaderHtml = siteConfig.header.customHtml;
 const contact = siteConfig.footer;
 const bg = siteConfig.appearance.background;
 const isMobile = ref(false);

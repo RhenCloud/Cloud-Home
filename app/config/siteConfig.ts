@@ -192,6 +192,11 @@ const siteConfig = {
     },
   },
 
+  header: {
+    customHtml:
+      '<script charset="UTF-8" id="MXA_COLLECT" src="//mxana.tacool.com/sdk.js"></script>\n<script>MXA.init({ id: "c2-sNzz1Cx4" })</script>',
+  },
+
   footer: {
     beian: "津ICP备2025039003号-1",
     beianLink: "https://beian.miit.gov.cn/",
