@@ -31,7 +31,7 @@
         <template v-for="link in links" :key="link.url">
           <NuxtLink
             :to="link.url"
-            class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-text-primary text-sm font-medium transition-all duration-200 hover:bg-primary/20 hover:border-primary/40 hover:text-primary hover:-translate-y-1"
+            class="social-link-chip inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 hover:-translate-y-1"
           >
             <span
               v-if="iconFor(link)"
@@ -42,6 +42,41 @@
             <span class="whitespace-nowrap">{{ link.name }}</span>
           </NuxtLink>
         </template>
+      </div>
+
+      <div
+        v-if="pgpInfo.publicKey"
+        class="mt-4 rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-xl"
+      >
+        <div class="flex flex-wrap items-start justify-between gap-3">
+          <div class="min-w-0">
+            <p class="m-0 text-sm font-semibold text-white">PGP 公钥</p>
+            <p class="m-0 mt-1 break-all text-xs text-text-muted">
+              指纹：{{ formatFingerprint(pgpInfo.fingerprint) || "未提供指纹" }}
+            </p>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <a
+              v-if="pgpInfo.keyUrl"
+              :href="pgpInfo.keyUrl"
+              target="_blank"
+              rel="noreferrer"
+              class="social-link-chip inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium"
+            >
+              查看公钥
+            </a>
+            <button
+              type="button"
+              class="social-link-chip inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium"
+              @click="copyPgpPublicKey"
+            >
+              复制公钥
+            </button>
+          </div>
+        </div>
+
+        <p v-if="copyFeedback" class="m-0 mt-2 text-xs text-text-muted">{{ copyFeedback }}</p>
       </div>
 
       <!-- <button
@@ -72,7 +107,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { computed, ref, onMounted, onBeforeUnmount } from "vue";
+import siteConfig from "~/config/siteConfig";
 
 defineProps({
   links: {
@@ -83,6 +119,16 @@ defineProps({
 
 const container = ref(null);
 const showOnlyIcons = ref(false);
+const copyFeedback = ref("");
+
+const pgpInfo = computed(() => {
+  const pgp = siteConfig.profile?.pgp || {};
+  return {
+    fingerprint: pgp.fingerprint || "",
+    publicKey: pgp.publicKey || "",
+    keyUrl: pgp.keyUrl || "",
+  };
+});
 
 const iconMap = {
   bilibili: "simple-icons:bilibili",
@@ -114,6 +160,20 @@ const iconFor = (link) => {
   return null;
 };
 
+const formatFingerprint = (fingerprint) => {
+  if (!fingerprint) return "";
+  return fingerprint.match(/.{1,4}/g)?.join(" ") || fingerprint;
+};
+
+async function copyPgpPublicKey() {
+  if (!pgpInfo.value.publicKey || !navigator.clipboard) return;
+  await navigator.clipboard.writeText(pgpInfo.value.publicKey);
+  copyFeedback.value = "已复制公钥";
+  window.setTimeout(() => {
+    copyFeedback.value = "";
+  }, 1600);
+}
+
 function updateScrollButtons() {
   const el = container.value;
   if (!el) return;
@@ -144,6 +204,26 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
+.social-link-chip {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(124, 193, 255, 0.12));
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(250, 253, 255, 0.98);
+  text-shadow: 0 1px 2px rgba(15, 22, 41, 0.4);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 10px 28px rgba(8, 14, 28, 0.16);
+  backdrop-filter: blur(12px) saturate(160%);
+}
+
+.social-link-chip:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(124, 193, 255, 0.2));
+  border-color: rgba(124, 193, 255, 0.58);
+  color: #f6fbff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 14px 30px rgba(124, 193, 255, 0.18);
+}
+
 .social-links-scroll {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
