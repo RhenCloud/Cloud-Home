@@ -199,6 +199,12 @@ En5WfP0rfILKDkvm8jD0/AU=
       url: "https://blog.sakura.ink",
       avatar: "https://q2.qlogo.cn/headimg_dl?dst_uin=2731443459&spec=5",
     },
+    {
+      name: "雾小蒜の小窝",
+      desc: "共寻繁星，逐光前行！",
+      url: "https://ciallovo.top",
+      avatar: "https://ciallovo.top/assets/pic/icon.webp",
+    },
   ],
 
   comments: {
