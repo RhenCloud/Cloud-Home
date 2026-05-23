@@ -1,44 +1,47 @@
 <template>
-  <div
-    class="my-4 mx-auto max-w-3xl w-full px-4 py-3 grid grid-cols-[auto_1fr_auto] gap-3 items-center"
+  <header
+    class="page-switcher fixed left-1/2 z-50 mx-auto grid w-fit max-w-[calc(100%-2rem)] -translate-x-1/2 grid-cols-1 items-center justify-items-center rounded-2xl border border-white/10 bg-linear-to-br from-white/8 to-white/3 px-4 py-2 shadow-md-dark backdrop-blur-xl transition-[top,box-shadow,transform,background-color] duration-200 ease-out"
+    :style="headerStyle"
   >
-    <button
-      :disabled="currentIndex <= 0"
-      class="bg-white/10 text-text-primary border border-white/15 rounded-2xl px-3 py-2 cursor-pointer transition-all duration-200 hover:bg-primary/20 hover:border-primary/40 hover:text-primary disabled:opacity-50 disabled:cursor-not-allowed"
-      @click="goPrev"
-    >
-      上一页
-    </button>
-    <div class="flex gap-2 flex-wrap justify-center">
+    <nav class="flex flex-nowrap gap-2 justify-center" aria-label="主导航">
       <button
         v-for="item in pages"
         :key="item.name"
         :class="{
-          'bg-primary/30 border-primary/60 text-primary shadow-lg shadow-primary/25':
+          'border-primary/40 bg-primary/10 text-primary shadow-lg shadow-primary/15':
             item.name === route.name,
         }"
-        class="px-2.5 py-2 bg-white/10 text-text-primary border border-white/15 rounded-2xl cursor-pointer transition-all duration-200 hover:bg-white/15 hover:border-primary/40"
+        class="rounded-2xl border border-white/10 bg-linear-to-br from-white/5 to-white/2 px-2.5 py-1.5 cursor-pointer text-text-primary shadow-md-dark transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg-dark hover:bg-linear-to-br hover:from-primary/6"
         @click="router.push({ name: item.name })"
       >
         {{ item.label }}
       </button>
-    </div>
-    <button
-      :disabled="currentIndex >= pages.length - 1"
-      class="bg-white/10 text-text-primary border border-white/15 rounded-2xl px-3 py-2 cursor-pointer transition-all duration-200 hover:bg-primary/20 hover:border-primary/40 hover:text-primary disabled:opacity-50 disabled:cursor-not-allowed"
-      @click="goNext"
-    >
-      下一页
-    </button>
-  </div>
+    </nav>
+  </header>
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 const router = useRouter();
 const route = useRoute();
+const scrollY = ref(0);
+
+const updateScrollY = () => {
+  scrollY.value = window.scrollY || window.pageYOffset || 0;
+};
+
+onMounted(() => {
+  updateScrollY();
+  window.addEventListener("scroll", updateScrollY, { passive: true });
+  window.addEventListener("resize", updateScrollY, { passive: true });
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("scroll", updateScrollY);
+  window.removeEventListener("resize", updateScrollY);
+});
 
 const pages = [
   { name: "index", label: "首页" },
@@ -49,17 +52,15 @@ const pages = [
   // { name: "comments", label: "留言" },
 ];
 
-const currentIndex = computed(() => pages.findIndex((item) => item.name === route.name));
+const headerStyle = computed(() => {
+  const maxOffset = 16;
+  const minOffset = 4;
+  const settleDistance = 320;
+  const progress = Math.min(scrollY.value / settleDistance, 1);
+  const top = maxOffset - (maxOffset - minOffset) * progress;
 
-const goPrev = () => {
-  if (currentIndex.value > 0) {
-    router.push({ name: pages[currentIndex.value - 1].name });
-  }
-};
-
-const goNext = () => {
-  if (currentIndex.value < pages.length - 1) {
-    router.push({ name: pages[currentIndex.value + 1].name });
-  }
-};
+  return {
+    top: `${top}px`,
+  };
+});
 </script>
