@@ -205,6 +205,12 @@ En5WfP0rfILKDkvm8jD0/AU=
       url: "https://ciallovo.top",
       avatar: "https://ciallovo.top/assets/pic/icon.webp",
     },
+    {
+      name: "香草的日记",
+      desc: "与你的日常，便是奇迹！分享技术与日常。",
+      url: "https://www.xcnahida.cn",
+      avatar: "https://www.xcnahida.cn/favicon.ico",
+    },
   ],
 
   comments: {
