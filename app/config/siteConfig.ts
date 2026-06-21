@@ -188,6 +188,12 @@ En5WfP0rfILKDkvm8jD0/AU=
 
   friends: [
     {
+      name: "XFJの主页✨",
+      desc: "我永远喜欢哈次捏米库！！！",
+      url: "https://minecraftxfj.top",
+      avatar: "https://cdn.jsdelivr.net/gh/XFJ-YYQF/Picture@main/img/home192.webp",
+    },
+    {
       name: "wuxian",
       desc: "wuxian's web",
       url: "https://www.alxian.cn",
