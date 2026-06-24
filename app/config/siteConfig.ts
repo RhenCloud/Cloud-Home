@@ -217,6 +217,12 @@ En5WfP0rfILKDkvm8jD0/AU=
       url: "https://www.xcnahida.cn",
       avatar: "https://www.xcnahida.cn/favicon.ico",
     },
+    {
+      name: "Nekro’s SEKAI",
+      desc: "自留地 / 日常记录 / 经验分享",
+      url: "https://www.nekro.top/",
+      avatar: "https://avatars.githubusercontent.com/u/90670998?v=4",
+    },
   ],
 
   comments: {
