@@ -181,8 +181,9 @@
 </template>
 
 <script setup>
-import { reactive, ref, watch, computed } from "vue";
+import { reactive, ref, watch, computed, onMounted } from "vue";
 import siteConfig from "../config/siteConfig";
+defineOptions({ inheritAttrs: false });
 const props = defineProps({ friends: { type: Array, default: () => [] } });
 const showFormModal = ref(false);
 const loading = ref(false);
@@ -212,10 +213,14 @@ const shuffle = (list) => {
 watch(
   () => props.friends,
   (val) => {
-    displayedFriends.value = shuffle(val || []);
+    displayedFriends.value = val ? [...val] : [];
   },
   { immediate: true }
 );
+
+onMounted(() => {
+  displayedFriends.value = shuffle(props.friends || []);
+});
 
 const exampleJson = computed(() => {
   const name = siteConfig.profile?.name || siteConfig.siteMeta?.title || "";
