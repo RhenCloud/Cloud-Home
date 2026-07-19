@@ -20,14 +20,7 @@ export default {
         "text-muted": "rgb(104, 120, 152)",
       },
       fontFamily: {
-        sans: [
-          '"Inter"',
-          "system-ui",
-          "-apple-system",
-          "BlinkMacSystemFont",
-          '"Segoe UI"',
-          "sans-serif",
-        ],
+        sans: ['"Inter"', "ui-sans-serif", "system-ui", "sans-serif"],
       },
       spacing: {
         "safe-x": "max(1rem, env(safe-area-inset-left))",

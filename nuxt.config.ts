@@ -14,7 +14,19 @@ export default defineNuxtConfig({
     "@nuxtjs/sitemap",
     "@nuxt/icon",
     "@nuxtjs/seo",
+    "@nuxt/fonts",
   ],
+
+  icon: {
+    provider: "iconify",
+    collections: ["lucide", "simple-icons"],
+  },
+
+  ogImage: {
+    security: {
+      secret: process.env.NUXT_OG_IMAGE_SECRET || "3ecc76b00dd73f5124438ab14204714ce74ae172b2c5e57dce3ba2244b41aad9",
+    },
+  },
 
   // 禁用 Vue Router 的非关键警告
   vue: {
