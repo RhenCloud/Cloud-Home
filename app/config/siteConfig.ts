@@ -154,8 +154,8 @@ En5WfP0rfILKDkvm8jD0/AU=
     {
       name: "我很可爱，请给我钱",
       desc: "我的捐赠页面",
-      url: "https://pay.rhen.cloud"
-    }
+      url: "https://pay.rhen.cloud",
+    },
   ],
 
   projects: [
