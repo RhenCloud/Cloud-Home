@@ -10,15 +10,14 @@
 - 优先使用 Composition API。
 - TypeScript 必须保持 strict mode。
 
-
 ## 环境与工具链
 
 - 优先通过 `nix develop` 或 `nix shell` 补全缺失工具，不要假设系统已全局安装 node、npm、pnpm。
 - 如果缺少开发工具，优先补充 `flake.nix`，或补充 `shell.nix` / devShell。
 - 默认使用 Bun：
-	- 安装依赖：`bun install`
-	- 运行脚本：`bun run <script>`
-	- 避免使用 npm、pnpm、yarn
+  - 安装依赖：`bun install`
+  - 运行脚本：`bun run <script>`
+  - 避免使用 npm、pnpm、yarn
 - 优先保证开发环境可复现，避免依赖本机隐式状态。
 - 常用命令：
 
