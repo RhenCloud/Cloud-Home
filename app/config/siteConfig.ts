@@ -151,6 +151,11 @@ En5WfP0rfILKDkvm8jD0/AU=
       desc: "网站运行状态监控",
       url: "https://status.rhen.cloud",
     },
+    {
+      name: "我很可爱，请给我钱",
+      desc: "我的捐赠页面",
+      url: "https://pay.rhen.cloud"
+    }
   ],
 
   projects: [
@@ -176,13 +181,13 @@ En5WfP0rfILKDkvm8jD0/AU=
     },
     {
       name: "SleepyXposed",
-      url: "https://github.com/RhenCloud/SleepyXposed",
+      url: "https://github.com/ReCloudStudio/SleepyXposed",
       desc: "基于Xposed的Sleepy客户端",
     },
     {
-      name: "cloud-pyprland",
-      url: "https://github.com/RhenCloud/cloud-pyprland",
-      desc: "我的pyprland实用插件",
+      name: "WebHooker",
+      url: "https://github.com/ReCloudStudio/WebHooker",
+      desc: "GitHub -> Discord Webhook 转发器",
     },
   ],
 
@@ -222,6 +227,12 @@ En5WfP0rfILKDkvm8jD0/AU=
       desc: "自留地 / 日常记录 / 经验分享",
       url: "https://www.nekro.top/",
       avatar: "https://avatars.githubusercontent.com/u/90670998?v=4",
+    },
+    {
+      name: "Bbzv🍥🏳️‍⚧️",
+      desc: "生如夏花之绚烂，死如秋叶之静美",
+      url: "https://bbzv.de5.net/",
+      avatar: "https://bu.dusays.com/2026/08/20/6a867e915d145.jpg",
     },
   ],
 
