@@ -234,6 +234,12 @@ En5WfP0rfILKDkvm8jD0/AU=
       url: "https://bbzv.de5.net/",
       avatar: "https://bu.dusays.com/2026/08/20/6a867e915d145.jpg",
     },
+    {
+      name: "IrisDream",
+      desc: "Mi estas ĉar vi estas.",
+      url: "https://iris-dream.top/",
+      avatar: "https://iris-dream.top/img/avatar.png",
+    },
   ],
 
   comments: {
