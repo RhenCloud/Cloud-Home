@@ -68,15 +68,8 @@ definePageMeta({
 </script>
 
 <style scoped>
-/* .container {
-  padding-left: 1rem;
-  padding-right: 1rem;
-} */
-
 h1 {
   color: #e6eef8;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
 }
 </style>
-
-<!-- <style src="../styles/giscus.css"></style> -->

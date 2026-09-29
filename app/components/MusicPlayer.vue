@@ -20,13 +20,3 @@ import siteConfig from "~/config/siteConfig";
 
 const music = siteConfig.music;
 </script>
-
-<!-- <style scoped>
-/* 音乐播放器样式由 NeteaseMiniPlayer 提供 */
-/* 使用 display: contents 使外层容器不占用空间 */
-/* 确保播放器浮动定位，不影响页面布局 */
-:deep(.netease-mini-player) {
-    position: fixed !important;
-    z-index: 999 !important;
-}
-</style> -->

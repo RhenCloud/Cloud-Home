@@ -18,15 +18,6 @@ export default defineNuxtPlugin(() => {
     return;
   }
 
-  // 在本地开发环境禁用网易音乐播放器，避免网络超时
-  // if (
-  //     typeof window !== "undefined" &&
-  //     (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
-  // ) {
-  //     console.log("Netease Music Player disabled on localhost");
-  //     return;
-  // }
-
   const cssHref = "/css/netease-mini-player-v2.css";
   const scriptSrc = "/js/netease-mini-player-v2.js";
 

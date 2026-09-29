@@ -3,31 +3,7 @@
     <h2 class="m-0 mb-1 text-lg font-semibold">社交链接</h2>
     <p class="text-text-muted text-sm m-0 mb-3 block">社交账号 · Links</p>
     <div class="relative">
-      <!-- <button
-        v-show="canScrollLeft"
-        aria-label="向左滚动"
-        class="scroll-arrow left flex items-center justify-center"
-        @click="scrollLeft"
-      >
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          <path
-            d="M15 18L9 12L15 6"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </button> -->
-
-      <div ref="container" class="relative flex flex-wrap gap-2.5">
+      <div class="relative flex flex-wrap gap-2.5">
         <template v-for="link in links" :key="link.url">
           <NuxtLink
             :to="link.url"
@@ -78,36 +54,12 @@
 
         <p v-if="copyFeedback" class="m-0 mt-2 text-xs text-text-muted">{{ copyFeedback }}</p>
       </div>
-
-      <!-- <button
-        v-show="canScrollRight"
-        aria-label="向右滚动"
-        class="scroll-arrow right flex items-center justify-center"
-        @click="scrollRight"
-      >
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          <path
-            d="M9 18L15 12L9 6"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </button> -->
     </div>
   </section>
 </template>
 
 <script setup>
-import { computed, ref, onMounted, onBeforeUnmount } from "vue";
+import { computed, ref } from "vue";
 import siteConfig from "~/config/siteConfig";
 
 defineProps({
@@ -117,8 +69,6 @@ defineProps({
   },
 });
 
-const container = ref(null);
-const showOnlyIcons = ref(false);
 const copyFeedback = ref("");
 
 const pgpInfo = computed(() => {
@@ -173,34 +123,6 @@ async function copyPgpPublicKey() {
     copyFeedback.value = "";
   }, 1600);
 }
-
-function updateScrollButtons() {
-  const el = container.value;
-  if (!el) return;
-  // 检测是否需要换行（内容高度大于一行）
-  const hasOverflow = el.scrollHeight > el.clientHeight + 5;
-  showOnlyIcons.value = hasOverflow;
-}
-
-// function scrollByAmount(amount) {
-//   const el = container.value;
-//   if (!el) return;
-//   el.scrollBy({ left: amount, behavior: "smooth" });
-//   setTimeout(updateScrollButtons, 300);
-// }
-
-onMounted(() => {
-  updateScrollButtons();
-  const el = container.value;
-  if (el) el.addEventListener("scroll", updateScrollButtons, { passive: true });
-  window.addEventListener("resize", updateScrollButtons);
-});
-
-onBeforeUnmount(() => {
-  const el = container.value;
-  if (el) el.removeEventListener("scroll", updateScrollButtons);
-  window.removeEventListener("resize", updateScrollButtons);
-});
 </script>
 
 <style scoped>
@@ -222,42 +144,5 @@ onBeforeUnmount(() => {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.35),
     0 14px 30px rgba(124, 193, 255, 0.18);
-}
-
-.social-links-scroll {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-.social-links-scroll::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
-}
-
-.scroll-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 36px;
-  height: 36px;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--color-text-primary, #fff);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(6px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-.scroll-arrow.left {
-  left: 6px;
-}
-.scroll-arrow.right {
-  right: 6px;
-}
-.scroll-arrow:hover {
-  transform: translateY(-50%) scale(1.05);
-}
-.scroll-arrow[style*="display: none"] {
-  visibility: hidden;
 }
 </style>
