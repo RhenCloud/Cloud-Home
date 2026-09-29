@@ -1,12 +1,12 @@
 <template>
   <div class="card panel flex flex-col gap-2.5">
-    <h2 class="m-0 mb-1 text-lg font-semibold">友情链接</h2>
-    <p class="text-sm text-white/60 mb-3">欢迎互换友链 · Friends</p>
+    <h2 class="panel-title">友情链接</h2>
+    <p class="panel-subtitle">欢迎互换友链 · Friends</p>
     <div class="grid grid-cols-1 gap-4 w-full max-w-275 mx-auto sm:grid-cols-2">
       <article
         v-for="f in displayedFriends"
         :key="f.url"
-        class="rounded-[14px] border border-white/10 bg-linear-to-br from-white/5 to-white/0 px-4 py-3.5 transition-all duration-200 hover:-translate-y-0.75 hover:border-pink-400/50 w-72.5 h-36.25 flex flex-col"
+        class="info-card friend-card hover:border-pink-400/50"
       >
         <div class="flex items-center justify-between mb-1.5">
           <div class="flex items-center gap-2 min-w-0">

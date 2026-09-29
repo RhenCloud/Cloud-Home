@@ -1,12 +1,12 @@
 <template>
   <section class="card main-section flex flex-col gap-2.5">
-    <h2 class="m-0 mb-1">个人简介</h2>
+    <h2 class="panel-title">个人简介</h2>
     <p class="text-text-muted text-sm m-0 mb-3 block">关于我 · About Me</p>
 
     <div class="flex flex-wrap justify-center gap-2 sm:gap-3.5">
       <article
         v-if="age"
-        class="flex-1 min-w-28 sm:min-w-35 flex items-center justify-between gap-2 bg-linear-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-2 sm:p-2.5 sm:px-3.5 px-2.5 shadow-md-dark transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg-dark hover:bg-linear-to-br hover:from-primary/6"
+        class="stat-chip duration-300 hover:-translate-y-1 hover:bg-linear-to-br hover:from-primary/6"
       >
         <div class="flex items-center gap-2">
           <span class="text-lg sm:text-xl leading-none">🎂</span>
@@ -19,10 +19,7 @@
         </p>
       </article>
 
-      <article
-        v-if="profile?.gender"
-        class="flex-1 min-w-28 sm:min-w-35 flex items-center justify-between gap-2 bg-linear-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-2 sm:p-2.5 sm:px-3.5 px-2.5 shadow-md-dark transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg-dark"
-      >
+      <article v-if="profile?.gender" class="stat-chip">
         <div class="flex items-center gap-2">
           <span class="text-lg sm:text-xl leading-none">⚧️</span>
           <h3 class="m-0 text-xs sm:text-sm font-semibold text-white/90">性别</h3>
@@ -34,10 +31,7 @@
         </p>
       </article>
 
-      <article
-        v-if="profile?.pronouns"
-        class="flex-1 min-w-28 sm:min-w-35 flex items-center justify-between gap-2 bg-linear-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-2 sm:p-2.5 sm:px-3.5 px-2.5 shadow-md-dark transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg-dark"
-      >
+      <article v-if="profile?.pronouns" class="stat-chip">
         <div class="flex items-center gap-2">
           <span class="text-lg sm:text-xl leading-none">🗣️</span>
           <h3 class="m-0 text-xs sm:text-sm font-semibold text-white/90">代词</h3>
@@ -49,10 +43,7 @@
         </p>
       </article>
 
-      <article
-        v-if="profile?.location"
-        class="flex-1 min-w-28 sm:min-w-35 flex items-center justify-between gap-2 bg-linear-to-br from-white/5 to-white/2 border border-white/10 rounded-2xl p-2 sm:p-2.5 sm:px-3.5 px-2.5 shadow-md-dark transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg-dark"
-      >
+      <article v-if="profile?.location" class="stat-chip">
         <div class="flex items-center gap-2">
           <span class="text-lg sm:text-xl leading-none">📍</span>
           <h3 class="m-0 text-xs sm:text-sm font-semibold text-white/90">地区</h3>

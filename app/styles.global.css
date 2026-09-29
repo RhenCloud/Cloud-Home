@@ -2,6 +2,19 @@
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* 品牌与文字颜色（原 tailwind.config.ts v3 token，迁移至 v4 @theme） */
+  --color-primary: rgb(124, 193, 255);
+  --color-accent: rgb(124, 193, 255);
+  --color-text-primary: rgb(232, 238, 252);
+  --color-text-secondary: rgb(159, 172, 200);
+  --color-text-muted: rgb(104, 120, 152);
+
+  /* 深色阴影 */
+  --shadow-sm-dark: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-md-dark: 0 8px 24px rgba(0, 0, 0, 0.18);
+  --shadow-lg-dark: 0 12px 32px rgba(0, 0, 0, 0.22);
+  --shadow-xl-dark: 0 16px 48px rgba(0, 0, 0, 0.25);
 }
 
 @layer base {
@@ -57,6 +70,32 @@
     @apply rounded-[14px] border border-white/10
            bg-linear-to-br from-white/5 to-white/0
            px-4 py-3.5 transition-all duration-200;
+  }
+
+  /* 友链/项目/站点卡片共用几何，hover 边框色由各区块指定 */
+  .friend-card {
+    @apply flex h-36.25 w-72.5 flex-col hover:-translate-y-0.75;
+  }
+
+  /* 区块副标题 */
+  .panel-subtitle {
+    @apply mb-3 text-sm text-white/60;
+  }
+
+  /* 个人简介区的统计小卡（年龄/性别/代词/地区） */
+  .stat-chip {
+    @apply flex min-w-28 flex-1 items-center justify-between gap-2
+           rounded-2xl border border-white/10
+           bg-linear-to-br from-white/5 to-white/2
+           p-2 px-2.5 shadow-md-dark transition-all duration-200
+           sm:min-w-35 sm:p-2.5 sm:px-3.5
+           hover:-translate-y-0.5 hover:border-primary/40
+           hover:shadow-lg-dark;
+  }
+
+  /* 区块标题（h1,h2,h3 的默认 margin 已在 base 层归零，mb-1 收紧间距） */
+  .panel-title {
+    @apply m-0 mb-1 text-lg font-semibold;
   }
 }
 

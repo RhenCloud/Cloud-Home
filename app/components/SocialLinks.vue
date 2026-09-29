@@ -1,6 +1,6 @@
 <template>
   <section class="card relative main-section flex flex-col gap-2.5">
-    <h2 class="m-0 mb-1 text-lg font-semibold">社交链接</h2>
+    <h2 class="panel-title">社交链接</h2>
     <p class="text-text-muted text-sm m-0 mb-3 block">社交账号 · Links</p>
     <div class="relative">
       <div class="relative flex flex-wrap gap-2.5">

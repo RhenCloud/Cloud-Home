@@ -4,7 +4,7 @@
       <p v-if="!giscus || !giscus.repo" class="text-sm text-red-500 mb-4">Giscus 未配置。</p>
       <ClientOnly>
         <section class="card panel flex flex-col gap-2.5">
-          <h2 class="m-0 mb-1 text-lg font-semibold">留言板</h2>
+          <h2 class="panel-title">留言板</h2>
           <p class="text-sm text-white/60 mb-3">在这里留下想说的话吧 · Comments</p>
           <div class="giscus-wrapper">
             <component

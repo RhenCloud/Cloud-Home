@@ -1,14 +1,14 @@
 <template>
   <section class="card panel flex flex-col gap-2.5">
-    <h2 class="m-0 mb-1 text-lg font-semibold">我的网站</h2>
+    <h2 class="panel-title">我的网站</h2>
 
-    <p class="text-sm text-white/60 mb-3">正在运行的站点 · Websites</p>
+    <p class="panel-subtitle">正在运行的站点 · Websites</p>
 
     <div class="grid grid-cols-1 gap-4 w-full max-w-[1100px] mx-auto sm:grid-cols-2">
       <article
         v-for="site in sites"
         :key="site.url"
-        class="rounded-[14px] border border-white/10 bg-linear-to-br from-white/5 to-white/0 px-4 py-3.5 transition-all duration-200 hover:-translate-y-[3px] hover:border-blue-400/50 w-[290px] h-[145px] flex flex-col"
+        class="info-card friend-card hover:border-blue-400/50"
       >
         <div class="flex items-center justify-between mb-1.5">
           <h3 class="font-medium truncate">
