@@ -1,7 +1,7 @@
 <template>
   <section class="card main-section flex flex-col gap-2.5">
     <h2 class="panel-title">个人简介</h2>
-    <p class="text-text-muted text-sm m-0 mb-3 block">关于我 · About Me</p>
+    <p class="panel-subtitle">关于我 · About Me</p>
 
     <div class="flex flex-wrap justify-center gap-2 sm:gap-3.5">
       <article
@@ -12,9 +12,7 @@
           <span class="text-lg sm:text-xl leading-none">🎂</span>
           <h3 class="m-0 text-xs sm:text-sm font-semibold text-white/90">年龄</h3>
         </div>
-        <p
-          class="text-text-muted text-xs m-0 text-right whitespace-nowrap font-medium text-white/60"
-        >
+        <p class="text-xs m-0 text-right whitespace-nowrap font-medium text-text-secondary">
           {{ age }} 岁
         </p>
       </article>
@@ -24,9 +22,7 @@
           <span class="text-lg sm:text-xl leading-none">⚧️</span>
           <h3 class="m-0 text-xs sm:text-sm font-semibold text-white/90">性别</h3>
         </div>
-        <p
-          class="text-text-muted text-xs m-0 text-right whitespace-nowrap font-medium text-white/60"
-        >
+        <p class="text-xs m-0 text-right whitespace-nowrap font-medium text-text-secondary">
           {{ profile.gender }}
         </p>
       </article>
@@ -36,9 +32,7 @@
           <span class="text-lg sm:text-xl leading-none">🗣️</span>
           <h3 class="m-0 text-xs sm:text-sm font-semibold text-white/90">代词</h3>
         </div>
-        <p
-          class="text-text-muted text-xs m-0 text-right whitespace-nowrap font-medium text-white/60"
-        >
+        <p class="text-xs m-0 text-right whitespace-nowrap font-medium text-text-secondary">
           {{ profile.pronouns }}
         </p>
       </article>
@@ -48,9 +42,7 @@
           <span class="text-lg sm:text-xl leading-none">📍</span>
           <h3 class="m-0 text-xs sm:text-sm font-semibold text-white/90">地区</h3>
         </div>
-        <p
-          class="text-text-muted text-xs m-0 text-right whitespace-nowrap font-medium text-white/60"
-        >
+        <p class="text-xs m-0 text-right whitespace-nowrap font-medium text-text-secondary">
           {{ profile.location }}
         </p>
       </article>

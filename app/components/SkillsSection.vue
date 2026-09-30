@@ -2,7 +2,7 @@
   <section class="card main-section flex flex-col gap-2.5">
     <div>
       <h2 class="m-0 mb-1 font-semibold">技能专长</h2>
-      <p class="text-text-muted text-sm m-0 mb-3">我常用的工具与技术 · Skills & Technologies</p>
+      <p class="panel-subtitle">我常用的工具与技术 · Skills & Technologies</p>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
       <article
