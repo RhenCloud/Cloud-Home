@@ -155,6 +155,18 @@
             </div>
           </label>
 
+          <!-- 蜜罐字段：用位移出屏隐藏（而非 hidden/display:none），机器人仍会提交 -->
+          <label class="absolute left-[-9999px] w-px h-px overflow-hidden" aria-hidden="true">
+            <input
+              v-model="form.website"
+              type="text"
+              name="website"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+            />
+          </label>
+
           <div class="sm:col-span-2 flex items-center justify-center gap-3 mt-2">
             <button
               type="button"
@@ -196,6 +208,8 @@ interface FriendForm {
   email: string;
   avatar: string;
   message: string;
+  /** 蜜罐：对真人隐藏，机器人填充会被服务端静默拒绝 */
+  website: string;
 }
 
 const showFormModal = ref(false);
@@ -211,6 +225,7 @@ const form = reactive<FriendForm>({
   email: "",
   avatar: "",
   message: "",
+  website: "",
 });
 const displayedFriends = ref<FriendEntry[]>([]);
 
@@ -282,6 +297,7 @@ const submitForm = async (): Promise<void> => {
     form.email = "";
     form.avatar = "";
     form.message = "";
+    form.website = "";
     message.value = "提交成功，已发送申请邮件";
     showFormModal.value = false;
     dialogTitle.value = "提交成功";
