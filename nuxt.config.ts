@@ -24,9 +24,8 @@ export default defineNuxtConfig({
 
   ogImage: {
     security: {
-      secret:
-        process.env.NUXT_OG_IMAGE_SECRET ||
-        "3ecc76b00dd73f5124438ab14204714ce74ae172b2c5e57dce3ba2244b41aad9",
+      // 仅从环境变量读取；未配置时由 nuxt-og-image 自行生成（不落仓库明文）
+      secret: process.env.NUXT_OG_IMAGE_SECRET || undefined,
     },
   },
 
@@ -117,11 +116,9 @@ export default defineNuxtConfig({
     senderEmail: process.env.SENDER_EMAIL ?? "",
     adminEmail: process.env.ADMIN_EMAIL ?? "",
     smtpSecure: process.env.SMTP_SECURE ?? "",
-    githubToken: process.env.NUXT_PUBLIC_GITHUB_TOKEN ?? "",
-    umamiApiKey: process.env.UMAMI_API_KEY ?? "",
-    public: {
-      wakatimeApiKey: process.env.WAKATIME_API_KEY ?? "",
-      wakatimeApiUrl: process.env.WAKATIME_API_URL ?? "https://wakatime.com/api/v1",
-    },
+    githubToken: process.env.NUXT_GITHUB_TOKEN ?? "",
+    umamiApiKey: process.env.NUXT_UMAMI_API_KEY ?? "",
+    wakapiApiKey: process.env.NUXT_WAKAPI_API_KEY ?? "",
+    wakapiApiUrl: process.env.NUXT_WAKAPI_API_URL ?? "https://wakapi.rhen.cloud/api/v1",
   },
 });

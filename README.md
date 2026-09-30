@@ -187,17 +187,31 @@ const siteConfig: SiteConfig = {
 
 在 Vercel 控制台或本地 `.env` 配置：
 
-- `NUXT_PUBLIC_GITHUB_TOKEN`: 具有仓库读取权限的 GitHub Token，用于绕过 GitHub API 速率限制。（可选）
-- `NUXT_PUBLIC_UMAMI_API_KEY`: 可选的 Umami API Key，用于展示访问量统计数据。
-- `WAKATIME_API_KEY`: Wakatime API Key，用于获取编码统计数据。
-- `WAKATIME_API_URL`: Wakatime API 地址，覆盖默认 `https://wakatime.com/api/v1`（可选）。
+- `NUXT_GITHUB_TOKEN`: 具有仓库读取权限的 GitHub Token，用于绕过 GitHub API 速率限制。（可选，仅服务端）
+- `NUXT_UMAMI_API_KEY`: Umami API Key，用于页脚访问统计。（可选，仅服务端）
+- `NUXT_WAKAPI_API_KEY`: Wakapi API Key，用于编码统计。（可选，仅服务端）
+- `NUXT_WAKAPI_API_URL`: Wakapi API 地址，覆盖默认 `https://wakapi.rhen.cloud/api/v1`（可选）。
 - `SMTP_HOST`: 邮件服务器主机名
 - `SMTP_PORT`: 端口（如 465 或 587）
 - `SMTP_USER`: 发件人邮箱账号
 - `SMTP_PASS`: 邮箱授权码或密码
 - `SENDER_EMAIL`: 发件人地址（通常同 SMTP_USER）
 - `ADMIN_EMAIL`: 接收通知的邮箱地址
-- `SMTP_SECURE`：是否强制启用 SSL/TLS（默认为 `true` 当端口为 465）。
+- `SMTP_SECURE`：是否强制启用 SSL/TLS（留空则按端口 465 自动推断）。
+- `NUXT_OG_IMAGE_SECRET`: OG 图片签名密钥（可选；未配置时由模块自行生成）。
+
+> 所有密钥均以 `NUXT_` 前缀声明为 Nitro 私有配置，**绝不会下发到浏览器**。SMTP 相关变量保持无前缀，由 `nuxt.config.ts` 显式读取。
+
+### 旧变量名 → 新变量名对照
+
+如果你从旧版本部署升级，请重命名以下环境变量（旧名已不再被读取）：
+
+| 旧变量名                    | 新变量名              |
+| --------------------------- | --------------------- |
+| `NUXT_PUBLIC_GITHUB_TOKEN`  | `NUXT_GITHUB_TOKEN`   |
+| `NUXT_PUBLIC_UMAMI_API_KEY` | `NUXT_UMAMI_API_KEY`  |
+| `WAKATIME_API_KEY`          | `NUXT_WAKAPI_API_KEY` |
+| `WAKATIME_API_URL`          | `NUXT_WAKAPI_API_URL` |
 
 ## 本地开发
 

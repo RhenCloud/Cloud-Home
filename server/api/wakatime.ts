@@ -17,13 +17,13 @@ export default defineEventHandler(async (event) => {
   }
 
   const config = useRuntimeConfig();
-  const apiKey = config.wakatimeApiKey;
+  const apiKey = config.wakapiApiKey;
   if (typeof apiKey !== "string") {
     throw createError({ statusCode: 500, statusMessage: "Invalid WakaTime API Key configuration" });
   }
 
   const query = getQuery(event);
-  const apiUrl = (query.apiUrl as string) || config.wakatimeApiUrl;
+  const apiUrl = (query.apiUrl as string) || config.wakapiApiUrl;
 
   const headers = {
     Authorization: `Basic ${Buffer.from(apiKey).toString("base64")}`,
