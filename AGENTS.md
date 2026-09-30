@@ -4,7 +4,7 @@
 
 ## 项目概览
 
-- 这是一个 Nuxt 4 + TypeScript + Tailwind CSS v4 + Bun 项目（个人主页，GitHub Pages 部署）。
+- 这是一个 Nuxt 4 + TypeScript + Tailwind CSS v4 + Bun 项目（个人主页，Cloudflare Pages 部署，Nitro preset `cloudflare-pages`）。
 - 默认使用 Bun 作为包管理器与运行时。
 - 优先采用 SSR 与 Nuxt conventions。
 - 优先使用 Composition API；组件脚本统一 `<script setup lang="ts">` + 泛型 `defineProps`。
@@ -26,6 +26,7 @@ bun run check   # lint + format:check + typecheck + build 全链
 ## DevOps
 
 - GitHub Actions（`.github/workflows/lint-format.yml`）：所有分支 push/PR 跑 `bun run check`；自动格式化 job 仅在 push 到 `main` 时触发。
+- 本仓库 `bun run check` / CI 用默认 preset 构建，**不等于** Cloudflare 环境。cloudflare-pages preset 下 og-image 对 takumi 渲染器走 wasm 绑定，必须保留 `@takumi-rs/wasm`（与 `@takumi-rs/core` 同版本锁定）；本地验证 CF 构建用 `NITRO_PRESET=cloudflare-pages bun run build`。
 - 自动格式化使用 `bun run format`，修改代码后优先执行，保证 Prettier 与 Tailwind 排版一致。
 - 本项目无 Docker / Nix 配置；不要假设存在 `flake.nix` 或容器编排文件。
 - 密钥一律走环境变量注入（见 `.env.example` 与 README 的变量对照表），禁止写入仓库。
