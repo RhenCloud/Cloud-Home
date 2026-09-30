@@ -7,8 +7,8 @@
   --color-primary: rgb(124, 193, 255);
   --color-accent: rgb(124, 193, 255);
   --color-text-primary: rgb(232, 238, 252);
-  --color-text-secondary: rgb(159, 172, 200);
-  --color-text-muted: rgb(143, 160, 187);
+  --color-text-secondary: rgb(198, 209, 228);
+  --color-text-muted: rgb(160, 175, 199);
 
   /* 深色阴影 */
   --shadow-sm-dark: 0 4px 12px rgba(0, 0, 0, 0.15);
