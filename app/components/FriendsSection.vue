@@ -180,18 +180,31 @@
   </Teleport>
 </template>
 
-<script setup>
-import { reactive, ref, watch, computed, onMounted } from "vue";
+<script setup lang="ts">
+import { computed, onMounted, reactive, ref, watch } from "vue";
 import { siteConfig } from "~/config";
+import type { FriendEntry } from "~/types/site";
+
 defineOptions({ inheritAttrs: false });
-const props = defineProps({ friends: { type: Array, default: () => [] } });
+
+const props = defineProps<{ friends: FriendEntry[] }>();
+
+interface FriendForm {
+  name: string;
+  url: string;
+  desc: string;
+  email: string;
+  avatar: string;
+  message: string;
+}
+
 const showFormModal = ref(false);
 const loading = ref(false);
 const message = ref("");
 const showDialog = ref(false);
 const dialogTitle = ref("");
 const dialogText = ref("");
-const form = reactive({
+const form = reactive<FriendForm>({
   name: "",
   url: "",
   desc: "",
@@ -199,20 +212,23 @@ const form = reactive({
   avatar: "",
   message: "",
 });
-const displayedFriends = ref([]);
+const displayedFriends = ref<FriendEntry[]>([]);
 
-const shuffle = (list) => {
+const shuffle = <T,>(list: readonly T[]): T[] => {
   const arr = [...list];
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
+    const a = arr[i] as T;
+    const b = arr[j] as T;
+    arr[i] = b;
+    arr[j] = a;
   }
   return arr;
 };
 
 watch(
   () => props.friends,
-  (val) => {
+  (val: FriendEntry[]) => {
     displayedFriends.value = val ? [...val] : [];
   },
   { immediate: true }
@@ -237,7 +253,7 @@ const openForm = () => {
 };
 
 // resolve possible local paths to absolute URLs using site meta URL
-const resolveUrl = (p) => {
+const resolveUrl = (p: string): string => {
   if (!p) return "";
   const s = String(p).trim();
   if (/^https?:\/\//i.test(s) || /^\/\//.test(s)) return s;
@@ -250,7 +266,7 @@ const resolveUrl = (p) => {
   return base + "/" + s;
 };
 
-const submitForm = async () => {
+const submitForm = async (): Promise<void> => {
   loading.value = true;
   message.value = "";
   try {

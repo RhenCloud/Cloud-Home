@@ -134,28 +134,50 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted, computed } from "vue";
+import type { WakapiConfig } from "~/types/site";
 
-const props = defineProps({
-  github: {
-    type: Object,
-    default: () => ({}),
-  },
-  wakatime: {
-    type: Object,
-    default: () => ({}),
-  },
-});
+interface LangStat {
+  name: string;
+  percent?: number;
+  count?: number;
+}
+interface WakatimeStats {
+  total_seconds?: number;
+  daily_average?: number;
+  days_including_holidays?: number;
+  languages?: LangStat[];
+}
+interface WakaStatus {
+  is_coding?: boolean;
+  project?: string;
+}
+interface GithubStats {
+  username: string;
+  heatmapUrl: string;
+  languages?: LangStat[];
+}
+
+const props = withDefaults(
+  defineProps<{
+    github?: GithubStats;
+    wakatime?: WakapiConfig;
+  }>(),
+  {
+    github: () => ({ username: "", heatmapUrl: "" }),
+    wakatime: () => ({ enable: false, apiUrl: "", username: "" }),
+  }
+);
 const github = props.github;
 const wakatime = props.wakatime;
 
 const activeTab = ref("github");
-const wakatimeActiveTab = ref("weekly");
+const wakatimeActiveTab = ref<"weekly" | "allTime">("weekly");
 
-const weeklyData = ref(null);
-const allTimeData = ref(null);
-const statusData = ref(null);
+const weeklyData = ref<WakatimeStats | null>(null);
+const allTimeData = ref<WakatimeStats | null>(null);
+const statusData = ref<WakaStatus | null>(null);
 const showComponent = ref(true);
 
 const githubPalette = ["#7cc1ff", "#6bdba6", "#ffd166", "#f497da", "#9b8cfc", "#5ce1e6", "#ffa3a3"];
@@ -169,7 +191,7 @@ const wakatimePalette = [
   "#ffa3a3",
 ];
 
-const githubLanguages = computed(() =>
+const githubLanguages = computed<LangStat[]>(() =>
   Array.isArray(github.languages) ? github.languages.slice(0, 5) : []
 );
 
@@ -182,26 +204,28 @@ const wakatimeLanguages = computed(() => {
   return currentWakatimeData.value.languages.slice(0, 5);
 });
 
-const colorFor = (name, type) => {
+type StatsTab = "github" | "wakatime";
+
+const colorFor = (name: string, type: StatsTab): string => {
   const palette = type === "github" ? githubPalette : wakatimePalette;
-  const languages =
-    type === "github" ? github.languages : currentWakatimeData.value?.languages || [];
+  const languages: LangStat[] =
+    type === "github" ? github.languages || [] : currentWakatimeData.value?.languages || [];
   const idx = languages.findIndex((l) => l.name === name);
-  return palette[(idx >= 0 ? idx : 0) % palette.length];
+  return palette[(idx >= 0 ? idx : 0) % palette.length] as string;
 };
 
-const barStyle = (lang, type) => ({
-  width: `${Math.max(8, lang.percent)}%`,
+const barStyle = (lang: LangStat, type: StatsTab) => ({
+  width: `${Math.max(8, lang.percent ?? 0)}%`,
   background: colorFor(lang.name, type),
 });
 
-const formatTime = (seconds) => {
+const formatTime = (seconds: number): string => {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   return `${hours}h ${minutes}m`;
 };
 
-const fetchWakatimeData = async () => {
+const fetchWakatimeData = async (): Promise<void> => {
   if (!wakatime.enable) return;
 
   try {

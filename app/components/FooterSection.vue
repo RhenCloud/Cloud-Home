@@ -53,22 +53,22 @@
   </footer>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { useRuntimeConfig } from "#imports";
 import { siteConfig } from "~/config";
-const contact = siteConfig.footer || {};
+const contact = siteConfig.footer;
 const config = useRuntimeConfig();
 const quote = ref("");
 const from = ref("");
 const pageviews = ref(0);
 const visitors = ref(0);
-const statsError = ref(true);
-const showHitokoto = siteConfig.footer?.hitokoto?.enable;
-const showStats = ref(siteConfig.umami?.enable);
+const statsError = ref<boolean>(true);
+const showHitokoto = siteConfig.footer.hitokoto.enable;
+const showStats = ref<boolean>(siteConfig.umami.enable);
 
-const buildHitokotoUrl = () => {
-  const type = siteConfig.footer?.hitokoto?.type;
+const buildHitokotoUrl = (): string => {
+  const type = siteConfig.footer.hitokoto.type;
   const url = new URL("https://v1.hitokoto.cn/");
   if (Array.isArray(type)) {
     type.filter(Boolean).forEach((t) => url.searchParams.append("c", t));
@@ -82,10 +82,10 @@ const buildHitokotoUrl = () => {
   return url.toString();
 };
 
-const fetchHitokoto = async () => {
+const fetchHitokoto = async (): Promise<void> => {
   try {
     const resp = await fetch(buildHitokotoUrl());
-    const data = await resp.json();
+    const data = (await resp.json()) as { hitokoto?: string; from?: string };
     quote.value = data.hitokoto || "";
     from.value = data.from || "";
   } catch (e) {
@@ -93,9 +93,9 @@ const fetchHitokoto = async () => {
   }
 };
 
-const fetchStats = async () => {
+const fetchStats = async (): Promise<void> => {
   try {
-    if (!siteConfig.umami?.apiBase || !siteConfig.umami?.websiteId) {
+    if (!siteConfig.umami.apiBase || !siteConfig.umami.websiteId) {
       return;
     }
     const apiBase = siteConfig.umami.apiBase;
@@ -123,11 +123,11 @@ const fetchStats = async () => {
       return;
     }
 
-    const data = await resp.json();
+    const data = (await resp.json()) as { pageviews?: number; visitors?: number };
     if (data) {
       statsError.value = false;
-      pageviews.value = data.pageviews;
-      visitors.value = data.visitors;
+      pageviews.value = data.pageviews ?? 0;
+      visitors.value = data.visitors ?? 0;
     }
 
     if (pageviews.value === 0 && visitors.value === 0) {
@@ -135,7 +135,10 @@ const fetchStats = async () => {
     }
   } catch (e) {
     statsError.value = true;
-    console.debug("Stats fetch failed (this is normal if blocked by ad blocker):", e.message);
+    console.debug(
+      "Stats fetch failed (this is normal if blocked by ad blocker):",
+      (e as Error).message
+    );
   }
 };
 

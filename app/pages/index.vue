@@ -6,7 +6,8 @@
   </main>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { definePageMeta } from "#imports";
 import HeroSection from "~/components/HeroSection.vue";
 import SocialLinks from "~/components/SocialLinks.vue";
 import AboutSection from "~/components/AboutSection.vue";

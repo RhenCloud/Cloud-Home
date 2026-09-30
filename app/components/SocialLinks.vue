@@ -58,21 +58,17 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, ref } from "vue";
 import { siteConfig } from "~/config";
+import type { SocialLink } from "~/types/site";
 
-defineProps({
-  links: {
-    type: Array,
-    required: true,
-  },
-});
+defineProps<{ links: SocialLink[] }>();
 
 const copyFeedback = ref("");
 
 const pgpInfo = computed(() => {
-  const pgp = siteConfig.profile?.pgp || {};
+  const pgp = siteConfig.profile.pgp;
   return {
     fingerprint: pgp.fingerprint || "",
     publicKey: pgp.publicKey || "",
@@ -80,7 +76,7 @@ const pgpInfo = computed(() => {
   };
 });
 
-const iconMap = {
+const iconMap: Record<string, string> = {
   bilibili: "simple-icons:bilibili",
   github: "simple-icons:github",
   blog: "fa6-solid:book",
@@ -103,14 +99,14 @@ const iconMap = {
   matrix: "simple-icons:matrix",
 };
 
-const iconFor = (link) => {
+const iconFor = (link: SocialLink): { name: string } | null => {
   const key = (link.name || "").toLowerCase();
   if (iconMap[key]) return { name: iconMap[key] };
-  if (link.icon) return { src: link.icon };
+  if (link.icon) return { name: link.icon };
   return null;
 };
 
-const formatFingerprint = (fingerprint) => {
+const formatFingerprint = (fingerprint: string): string => {
   if (!fingerprint) return "";
   return fingerprint.match(/.{1,4}/g)?.join(" ") || fingerprint;
 };

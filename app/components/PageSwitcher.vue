@@ -20,9 +20,14 @@
   </header>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
+
+interface NavPage {
+  name: string;
+  label: string;
+}
 
 const router = useRouter();
 const route = useRoute();
@@ -43,7 +48,7 @@ onBeforeUnmount(() => {
   window.removeEventListener("resize", updateScrollY);
 });
 
-const pages = [
+const pages: NavPage[] = [
   { name: "index", label: "首页" },
   { name: "about", label: "关于" },
   { name: "sites", label: "网站" },

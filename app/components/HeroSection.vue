@@ -21,14 +21,8 @@
   </section>
 </template>
 
-<script setup>
-import { siteConfig } from "~/config";
+<script setup lang="ts">
+import type { ProfileConfig } from "~/types/site";
 
-const { profile } = defineProps({
-  profile: {
-    type: Object,
-    required: false,
-    default: () => siteConfig.profile || {},
-  },
-});
+defineProps<{ profile: ProfileConfig }>();
 </script>

@@ -31,11 +31,8 @@
   </section>
 </template>
 
-<script setup>
-defineProps({
-  projects: {
-    type: Array,
-    default: () => [],
-  },
-});
+<script setup lang="ts">
+import type { ProjectEntry } from "~/types/site";
+
+defineProps<{ projects: ProjectEntry[] }>();
 </script>

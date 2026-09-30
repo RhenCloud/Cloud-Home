@@ -4,7 +4,8 @@
   </main>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { definePageMeta } from "#imports";
 import FriendsSection from "~/components/FriendsSection.vue";
 import { siteConfig } from "~/config";
 

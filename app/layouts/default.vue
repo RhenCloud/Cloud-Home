@@ -31,7 +31,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import PageSwitcher from "~/components/PageSwitcher.vue";
 import FooterSection from "~/components/FooterSection.vue";

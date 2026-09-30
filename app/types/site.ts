@@ -12,6 +12,7 @@ export interface ProfileConfig {
   email: string;
   pgp: PgpConfig;
   birthday: string;
+  gender?: string;
   pronouns: string;
   location: string;
 }
@@ -19,6 +20,8 @@ export interface ProfileConfig {
 export interface SocialLink {
   name: string;
   url: string;
+  /** 可选：显式指定 iconify 图标名，缺省时按 name 查内置映射 */
+  icon?: string;
 }
 
 export interface AboutItem {

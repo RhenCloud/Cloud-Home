@@ -33,11 +33,8 @@
   </section>
 </template>
 
-<script setup>
-defineProps({
-  sites: {
-    type: Array,
-    default: () => [],
-  },
-});
+<script setup lang="ts">
+import type { SiteEntry } from "~/types/site";
+
+defineProps<{ sites: SiteEntry[] }>();
 </script>

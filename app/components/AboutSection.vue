@@ -72,21 +72,16 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from "vue";
+import type { AboutItem, ProfileConfig } from "~/types/site";
 
-const props = defineProps({
-  items: {
-    type: Array,
-    default: () => [],
-  },
-  profile: {
-    type: Object,
-    default: () => ({}),
-  },
-});
+const props = defineProps<{
+  items: AboutItem[];
+  profile: ProfileConfig;
+}>();
 
-const age = computed(() => {
+const age = computed<number | null>(() => {
   if (!props.profile?.birthday) return null;
   const birthDate = new Date(props.profile.birthday);
   const today = new Date();

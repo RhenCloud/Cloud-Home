@@ -33,7 +33,11 @@
   </section>
 </template>
 
-<script setup>
-defineProps({ skills: { type: Array, default: () => [] } });
-const iconSrc = (id) => `https://skillicons.dev/icons?i=${encodeURIComponent(id)}&theme=dark`;
+<script setup lang="ts">
+import type { SkillGroup } from "~/types/site";
+
+defineProps<{ skills: SkillGroup[] }>();
+
+const iconSrc = (id: string): string =>
+  `https://skillicons.dev/icons?i=${encodeURIComponent(id)}&theme=dark`;
 </script>
