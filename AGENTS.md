@@ -4,38 +4,31 @@
 
 ## 项目概览
 
-- 这是一个 Nuxt.js + TypeScript + Tailwind CSS + Bun 项目。
+- 这是一个 Nuxt 4 + TypeScript + Tailwind CSS v4 + Bun 项目（个人主页，GitHub Pages 部署）。
 - 默认使用 Bun 作为包管理器与运行时。
 - 优先采用 SSR 与 Nuxt conventions。
-- 优先使用 Composition API。
-- TypeScript 必须保持 strict mode。
+- 优先使用 Composition API；组件脚本统一 `<script setup lang="ts">` + 泛型 `defineProps`。
+- TypeScript 保持 strict（Nuxt 默认 tsconfig 含 `noUncheckedIndexedAccess`，索引访问需显式收窄）。
 
 ## 环境与工具链
 
-- 优先通过 `nix develop` 或 `nix shell` 补全缺失工具，不要假设系统已全局安装 node、npm、pnpm。
-- 如果缺少开发工具，优先补充 `flake.nix`，或补充 `shell.nix` / devShell。
-- 默认使用 Bun：
-  - 安装依赖：`bun install`
-  - 运行脚本：`bun run <script>`
-  - 避免使用 npm、pnpm、yarn
-- 优先保证开发环境可复现，避免依赖本机隐式状态。
+- 安装依赖：`bun install`；运行脚本：`bun run <script>`。
+- 避免使用 npm、pnpm、yarn。
+- 不要使用 `bunx vue-tsc`（会拉取与本地 typescript ~5.9 不兼容的新版）；typecheck 走 package.json 脚本即可。
 - 常用命令：
 
 ```bash
-nix develop
 bun install
 bun run dev
-bun run build
-bun run lint
+bun run check   # lint + format:check + typecheck + build 全链
 ```
 
 ## DevOps
 
-- Docker 已支持，构建入口见 [Dockerfile](Dockerfile)，本地联动服务见 [docker-compose.yml](docker-compose.yml)。默认使用 `docker compose up --build` 启动整套环境。
-- Nix flake 已支持，开发环境以 [flake.nix](flake.nix) 为准；优先通过 `nix develop` 进入可复现 shell，再执行 Bun 命令。
-- GitHub Actions 已配置 CI，检查顺序与本地一致：安装依赖、`bun run lint`、`bun run typecheck`、`bun run build`。
+- GitHub Actions（`.github/workflows/lint-format.yml`）：所有分支 push/PR 跑 `bun run check`；自动格式化 job 仅在 push 到 `main` 时触发。
 - 自动格式化使用 `bun run format`，修改代码后优先执行，保证 Prettier 与 Tailwind 排版一致。
-- 自动 lint 与自动 typecheck 依赖仓库脚本和 CI；本地修改后优先跑 `bun run lint` 和 `bun run typecheck`，避免把问题留到流水线。
+- 本项目无 Docker / Nix 配置；不要假设存在 `flake.nix` 或容器编排文件。
+- 密钥一律走环境变量注入（见 `.env.example` 与 README 的变量对照表），禁止写入仓库。
 
 ## TypeScript 规范
 
@@ -54,15 +47,12 @@ bun run lint
 
 ## Nuxt / Vue 约定
 
-- composables 放在 `/composables`。
-- server routes 放在 `/server/api`。
-- shared types 放在 `/types`。
-- 通用工具函数放在 `/utils`。
-- 页面逻辑保持轻量，复杂业务下沉到 composables / server / utils。
-- 避免在 components 中写复杂业务逻辑。
-- 优先使用 `useFetch`、`useAsyncData` 与 Nuxt auto imports。
-- Tailwind class 要保持可读性，避免过长 class chain。
-- 优先使用语义化 wrapper components，而不是把样式逻辑散落在页面里。
+- 站点配置按领域拆分在 `app/config/`（profile.ts / content.ts / site.config.ts），一律通过 barrel 导入：`import { siteConfig } from "~/config"`。新增顶层键须同步补进 `app/types/site.ts` 并在对应领域文件用 `satisfies` 约束。
+- 共享类型放 `app/types/`（site.ts 配置侧、api.ts 服务端 API 响应侧）；server 路由同样以 `~/types/...` 导入。
+- server routes 放在 `server/api/`。所有第三方密钥（GitHub / Umami / Wakapi / SMTP）只在服务端 runtimeConfig 私有区读取，客户端永远不可见。
+- 数据获取优先 `useFetch` / `useAsyncData`。注意 Nuxt 4.2 的 `useFetch` 泛型与 `skip` 选项在 vue-tsc 下重载冲突（TS2769）：需要条件获取时用三元条件调用（enable 时 `useFetch(...)`，否则本地 `ref` 兜底），不要使用 `skip`。
+- 页面逻辑保持轻量，复杂业务下沉到 server routes。
+- Tailwind class 要保持可读性；重复卡片样式使用 `app/styles.global.css` 中的组件类（`.info-card` / `.friend-card` / `.stat-chip` / `.panel-title` / `.panel-subtitle`），颜色与阴影 token 定义在 `@theme` 块（Tailwind v4 无 tailwind.config.ts）。
 
 ## AI Agent 行为规则
 
@@ -73,19 +63,12 @@ bun run lint
 - 不要随意增加依赖；新增依赖必须说明原因。
 - 不要破坏 SSR、hydration 或 Nuxt 自动导入约定。
 - 不要绕过 TypeScript 类型系统。
-- 不要通过关闭 lint、typecheck 或 build 来“修复”问题。
+- 不要通过关闭 lint、typecheck 或 build 来"修复"问题。
 
 ## 测试与质量
 
-- 所有改动应尽量通过 typecheck、lint、build。
-- 修改后优先运行：
-
-```bash
-bun run lint
-bun run typecheck
-bun run build
-```
-
+- 仓库无测试框架；质量门禁即 `bun run check`（lint → format:check → typecheck → build）。
+- 所有改动必须全链通过后再提交。
 - 如果某个检查失败，先修复根因，再继续扩大修改。
 
 ## 维护原则
