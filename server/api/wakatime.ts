@@ -1,56 +1,70 @@
-import { defineEventHandler, getQuery, createError } from "h3";
+import { defineEventHandler, getQuery, createError, setResponseHeader } from "h3";
 import { useRuntimeConfig } from "#imports";
+import type { WakatimeResponse } from "~/types/api";
 
-export default defineEventHandler(async (event) => {
-  const res = event.node.res;
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+/** 允许的上游主机白名单（Q19-C）；地址只能来自服务端 runtimeConfig，query 参数一律忽略。 */
+const ALLOWED_HOSTS = new Set(["wakatime.com", "api.wakatime.com", "wakapi.rhen.cloud"]);
 
-  if (event.node.req.method === "OPTIONS") {
-    res.statusCode = 200;
-    return "ok";
+const UPSTREAM_TIMEOUT_MS = 8000;
+
+function isAllowedUrl(raw: string): boolean {
+  try {
+    return ALLOWED_HOSTS.has(new URL(raw).hostname);
+  } catch {
+    return false;
   }
+}
 
-  if (event.node.req.method !== "GET") {
+export default defineEventHandler(async (event): Promise<WakatimeResponse> => {
+  if (event.method !== "GET") {
     throw createError({ statusCode: 405, statusMessage: "Method Not Allowed" });
   }
 
+  // 忽略任何客户端传入的 apiUrl/query，上游地址只信服务端配置（消除 SSRF 面）
+  void getQuery(event);
+
   const config = useRuntimeConfig();
   const apiKey = config.wakapiApiKey;
-  if (typeof apiKey !== "string") {
-    throw createError({ statusCode: 500, statusMessage: "Invalid WakaTime API Key configuration" });
+  const apiUrl = config.wakapiApiUrl;
+
+  if (!apiKey || !apiUrl) {
+    return { weekly: null, allTime: null };
+  }
+  if (!isAllowedUrl(apiUrl)) {
+    console.error("Wakapi upstream host not allowed:", apiUrl);
+    throw createError({ statusCode: 500, statusMessage: "Failed to fetch coding stats" });
   }
 
-  const query = getQuery(event);
-  const apiUrl = (query.apiUrl as string) || config.wakapiApiUrl;
-
-  const headers = {
-    Authorization: `Basic ${Buffer.from(apiKey).toString("base64")}`,
-  };
+  // WakaTime v1 规范：Basic base64("<api_key>:")，冒号不可省
+  const auth = "Basic " + Buffer.from(`${apiKey}:`).toString("base64");
+  const headers = { Authorization: auth };
 
   try {
-    const [weeklyStatsResponse, allTimeStatsResponse, statusResponse] = await Promise.all([
-      fetch(`${apiUrl}/users/current/stats/last_7_days`, { headers }),
-      fetch(`${apiUrl}/users/current/stats/all_time`, { headers }),
-      fetch(`${apiUrl}/users/current/status`, { headers }),
+    const [weeklyRes, allTimeRes] = await Promise.all([
+      fetch(`${apiUrl}/users/current/stats/last_7_days`, {
+        headers,
+        signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
+      }),
+      fetch(`${apiUrl}/users/current/stats/all_time`, {
+        headers,
+        signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
+      }),
     ]);
 
-    if (!weeklyStatsResponse.ok) {
-      throw new Error(`Wakatime API error: ${weeklyStatsResponse.status}`);
+    if (!weeklyRes.ok) {
+      throw new Error(`upstream stats: ${weeklyRes.status}`);
     }
+    const weeklyData = (await weeklyRes.json()) as { data?: WakatimeResponse["weekly"] };
+    const allTimeData = allTimeRes.ok
+      ? ((await allTimeRes.json()) as { data?: WakatimeResponse["allTime"] })
+      : null;
 
-    const weeklyStatsData = await weeklyStatsResponse.json();
-    const allTimeStatsData = allTimeStatsResponse.ok ? await allTimeStatsResponse.json() : null;
-    const statusData = statusResponse.ok ? await statusResponse.json() : null;
+    // 同源代理响应无需 CORS；短缓存配合 ISR 降低上游压力
+    setResponseHeader(event, "Cache-Control", "public, max-age=60");
 
-    return {
-      weekly: weeklyStatsData.data,
-      allTime: allTimeStatsData ? allTimeStatsData.data : null,
-      status: statusData,
-    };
+    return { weekly: weeklyData.data ?? null, allTime: allTimeData?.data ?? null };
   } catch (error) {
-    console.error("Wakatime API error:", error);
-    throw createError({ statusCode: 500, statusMessage: "Failed to fetch Wakatime data" });
+    console.error("Wakapi proxy error:", error);
+    throw createError({ statusCode: 500, statusMessage: "Failed to fetch coding stats" });
   }
 });

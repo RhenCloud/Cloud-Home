@@ -75,7 +75,7 @@
             <span class="stat-value">{{
               currentWakatimeData?.days_including_holidays ?? "N/A"
             }}</span>
-            <span class="stat-label">活跃天数</span>
+            <span class="stat-label">统计天数</span>
           </div>
         </div>
       </div>
@@ -120,65 +120,47 @@
           </button>
         </div>
       </div>
-
-      <div v-if="statusData" class="status-wrap">
-        <h3>当前状态</h3>
-        <p class="muted">实时状态 · Current Status</p>
-        <div class="status-item">
-          <span class="status-indicator" :class="{ active: statusData.is_coding }" />
-          <span class="status-text">{{ statusData.is_coding ? "正在编码" : "未在编码" }}</span>
-          <span v-if="statusData.project" class="status-project">{{ statusData.project }}</span>
-        </div>
-      </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from "vue";
+import { ref, computed } from "vue";
+import { useFetch } from "#imports";
 import type { WakapiConfig } from "~/types/site";
-
-interface LangStat {
-  name: string;
-  percent?: number;
-  count?: number;
-}
-interface WakatimeStats {
-  total_seconds?: number;
-  daily_average?: number;
-  days_including_holidays?: number;
-  languages?: LangStat[];
-}
-interface WakaStatus {
-  is_coding?: boolean;
-  project?: string;
-}
-interface GithubStats {
-  username: string;
-  heatmapUrl: string;
-  languages?: LangStat[];
-}
+import type { GithubStats, LangStat, WakatimeResponse } from "~/types/api";
 
 const props = withDefaults(
   defineProps<{
     github?: GithubStats;
-    wakatime?: WakapiConfig;
+    wakapi?: WakapiConfig;
   }>(),
   {
     github: () => ({ username: "", heatmapUrl: "" }),
-    wakatime: () => ({ enable: false, apiUrl: "", username: "" }),
+    wakapi: () => ({ enable: false, apiUrl: "", username: "" }),
   }
 );
 const github = props.github;
-const wakatime = props.wakatime;
+const wakapi = props.wakapi;
 
 const activeTab = ref("github");
 const wakatimeActiveTab = ref<"weekly" | "allTime">("weekly");
 
-const weeklyData = ref<WakatimeStats | null>(null);
-const allTimeData = ref<WakatimeStats | null>(null);
-const statusData = ref<WakaStatus | null>(null);
-const showComponent = ref(true);
+/**
+ * wakapi 关闭时不调用 useFetch，零请求。
+ * 不用 `skip`：Nuxt 的 `skip` 与 `default` 在 vue-tsc 下类型重载冲突
+ * （default 泛型槽被推断为 Ref<undefined>，TS2769）。
+ */
+const wakaData = wakapi.enable
+  ? useFetch<WakatimeResponse>("/api/wakatime", {
+      server: false,
+      lazy: true,
+      default: () => ({ weekly: null, allTime: null }),
+    }).data
+  : ref<WakatimeResponse>({ weekly: null, allTime: null });
+
+const weeklyData = computed(() => wakaData.value.weekly);
+const allTimeData = computed(() => wakaData.value.allTime);
 
 const githubPalette = ["#7cc1ff", "#6bdba6", "#ffd166", "#f497da", "#9b8cfc", "#5ce1e6", "#ffa3a3"];
 const wakatimePalette = [
@@ -224,41 +206,6 @@ const formatTime = (seconds: number): string => {
   const minutes = Math.floor((seconds % 3600) / 60);
   return `${hours}h ${minutes}m`;
 };
-
-const fetchWakatimeData = async (): Promise<void> => {
-  if (!wakatime.enable) return;
-
-  try {
-    const params = new URLSearchParams();
-    if (wakatime.apiUrl && wakatime.apiUrl !== "https://wakatime.com/api/v1") {
-      params.append("apiUrl", wakatime.apiUrl);
-    }
-    const url = `/api/wakatime${params.toString() ? `?${params.toString()}` : ""}`;
-    const response = await fetch(url);
-
-    if (response.ok) {
-      const data = await response.json();
-      weeklyData.value = data.weekly;
-      allTimeData.value = data.allTime;
-      statusData.value = data.status;
-    } else {
-      const errorText = await response.text();
-      console.error("API Error:", response.status, errorText);
-      if (response.status === 500 && errorText.includes("Wakatime API Key not configured")) {
-        console.warn("Wakatime API Key not configured - hiding component");
-        showComponent.value = false;
-        return;
-      }
-      throw new Error(`API returned ${response.status}: ${errorText}`);
-    }
-  } catch (error) {
-    console.error("Failed to fetch Wakatime data:", error);
-  }
-};
-
-onMounted(() => {
-  fetchWakatimeData();
-});
 </script>
 
 <style scoped>
@@ -352,37 +299,6 @@ onMounted(() => {
   background: #6bdba6;
   color: white;
   border-color: #6bdba6;
-}
-
-.status-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.04);
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  margin-top: 1rem;
-}
-
-.status-indicator {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #a8b3cf;
-}
-
-.status-indicator.active {
-  background: #6bdba6;
-}
-
-.status-text {
-  font-weight: 500;
-}
-
-.status-project {
-  color: #a8b3cf;
-  font-size: 0.875rem;
 }
 
 .lang-wrap {

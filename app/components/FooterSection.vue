@@ -6,8 +6,8 @@
     </p>
 
     <!-- 访问统计 -->
-    <p v-if="showStats && !statsError" class="text-text-muted text-xs m-0">
-      👁️ {{ visitors }} · 📊 {{ pageviews }}
+    <p v-if="hasStats" class="text-text-muted text-xs m-0">
+      👁️ {{ stats?.visitors }} · 📊 {{ stats?.pageviews }}
     </p>
 
     <!-- 备案信息 -->
@@ -54,18 +54,30 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
-import { useRuntimeConfig } from "#imports";
+import { computed, onMounted, ref } from "vue";
+import { useFetch } from "#imports";
 import { siteConfig } from "~/config";
+import type { UmamiStatsDTO } from "~/types/api";
 const contact = siteConfig.footer;
-const config = useRuntimeConfig();
 const quote = ref("");
 const from = ref("");
-const pageviews = ref(0);
-const visitors = ref(0);
-const statsError = ref<boolean>(true);
 const showHitokoto = siteConfig.footer.hitokoto.enable;
-const showStats = ref<boolean>(siteConfig.umami.enable);
+
+/**
+ * umami 关闭时不调用 useFetch，零请求。
+ * 不用 `skip`：Nuxt 的 `skip` 与 `default` 在 vue-tsc 下类型重载冲突
+ * （default 泛型槽被推断为 Ref<undefined>，TS2769）。
+ */
+const stats = siteConfig.umami.enable
+  ? useFetch<UmamiStatsDTO>("/api/stats", {
+      server: false,
+      lazy: true,
+      default: () => ({ pageviews: 0, visitors: 0 }),
+    }).data
+  : ref<UmamiStatsDTO>({ pageviews: 0, visitors: 0 });
+
+/** 与旧行为一致：仅当有非零数据时展示统计行 */
+const hasStats = computed(() => stats.value.pageviews > 0 || stats.value.visitors > 0);
 
 const buildHitokotoUrl = (): string => {
   const type = siteConfig.footer.hitokoto.type;
@@ -93,57 +105,7 @@ const fetchHitokoto = async (): Promise<void> => {
   }
 };
 
-const fetchStats = async (): Promise<void> => {
-  try {
-    if (!siteConfig.umami.apiBase || !siteConfig.umami.websiteId) {
-      return;
-    }
-    const apiBase = siteConfig.umami.apiBase;
-    const websiteId = siteConfig.umami.websiteId;
-    const apiKey = config.public.umamiApiKey;
-
-    if (!apiKey) return;
-
-    // 获取统计数据
-    const endAt = Date.now();
-    const startAt = new Date(siteConfig.siteMeta.startDate).getTime();
-
-    const resp = await fetch(
-      `${apiBase}/v1/websites/${websiteId}/stats?startAt=${startAt}&endAt=${endAt}`,
-      {
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-        },
-      }
-    );
-
-    if (!resp.ok) {
-      console.warn(`Stats API returned ${resp.status}`);
-      statsError.value = true;
-      return;
-    }
-
-    const data = (await resp.json()) as { pageviews?: number; visitors?: number };
-    if (data) {
-      statsError.value = false;
-      pageviews.value = data.pageviews ?? 0;
-      visitors.value = data.visitors ?? 0;
-    }
-
-    if (pageviews.value === 0 && visitors.value === 0) {
-      showStats.value = false;
-    }
-  } catch (e) {
-    statsError.value = true;
-    console.debug(
-      "Stats fetch failed (this is normal if blocked by ad blocker):",
-      (e as Error).message
-    );
-  }
-};
-
 onMounted(() => {
   if (showHitokoto) fetchHitokoto();
-  if (showStats.value) fetchStats();
 });
 </script>
