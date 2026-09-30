@@ -34,7 +34,7 @@
 import { definePageMeta } from "#imports";
 import { onMounted, shallowRef, markRaw } from "vue";
 import type { Component } from "vue";
-import siteConfig from "~/config/siteConfig";
+import { siteConfig } from "~/config";
 
 const giscus = siteConfig.comments.giscus || {};
 const GiscusComponent = shallowRef<Component | null>(null);

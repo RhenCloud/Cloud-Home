@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import siteConfig from "~/config/siteConfig";
+import { siteConfig } from "~/config";
 
 const music = siteConfig.music;
 </script>

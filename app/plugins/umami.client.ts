@@ -1,7 +1,7 @@
 import { defineNuxtPlugin } from "#app";
 import { VueUmamiPlugin } from "@jaseeey/vue-umami-plugin";
 import type { Router } from "vue-router";
-import siteConfig from "~/config/siteConfig";
+import { siteConfig } from "~/config";
 
 export default defineNuxtPlugin((nuxtApp) => {
   if (!import.meta.client) return;

@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import siteConfig from "../config/siteConfig";
+import { siteConfig } from "~/config";
 
 const { profile } = defineProps({
   profile: {

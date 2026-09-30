@@ -1,5 +1,5 @@
 import { defineNuxtPlugin } from "#app";
-import siteConfig from "~/config/siteConfig";
+import { siteConfig } from "~/config";
 
 type NeteaseMiniPlayerGlobal = {
   init?: () => void;

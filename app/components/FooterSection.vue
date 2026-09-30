@@ -56,7 +56,7 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { useRuntimeConfig } from "#imports";
-import siteConfig from "~/config/siteConfig";
+import { siteConfig } from "~/config";
 const contact = siteConfig.footer || {};
 const config = useRuntimeConfig();
 const quote = ref("");

@@ -182,7 +182,7 @@
 
 <script setup>
 import { reactive, ref, watch, computed, onMounted } from "vue";
-import siteConfig from "../config/siteConfig";
+import { siteConfig } from "~/config";
 defineOptions({ inheritAttrs: false });
 const props = defineProps({ friends: { type: Array, default: () => [] } });
 const showFormModal = ref(false);

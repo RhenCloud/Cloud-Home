@@ -6,7 +6,7 @@
 
 <script setup>
 import ProjectsSection from "~/components/ProjectsSection.vue";
-import siteConfig from "~/config/siteConfig";
+import { siteConfig } from "~/config";
 
 const projects = siteConfig.projects;
 

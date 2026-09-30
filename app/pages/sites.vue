@@ -6,7 +6,7 @@
 
 <script setup>
 import SitesSection from "~/components/SitesSection.vue";
-import siteConfig from "~/config/siteConfig";
+import { siteConfig } from "~/config";
 
 const sites = siteConfig.sites;
 

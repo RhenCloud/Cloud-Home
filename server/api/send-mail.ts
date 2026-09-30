@@ -10,7 +10,7 @@ type MailConfig = {
   smtpPass?: string;
   senderEmail?: string;
   adminEmail?: string;
-  smtpSecure?: boolean;
+  smtpSecure?: string;
 };
 
 type SendMailPayload = {
@@ -62,7 +62,8 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 500, statusMessage: "SMTP server is not fully configured" });
   }
 
-  const secure = typeof smtpSecure === "boolean" ? smtpSecure : smtpPort === 465;
+  const secure =
+    smtpSecure !== undefined && smtpSecure !== "" ? smtpSecure === "true" : smtpPort === 465;
   const smtpOptions: SMTPTransport.Options = {
     host: smtpHost,
     port: smtpPort,

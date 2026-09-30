@@ -60,7 +60,7 @@
 
 <script setup>
 import { computed, ref } from "vue";
-import siteConfig from "~/config/siteConfig";
+import { siteConfig } from "~/config";
 
 defineProps({
   links: {

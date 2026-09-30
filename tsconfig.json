@@ -6,5 +6,12 @@
   "vueCompilerOptions": {
     "globalTypesPath": "./node_modules/.vue-global-types"
   },
-  "include": ["nuxt.config.ts", "app/**/*.ts", "app/**/*.vue", "app/**/*.d.ts", "server/**/*.ts"]
+  "include": [
+    "./.nuxt/nuxt.node.d.ts",
+    "nuxt.config.ts",
+    "app/**/*.ts",
+    "app/**/*.vue",
+    "app/**/*.d.ts",
+    "server/**/*.ts"
+  ]
 }

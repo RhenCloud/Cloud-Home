@@ -6,7 +6,7 @@
 
 <script setup>
 import FriendsSection from "~/components/FriendsSection.vue";
-import siteConfig from "~/config/siteConfig";
+import { siteConfig } from "~/config";
 
 const friends = siteConfig.friends;
 

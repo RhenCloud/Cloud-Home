@@ -21,11 +21,11 @@ import { useRuntimeConfig, definePageMeta } from "#imports";
 import HeroSection from "~/components/HeroSection.vue";
 import SkillsSection from "~/components/SkillsSection.vue";
 import StatsSection from "~/components/StatsSection.vue";
-import siteConfig from "@/config/siteConfig";
+import { siteConfig } from "~/config";
 
 const profile = siteConfig.profile;
 const skills = siteConfig.skills;
-const wakatime = siteConfig.wakatime;
+const wakatime = siteConfig.wakapi;
 const config = useRuntimeConfig();
 const githubToken = config.public.githubToken ?? "";
 

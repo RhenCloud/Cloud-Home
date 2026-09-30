@@ -36,7 +36,7 @@ import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import PageSwitcher from "~/components/PageSwitcher.vue";
 import FooterSection from "~/components/FooterSection.vue";
 import MusicPlayer from "~/components/MusicPlayer.vue";
-import siteConfig from "~/config/siteConfig";
+import { siteConfig } from "~/config";
 
 const customHeaderHtml = siteConfig.header.customHtml;
 const contact = siteConfig.footer;

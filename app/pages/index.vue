@@ -10,7 +10,7 @@
 import HeroSection from "~/components/HeroSection.vue";
 import SocialLinks from "~/components/SocialLinks.vue";
 import AboutSection from "~/components/AboutSection.vue";
-import siteConfig from "~/config/siteConfig";
+import { siteConfig } from "~/config";
 
 const profile = siteConfig.profile;
 const socialLinks = siteConfig.socialLinks;

@@ -1,5 +1,5 @@
 import { defineNuxtConfig } from "nuxt/config";
-import siteConfig from "./app/config/siteConfig";
+import { siteConfig } from "./app/config";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
@@ -116,7 +116,7 @@ export default defineNuxtConfig({
     smtpPass: process.env.SMTP_PASS ?? "",
     senderEmail: process.env.SENDER_EMAIL ?? "",
     adminEmail: process.env.ADMIN_EMAIL ?? "",
-    smtpSecure: process.env.SMTP_SECURE ? process.env.SMTP_SECURE === "true" : undefined,
+    smtpSecure: process.env.SMTP_SECURE ?? "",
     githubToken: process.env.NUXT_PUBLIC_GITHUB_TOKEN ?? "",
     umamiApiKey: process.env.UMAMI_API_KEY ?? "",
     public: {
